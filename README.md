@@ -14,7 +14,7 @@
 
 ## Entities
 
-### Chapter
+### 1. Chapter
 
 A chapter is a group of members in a certain geographical area who have similar interests.
 
@@ -24,7 +24,7 @@ A chapter is a group of members in a certain geographical area who have similar 
 - **Number of Members**: The number of participants in a chapter.
 - **Chapter Lead**: The person who is in charge of the chapter.
 
-### Member
+### 2. Member
 
 Someone who attends an event or makes a donation.
 
@@ -38,7 +38,7 @@ Someone who attends an event or makes a donation.
 - **Demographics**: The demographics of the member entail things like race, gender, and pronouns.
 - **Number of Events Attended**: This entails the number of events attended.
 
-### Event
+### 3. Event
 
 An event is a gathering that has one or more members participating.
 
