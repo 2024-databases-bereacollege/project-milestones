@@ -52,3 +52,7 @@ An event is a gathering that has one or more members participating.
 ## ER Diagram
 
 ![ER Diagram](ER_diagram.PNG)
+
+---
+
+Document Link: https://docs.google.com/document/d/1xs227zgCnU8y_3lzEl-bQvKeSdAjbs4DNt9NGn95F_c/edit
