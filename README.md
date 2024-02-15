@@ -89,3 +89,26 @@ Inventory can be modified by many Case managers, Inventory needs a Case Manager 
 ## **Entity Relationship Diagram (ERD)**: 
 
 ![brief alt text](B240470A-174B-47F5-A750-61DDDB946791.png)
+
+# Milestone 2: Project Schema Design
+**Learning Objective:** 
+Translating conceptual ER diagrams into relational schemas.
+Representing real-world organizational data as a relational data model
+Observe how conceptual design decisions translate into the logical design stage
+
+## Reflection:
+
+We discussed how the ERD model really helped us visualize the logic behind each relationship and entity. The visual aid was very useful to us. Using the ERD tools that were available to us, we were able to easily make changes, which was extremely important as we kept adjusting the logic behind our process.
+We would have been more specific with our attributes to prevent confusion. We also would have spent more time planning what would be Primary and Foreign Keys!
+
+
+## Changes from the ERD model: 
+We changed our Volunteer entity’s primary key name to VolunteerID to avoid confusion with the Case Manager Entity. 
+We added a boolean attribute to Volunteer to determine if they have access to the records.
+We redetermined which attributes in several different entities would be foreign keys. 
+We decided to make Services an associative entity, because it is an action that occurs between Volunteers and Neighbors Entities.
+We redesigned the Service Access Records and changed the name to Records.
+
+## Schema
+![brief alt text](Schema_2_15_24.png)
+
