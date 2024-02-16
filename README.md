@@ -45,11 +45,9 @@ Attributes: Record ID, Individual ID, Service ID, Date/Time of Access, Outcome (
 Inventory: the organization has an inventory of clothing, hygiene kits, and food, and there are some guidelines about how many items can a neighbor have. These guidelines are always changing on a case-by-case basis. UP also envisions this process being automatize and displayed on their website so donors can see what the organization needs the most.
 Attributes: Item ID, Type (Clothing, Hygiene, Food), Description, Quantity Available, Reorder Level.
 
-Document Assistance Records
+Service Access Record:
 Attributes: Record ID, Individual ID, Type (ID, SS Card, etc.), Status (Requested, In Process, Completed), Date of Request, Date of Completion.
 
-Referrals
-Attributes: Referral ID, Individual ID, Organization ID, Service Referred To, Date of Referral, Follow-up Date, Outcome.
 
 
 
