@@ -1,6 +1,9 @@
 #Domain Names
 
 ##MEMBER
+![Member, Chapter Domain](Member_&_Chapter_Domain.PNG)
+![Event and Updated ER Model](Event_&_ER.PNG)
+![Updated Schema](Updated_Schema.PNG)
 
 ##Reflections & Changes
 - Our previous version was missing a domain for each entity type. 
