@@ -15,38 +15,36 @@ UP data: Since UP is a local, small non-profit, the only data they want to use i
 
 ## Business Rules (both data and non-data) 
 
-A NEIGHBOR is registered by an ADMINISTRATOR on the RECORD only once on their second visit to UP, whereas the RECORD registers optional one NEIGHBOR by at least one ADMINISTRATOR.
+A NEIGHBOR is registered by a VOLUNTEER on the VISIT RECORD only once on their second visit to UP, whereas the RECORD registers optional one NEIGHBOR by at least one VOLUNTEER.
 
-A NEIGHBOR can receive many SERVICES, and a SERVICE can be received by optional one NEIGHBOR. 
+A NEIGHBOR can receive one VISIT SERVICE registration per action registered many times on the VISIT RECORD, and a VISIT SERVICE can be received by optional one NEIGHBOR registred optionally on the VISIT RECORD. 
 
- A NEIGHBOR follows guidelines on the usage of INVENTORY items. The NEIGHBOR can acquire optional many items from the INVENTORY, whereas the INVENTORY may have a NEIGHBOR acquiring items optionally many times. 
+A NEIGHBOR follows guidelines on the usage of INVENTORY items. The NEIGHBOR can acquire optional many items from the INVENTORY, whereas the INVENTORY may have a NEIGHBOR acquiring items optionally many times. 
 
- An ADMINISTRATOR has access to many RECORD data, whereas the RECORD can be accessed by many ADMINISTRATORS.
+An VOLUNTEER has access to many VISIT RECORD data, whereas the VISIT RECORD can be accessed by many VOLUNTEERS with access.
 
-Using the RECORD, an ADMINISTRATOR can start a process to assist the NEIGHBOR in receiving many SERVICES. 
+Using the VISIT SERVICE, a VOLUNTEER can start a process to assist the NEIGHBOR in receiving many VISIT SERVICE. 
 
-A SERVICE is provided by optional one PARTNER ORGANIZATION, whereas a PARTNER ORGANIZATION can provide at least one SERVICE. The SERVICE is then tracked on the NEIGHBOR’s record and followed up as necessary by at least one UP ADMINISTRATOR. 
+A VISIT SERVICE is provided by optional one PARTNER ORGANIZATION, whereas a PARTNER ORGANIZATION can provide at least one SERVICE. The SERVICE is then tracked on the NEIGHBOR’s record and followed up as necessary by at least one UP ADMINISTRATOR. 
 
 
 ## Entity Names and Definitions
 
 Neighbors: a houseless person who seeks UP for support. They can be classified as emergency housed (e.g. a person sleeps in someone’s house), underhoused (they may have a shelter, but it is not optimal. e.g. a shed or trailer without access to electricity or water, or similar precarious situations).
-Attributes: ID, Name, Date of Birth, Contact Information (phone, email), Mailing Address, Services Accessed (list of service IDs), Case Manager ID, Document Assistance (IDs, SS cards, etc.), Notes.
+Attributes: NeighborID, FirstName, LastName, Date of Birth, Contact Information (phone, email), Mailing Address, Services Accessed (list of service IDs), HasStateId, HasPet.
 
-Services: different forms of assistance that UP facilitates to individuals
-Attributes: Service ID, Service Type (Laundry, Meals, Emergency Shelter, Case Management, ID Assistance, SS Card Assistance, Referrals with SNAP, etc.), Description, Date/Time Offered.
+Visit Services: the relationship between partner organization, UP, and the neighbor registered on Visit Record
+Attributes: ServiceOrder, PartnerName, NeighborId, VolunteerId, DateService, Description.
 
-Partner Organizations: UP partners support their Neighbors on each specific possible help (for example, a case manager)
-Attributes: Organization ID, Name, Contact Information, Services Offered, Referral Contact (person or department within the organization).
+Service Records: history of services provided throughout the work. 
+Attributes: RecordID, ServiceOrder, Date, Time.
 
-Service Access Records: access to the database information
-Attributes: Record ID, Individual ID, Service ID, Date/Time of Access, Outcome (for services with measurable outcomes).
+Partner Organizations: organization that assist UP on their mission.
+Attributes: PartnerName, ServiceType, ContactPerson, Email, Phone, DateofStart.
+
 
 Inventory: the organization has an inventory of clothing, hygiene kits, and food, and there are some guidelines about how many items can a neighbor have. These guidelines are always changing on a case-by-case basis. UP also envisions this process being automatize and displayed on their website so donors can see what the organization needs the most.
-Attributes: Item ID, Type (Clothing, Hygiene, Food), Description, Quantity Available, Reorder Level.
-
-Service Access Record:
-Attributes: Record ID, Individual ID, Type (ID, SS Card, etc.), Status (Requested, In Process, Completed), Date of Request, Date of Completion.
+Attributes: NameOfItemItem, VolunteerID, ExpirationDate, NumerofItem
 
 
 
@@ -101,11 +99,7 @@ We would have been more specific with our attributes to prevent confusion. We al
 
 
 ## Changes from the ERD model: 
-We changed our Volunteer entity’s primary key name to VolunteerID to avoid confusion with the Case Manager Entity. 
-We added a boolean attribute to Volunteer to determine if they have access to the records.
-We redetermined which attributes in several different entities would be foreign keys. 
-We decided to make Services an associative entity, because it is an action that occurs between Volunteers and Neighbors Entities.
-We redesigned the Service Access Records and changed the name to Records.
+In order to reorganize our model, we created two one new associative entity called Visit Service. Our information now is restructured in a way that the neighbor will be registered on the Visit Record through the Visit Service entity. 
 
 ## Schema
 ![brief alt text](Schema_2_15_24.png)
