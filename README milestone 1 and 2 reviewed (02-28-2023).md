@@ -102,5 +102,5 @@ We would have been more specific with our attributes to prevent confusion. We al
 In order to reorganize our model, we created two one new associative entity called Visit Service. Our information now is restructured in a way that the neighbor will be registered on the Visit Record through the Visit Service entity. 
 
 ## Schema
-![brief alt text](Schema_2_15_24.png)
+![brief alt text](Conceptual_Schema_2_28_24.png)
 
