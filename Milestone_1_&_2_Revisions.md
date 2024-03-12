@@ -28,7 +28,7 @@
 | Attendance  | Numbers     | Set of all possible member attendance | integer: 3 digits           |
 
 
-![Schema](Updated_Schema.PNG, "Schema")
+![Schema]([Updated_Schema.PNG](https://github.com/2024-databases-bereacollege/client-project-the-infinite-loopers/blob/main/Updated_Schema.PNG), "Schema")
 
 # Reflections & Changes
 - Our previous version was missing a domain for each entity type. 
