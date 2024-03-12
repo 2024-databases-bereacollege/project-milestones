@@ -27,8 +27,8 @@
 | EventDate   | Dates       | Set of all possible dates             | date: format mm/dd/yy       |
 | Attendance  | Numbers     | Set of all possible member attendance | integer: 3 digits           |
 
-
-![Schema]([Updated_Schema.PNG](/Updated_Schema.PNG "Schema")
+# Schema
+![Schema](Updated_Schema.PNG)
 
 # Reflections & Changes
 - Our previous version was missing a domain for each entity type. 
