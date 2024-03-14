@@ -1,3 +1,5 @@
+-- https://www.postgresqltutorial.com/
+
 CREATE TABLE othertable (
     otherid integer PRIMARY KEY,
     data varchar

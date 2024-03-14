@@ -2,6 +2,7 @@
 psql -c "DROP table example;"
 psql -c "DROP table othertable;"
 
+psql -c "DELETE FROM migratehistory;"
 rm -rf migrations
 rm -rf migrations.json
 

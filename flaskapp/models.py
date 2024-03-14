@@ -9,6 +9,7 @@ class baseModel(Model):
         database = mydb
 
 # Class Definitions
+# https://docs.peewee-orm.com/en/latest/peewee/models.html
 class OtherTable (baseModel):
     otherid = PrimaryKeyField()
     data = CharField(null=False)
