@@ -1,9 +1,9 @@
-CREATE TABLE othertable AS (
+CREATE TABLE othertable (
     otherid integer PRIMARY KEY,
     data varchar
 );
 
-CREATE TABLE example AS (
+CREATE TABLE example (
     id serial PRIMARY KEY,
     username varchar(32) UNIQUE,
     description varchar(255) NOT NULL,

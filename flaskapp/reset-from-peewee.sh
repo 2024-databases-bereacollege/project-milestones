@@ -1,6 +1,6 @@
 # Remove objects from the database
 psql -c "DROP table example;"
-psql -c "DROP table test2;"
+psql -c "DROP table othertable;"
 
 rm -rf migrations
 rm -rf migrations.json
@@ -8,6 +8,7 @@ rm -rf migrations.json
 pem init
 
 # Use peewee-migrate to create tables from Peewee models
+pem add models.OtherTable
 pem add models.Example
 
 pem watch
