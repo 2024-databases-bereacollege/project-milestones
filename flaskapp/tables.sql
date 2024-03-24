@@ -67,10 +67,10 @@ CREATE TABLE Visit_Service (
 );
 
 CREATE TABLE Visit_Record (
-    RecordID SERIAL,
-    ServiceOrder INT,
+    RecordID SERIAL PRIMARY KEY,
+    ServiceOrder INT NOT NULL,
     Date DATE,
     Time TIME,
-    PRIMARY KEY (RecordID, ServiceOrder),
+    Notes TEXT,
     FOREIGN KEY (ServiceOrder) REFERENCES Visit_Service(ServiceOrder)
 );
