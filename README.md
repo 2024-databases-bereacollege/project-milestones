@@ -86,7 +86,7 @@ Inventory can be modified by many Case managers, Inventory needs a Case Manager 
 
 ## **Entity Relationship Diagram (ERD)**: 
 
-![brief alt text](Relational_Schema_03.25.24 .png)
+![brief alt text](Rel_Schema_03-25-24.png)
 
 # Milestone 2: Project Schema Design
 **Learning Objective:** 
