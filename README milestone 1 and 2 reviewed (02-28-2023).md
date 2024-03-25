@@ -15,9 +15,11 @@ UP data: Since UP is a local, small non-profit, the only data they want to use i
 
 ## Business Rules (both data and non-data) 
 
-A NEIGHBOR is registered by a VOLUNTEER on the VISIT RECORD only once on their second visit to UP, whereas the RECORD registers optional one NEIGHBOR by at least one VOLUNTEER.
+A NEIGHBOR is registered by a VOLUNTEER on the VISIT_SERVICE only once on their second visit to UP and a VISIT_SERVICE is registered on the VISIT_RECORD only once, whereas the VISIT_SERVICE registers optional one NEIGHBOR by at least one VOLUNTEER.
 
-A NEIGHBOR can receive one VISIT SERVICE registration per action registered many times on the VISIT RECORD, and a VISIT SERVICE can be received by optional one NEIGHBOR registred optionally on the VISIT RECORD. 
+On the VISIT_SERVICE, a VOLUNTEER registers once the SERVICE provided by at least one SERVICE_PROVIDER to a NEIGHBOR, whereas a SERVICE_PROVIDER can provide multiple SERVICE to many NEIGHBOR.
+
+A NEIGHBOR can receive one VISIT_SERVICE registration per action registered many times on the VISIT RECORD, and a VISIT SERVICE can be received by optional one NEIGHBOR registred optionally on the VISIT RECORD. 
 
 A NEIGHBOR follows guidelines on the usage of INVENTORY items. The NEIGHBOR can acquire optional many items from the INVENTORY, whereas the INVENTORY may have a NEIGHBOR acquiring items optionally many times. 
 
@@ -84,7 +86,7 @@ Inventory can be modified by many Case managers, Inventory needs a Case Manager 
 
 ## **Entity Relationship Diagram (ERD)**: 
 
-![brief alt text](initial_Conceptual_Schema_.png)
+![brief alt text](Relational_Schema_03.25.24.png)
 
 # Milestone 2: Project Schema Design
 **Learning Objective:** 
