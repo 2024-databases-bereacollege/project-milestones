@@ -43,12 +43,17 @@ Attributes: ServiceOrder, description, RecordID (foreignKey)
 Visit Record: history of services provided per day to different neighbors.
 Attributes: RecordID, Service_Order (foreign key), NeighborID (foreign Key), VolunteerID (Foreign Key)
 
-Partner Organizations: organization that assist UP on their mission.
-Attributes: PartnerName, ServiceType, ContactPerson, Email, Phone, DateofStart.
+Service Providers: every organization that assist the neighbors, being UP itself or their partners.
+Attributes: OrganizationID, Organization_Name, Email, Phone, DateofStart, ContactPerson.
 
+Service: The type of services that one organization can provide
+Attributes: ServiceID, Service_Type OrganizationID (foreign key)
 
 Inventory: the organization has an inventory of clothing, hygiene kits, and food, and there are some guidelines about how many items can a neighbor have. These guidelines are always changing on a case-by-case basis. UP also envisions this process being automatize and displayed on their website so donors can see what the organization needs the most.
-Attributes: NameOfItemItem, VolunteerID, ExpirationDate, NumerofItem
+Attributes: Item_Number, VolunteerID, ExpirationDate, NumerofItem, Description_of_Item
+
+Inventory_Usage: accountability of the items from the inventory used on a service provided by UP to neighbors.
+Attributes: Order_Number, RecordID (foreign key), NumberofItem, DescriptionOfItem 
 
 
 
