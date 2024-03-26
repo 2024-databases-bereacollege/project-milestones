@@ -1,0 +1,19 @@
+<!-- When extending this class, please fill page_title and page_description function-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{page_title | default("UP Initiative")}}</h1>
+      <p>{{page_description |default("")}}</p>
+      <hr>
+      {% block content %}{% endblock %}
+    </div>
+    <script src="/static/main.js"></script>
+    
+    {% block scripts %}{% endblock %}  
+
+  </body>
+  </html>
