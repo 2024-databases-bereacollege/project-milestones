@@ -31,13 +31,17 @@ A VISIT SERVICE is provided by optional one PARTNER ORGANIZATION, whereas a PART
 ## Entity Names and Definitions
 
 Neighbors: a houseless person who seeks UP for support. They can be classified as emergency housed (e.g. a person sleeps in someone’s house), underhoused (they may have a shelter, but it is not optimal. e.g. a shed or trailer without access to electricity or water, or similar precarious situations).
-Attributes: NeighborID, FirstName, LastName, Date of Birth, Contact Information (phone, email), Mailing Address, Services Accessed (list of service IDs), HasStateId, HasPet.
+Attributes: NeighborID, FirstName, LastName, Date of Birth, phone, email HasStateId (bool), HasPet (bool), location.
 
-Visit Services: the relationship between partner organization, UP, and the neighbor registered on Visit Record
-Attributes: ServiceOrder, PartnerName, NeighborId, VolunteerId, DateService, Description.
+Volunteer: a person who works at UP initiative and can or cannot have access to records.
+Attributes: VolunteerID, FirstName, LastName, Email, Phone, HasRecordAccess (bool)
 
-Service Records: history of services provided throughout the work. 
-Attributes: RecordID, ServiceOrder, Date, Time.
+
+Visit Service: in order to catalog what activities UP is doing, the visit service registers what specific unique work was done to the Neighbor in consultation.
+Attributes: ServiceOrder, description, RecordID (foreignKey)
+
+Visit Record: history of services provided per day to different neighbors.
+Attributes: RecordID, Service_Order (foreign key), NeighborID (foreign Key), VolunteerID (Foreign Key)
 
 Partner Organizations: organization that assist UP on their mission.
 Attributes: PartnerName, ServiceType, ContactPerson, Email, Phone, DateofStart.
