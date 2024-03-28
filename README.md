@@ -60,40 +60,37 @@ Attributes: Order_Number, RecordID (foreign key), NumberofItem, DescriptionOfIte
 
 ## Relationships
 
-Individuals to Services
+### Neighbors to Visit Records
+
+One-to-Many: A NEIGHBOR is registered in at least one VISIT_RECORD, and a VISIT_RECORD registers only one NEIGHBOR per entry.
 
 
-Many-to-Many: An individual can access multiple services, and a service can be accessed by multiple individuals. This relationship is mediated by the Service Access Records entity.
+### Visit Record to Visit Service
+One-to-Many: A VISIT_SERVICE is part of only one VISIT_RECORD, whereas a VISIT_RECORD is part of many VISIT_SERVICE.
+
+### Visit Service to Service
+One-to-Many: A VISIT_SERVICE uses only one SERVICE, whereas a SERVICE can be used by many VISIT_SERVICE.
 
 
-Individuals to Case Management
+### Service to Service_Provider
+Many-to-Many: A SERVICE is provided by many SERVICE_PROVIDER, whereas a SERVICE_PROVIDER provides at least one SERVICE.
 
+### Visit Record to Inventory Usage
+One-to-Many: a VISIT_RECORD saves many INVENTORY_USAGE records, whereas an INVENTORY_USAGE can be saved by only one VISIT_RECORD.
 
-One-to-Many: A single case manager can assist multiple individuals, but an individual's case is primarily managed by one case manager at a time.
-Case Management can Access many records but records can only be accessed by one Case Manager.
+### Inventory_Usage to Inventory
+Many-to-Many: A INVENTORY_USAGE log updates many INVENTORY, whereas an INVENTORY is updated by many INVENTORY_USAGE.
 
+### Visit_Record to Volunteer
+Many-to-Many: A VOLUNTER with permission accesses many VISIT_RECORD, whereas a VISIT_RECORD is accessed by many VOLUNTEERS with permission.
 
-Services to Partner Organizations
-
-
-Many-to-Many: A service may be provided in partnership with multiple organizations, and an organization can offer multiple services. This might be more indirect, depending on how closely services are tied to specific partners.
-Partner Organizations can see many inventory and inventory can be seen by many Partner organizations.
-
-
-Individuals to Document Assistance Records
-
-
-One-to-Many: An individual can have multiple document assistance records (for different documents or repeated assistance).
-
-
-Inventory to Case Managers
-Inventory can be modified by many Case managers, Inventory needs a Case Manager to be modified.
-
+### Volunteer to Inventory
+One-to-Many: A VOLUNTEER is controls optional many INVENTORY, whereas an INVENTORY is controlled by many VOLUNTEERS. 
 
 
 ## **Entity Relationship Diagram (ERD)**: 
 
-![brief alt text](initial_Conceptual_Schema_.png)
+![brief alt text](Conceptual_Schema_v1.png)
 
 # Milestone 2: Project Schema Design
 **Learning Objective:** 
@@ -111,5 +108,100 @@ We would have been more specific with our attributes to prevent confusion. We al
 In order to reorganize our model, we created two one new associative entity called Visit Service. Our information now is restructured in a way that the neighbor will be registered on the Visit Record through the Visit Service entity. 
 
 ## Schema
-![brief alt text](Conceptual_Schema_2_28_24.png)
+![brief alt text](Conceptual_Schema_3_26_24.png)
 
+# Milestone 3: Data-Driven Application - Getting Started
+**Deliverable 1:**
+List of application users, with a description of their application use goals.
+Volunteers – administrator access. They can input and edit the data on the database.
+Donors – people who donate to an organization. They do not have access to the database.
+Neighbors - People who are being helped by the organization. They have restricted access to the
+application, where they can view information, and add data that gets sent to the database.
+
+**Deliverable 2:** 
+List of information needs (at least 15-20 across the group), with priorities for
+the client and C,R,U,D, annotations to indicate functionality needed.
+	1) The Volunteer wants to know “How many neighbors are being assisted?” (high) R
+	2) The Volunteer needs to input information about a service provided. (High) C
+	3) The Volunteer needs to input information about a neighbor. (High) C
+	4) The Volunteer needs to update information about a neighbor. (High) U
+	5) The Volunteer needs to update the information on items in the inventory. (High) U
+	6) The Volunteer wants to know “What kind of assistance are the neighbors getting?” (high)
+R
+	7) The Volunteer wants to know “What is the most recurrent assistance type?” (low) R
+	8) The Volunteer needs to know “Who are UP's active partners?” (low) R
+	9) Which volunteers have access to the Visit_Record? (low) R
+	10) The donor needs to know “What are the most needed items for the inventory?” (high) R
+	11) The Neighbor requires emergency contact details for immediate assistance. (High) R
+	12) The Neighbor wishes to update their personal contact information. (High) U
+	13) The Neighbor wants to request a specific type of assistance from available services.
+	(High) C
+	14) The Neighbor wants to provide feedback on the services received. (Medium) C
+	15) The Volunteer needs to schedule a visit or service for a neighbor. (High) C
+
+**Deliverable 3:** 
+3-4 data flow diagrams, each with 2 information needs depicted.
+Flow Diagram 1:
+![brief alt text](Flow_Diagram_1.png)
+
+Flow Diagram 2:
+![brief alt text](Flow_Diagram_2.png)
+
+Flow Diagram 3:
+![brief alt text](Flow_Diagram_3.png)
+
+Flow Diagram 4:
+![brief alt text](Flow_Diagram_4.png)
+
+
+**Deliverable 4:** 
+Sketches for the user interfaces, with each data flow represented. A UI can
+include multiple data flows, but a data flow might require multiple UI’s (e.g. one for input,
+one for output).
+
+UI Sketch 1:
+
+![alt text](UI_1.png)
+
+UI Sketch 2:
+![alt text](UI_2.png)
+
+# Milestone 4: Create Database Schema
+**Deliverables:**
+
+1. If not completed in Milestone 2, create a relational schema for your client database. Use lines to show Foreign Key relationships. Use text style notation (example below) and organize your relations so lines to not overlap.
+
+	Visit_Record (RecordID, ServiceOrder, Date, NeighborID, VolunteerID)
+	Visit_Service (ServiceOrder, Description, RecordID (FK), ServiceID (FK))
+	Inventory (Item_Number, VolunteerID, ExpirationDate, Number_of_Item, Description_of_Item, Order_Number (FK))
+	Inventory_Usage (Order_Number, RecordID (fk), Number_of_Item, Description_of_Item)
+	Volunteer (VolunteerID, FirstName, LastName, Email, Phone, HasRecordAccess)
+	Neighbor (NeighborID, VolunteerID (FK), Organization (FK), FirstName, LastName, DateOfBirth, Phone, Location, Email, HasStateID, HasPet)
+	Service_Provider (OrganizationID, Organization_Name, ContactPerson, Email, Phone)
+	Service (ServiceID, Service_Type Organization (FK))
+
+
+
+2. Normalize your relations to at least 3NF. Write out new normalized schema, along with documentation of decisions. Your documentation should show proof of no partial or transitive dependencies. Save all in a file called "Relational Schema.md"
+
+	In order to normalize our database, we restructured the conceptual schema and relations. The changes made are the following:
+
+	Volunteers: divided “contact information” into “phone” and “email”
+	Organization: previously “partner organizations”, we updated to “Service_Provider” to allow UP to also be an instance of entity. Thus, the relationship with service works without redundancy.
+	Service: it used to be encapsulated into “Services”, and we broke it down into “Service” and “Visit_Service” to allow organizations to provide multiple services at once. 
+	Visit_Service and Visit_Record: breaking down “Records” into “Visit_Service” and “Visit_Record” to allow records of what happened in one interaction of assistance to a neighbor as well as all interactions on a day.
+	Inventory and Inventory_Usage: we broke down “Inventory” into “Inventory”, which holds the information of items in stock, and “Inventory_Usage” which will log the amount of items from the inventory used per assistance to a neighbor.
+	General: 
+		Removed “time” from “visit_record” so all of the services provided in a day are stored in the same table
+		Renamed in Neighbor “address” to “location” since the population served may not have an address but a certain location they can be found.
+
+Relational Schema with normalized form:
+	![alt text](Relational_Schema_03-27-24.png)
+
+	3. Create a draft SQL script of the Create Table DDL statements needed to implement your database. Pay special attention to column data types and include necessary constraints such as Primary Key, Not Null, or Foreign Key constraints. 
+
+		Revisit R7: Well-structured Relations for reminders on how to convert a conceptual model (Milestone 2) to a relation
+		You can use psql to write out statements, write out a "script" of statements in an *.sql document, or use a Jupyter notebook to test your scripts
+		Remember, you cannot create duplicate tables. You must drop (delete) the old table before you can create a new one.
+	
+	4. Create a python file (models.py) with Peewee models of your schema. Introspect your models to compare the underlying SQL with your draft from Step 3.
