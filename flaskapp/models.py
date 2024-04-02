@@ -25,6 +25,7 @@ class Volunteer(baseModel):
     VolunteerID = IntegerField(primary_key=True)
     FirstName = CharField(max_length=255)
     LastName = CharField(max_length=255)
+    Password = CharField()
     Email = CharField(max_length=255)
     Phone = CharField(max_length=20)
     HasRecordAccess = BooleanField()
