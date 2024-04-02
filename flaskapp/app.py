@@ -6,16 +6,6 @@ from logic import *
 #to run type flask run in the terminal
 app = Flask(__name__)
 
-## additions Nicholas
-# starting point for Flask web application that interacts with PostgreSQL database.
-
-# Application's Routes:
-# Home/Dashboard Page (/): Display a dashboard or list of entries.
-# Add Entry Page (/add): Show a form to input new records.
-# Add Entry Action (/add - POST): Handle the form submission for adding new records.
-# View Entry (/entry/<id>): Display details for a specific entry.
-# Delete Entry (/delete/<id> - POST): Delete a specific entry. We use POST to safely delete data.
-
 #Root URL
 @app.route('/')
 def index():
@@ -92,19 +82,6 @@ def add_Neighbor():
             # Handle duplicate username or email
             return render_template('add_neighbor.html', error='Neighbor already exists')
     return "Form submitted successfully!"
-
-@app.route('/entry/<int:id>')
-def view_entry(id):
-    # Fetch a specific entry by ID. Adjust according to your actual model.
-    entry = Volunteer.get(Volunteer.id == id)  # Adjust Volunteer to your model
-    return render_template('view_entry.html', entry=entry)
-
-@app.route('/delete/<int:id>', methods=['POST'])
-def delete_entry(id):
-    # Delete a specific entry. Ensure safety by using POST.
-    entry = Volunteer.get(Volunteer.id == id)  # Adjust Volunteer to your model
-    entry.delete_instance()
-    return redirect(url_for('home'))
 
 ## additions Nicholas
 # Service Providers Example ########################################
