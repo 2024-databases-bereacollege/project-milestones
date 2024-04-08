@@ -1,4 +1,5 @@
 from peewee import *
+from datetime import datetime
 
 # Database Configuration
 ################################
@@ -10,54 +11,32 @@ class baseModel(Model):
 
 # Class Definitions
 # https://docs.peewee-orm.com/en/latest/peewee/models.html
-# class OtherTable (baseModel):
-#     otherid = PrimaryKeyField()
-#     data = CharField(null=False)
-
-# class Example (baseModel):
-#     username = CharField(32,unique=True)
-#     description = CharField(255)
-#     other = ForeignKeyField(OtherTable)
-#     isInt = BooleanField(default=0)
-#     isBool = BooleanField()
-
 class member (baseModel):
     memberId = PrimaryKeyField()
-    firstName = CharField(32,unique=True)
-    lastName = CharField(32,unique=True)
-    phoneNumber = CharField(20,unique=True)
+    firstName = CharField(100)
+    lastName = CharField(100)
+    phoneNumber = CharField(100)
     score = IntegerField()
+    memberAddress = CharField(25),
     NumberOfEventsAttended = IntegerField()
 
 class chapter(baseModel):
-    chapterName = PrimaryKeyField()
+    chapterName = PrimaryKeyField(100)
     numberofMembers = IntegerField()
-    chapterLead = CharField(32,unique=True)
-    memberId = ForeignKeyField(member)
-    chapterEmail = CharField(32,unique=True)
+    chapterLead = CharField(100)
+    chapterEmail = CharField(100)
 
 class event:
-    eventName = PrimaryKeyField()
-    venue = CharField(32,unique=True)
+    eventName = PrimaryKeyField(100)
+    venue = CharField(100)
+    theme = CharField(100)
     eventDate = DateTimeField(default=datetime.datetime.utcnow)
     attendance = IntegerField()
 
-class demographics:
-    memberId = ForeignKeyField(member),
-    race = CharField(32,unique=True)
-    age = IntegerField()
-    gender = CharField(32,unique=True)
-
-class memberAddress:
-    memberId = ForeignKeyField(member),
-    street = CharField(32,unique=True)
-    city = CharField(32,unique=True)
-    state =CharField(32,unique=True) 
-    zipcode = IntegerField()
-
-class donation: 
-    memberId = ForeignKeyField(member),
-    item = CharField(32,unique=True)
+class donation:
+    donationId = PrimaryKeyField(), 
+    donationId = ForeignKeyField(member),
+    item = CharField(50)
     monetaryWorth = IntegerField()
 
 
