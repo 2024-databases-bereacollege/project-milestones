@@ -1,5 +1,3 @@
--- https://www.postgresqltutorial.com/
-
 CREATE TABLE member (
     memberId integer PRIMARY KEY,
     firstName varchar(100),
@@ -20,16 +18,11 @@ CREATE TABLE chapter (
 CREATE TABLE event (
     eventName varchar(100) PRIMARY KEY,
     venue varchar(100),
+    event varchar(200),
     eventDate date,
-    attendance integer
+    attendance integer,
+    theme varchar(200) -- Added the theme column as per the insert statements
 );
-
--- CREATE TABLE demographics (
---     memberId integer PRIMARY KEY,
---     race varchar(50),
---     age integer,
---     gender varchar(50)
--- );
 
 CREATE TABLE memberAddress (
     memberId integer PRIMARY KEY,
@@ -45,47 +38,38 @@ CREATE TABLE donation (
     monetaryWorth integer
 );
 
-INSERT INTO member (memberId, Score, phoneNumber, firstName, middleName, lastName, NumberOfEventsAttended)
+INSERT INTO member (memberId, score, phoneNumber, firstName, middleName, lastName, NumberOfEventsAttended)
 VALUES
-(01, 987, 1234567890, 'Betty', 'M', 'Hibler', 5),
-(02, 654, 2345678901, 'Landra', 'Lewis', 3),
-(03,321, 3456789012, 'Travis', 'Bolinger', 2),
-(04, 432, 4567890123, 'Rachel', 'White', 7),
-(05, 876, 5678901234, 'Joanie', 'Lukins', 4),
+(1, 987, '1234567890', 'Betty', 'M', 'Hibler', 5),
+(2, 654, '2345678901', 'Landra', '', 'Lewis', 3),
+(3, 321, '3456789012', 'Travis', '', 'Bolinger', 2),
+(4, 432, '4567890123', 'Rachel', '', 'White', 7),
+(5, 876, '5678901234', 'Joanie', '', 'Lukins', 4);
 
 INSERT INTO chapter (chapterName, numberofMembers, chapterLead, chapterEmail)
 VALUES
-    ('Madison County', 50, 'Landra Lewis', 'alex@example.com'),
-    ('Wilderness Trace', 30, 'Emily Brown', 'emily@example.com')
-
-
--- INSERT INTO demographics (memberId, race, age, gender)
--- VALUES
---     (1, 'White', 30, 'Male'),
---     (2, 'Asian', 25, 'Female');
+('Madison County', 50, 'Landra Lewis', 'alex@example.com'),
+('Wilderness Trace', 30, 'Emily Brown', 'emily@example.com');
 
 INSERT INTO memberAddress (memberId, street, city, state, zipcode)
 VALUES
-    (01,'314 Prospect St', 'Berea', 'KY', 40403),
-    (02,'619 Chestnut St', 'Berea', 'KY', 40403),
-    (03,'314 University Dr Apt A', 'Richmond', 'KY', 2841),
-    (04,'1101 Elm St', 'Danville', 'KY', 40422),
-    (05,'503 Ohara Dr', 'Daville', 'KY', 40422),
-    
-
+(1, '314 Prospect St', 'Berea', 'KY', 40403),
+(2, '619 Chestnut St', 'Berea', 'KY', 40403),
+(3, '314 University Dr Apt A', 'Richmond', 'KY', 40475), -- Corrected ZIP code
+(4, '1101 Elm St', 'Danville', 'KY', 40422),
+(5, '503 Ohara Dr', 'Daville', 'KY', 40422);
 
 INSERT INTO donation (memberId, item, monetaryWorth)
 VALUES
-    (01,'Laptop', 800),
-    (02,'Books', 100),
-    (03,'Laptop', 800),
-    (04,'Books', 100),
-    (05,'Laptop', 800),
+(1, 'Laptop', 800),
+(2, 'Books', 100),
+(3, 'Laptop', 800),
+(4, 'Books', 100),
+(5, 'Laptop', 800);
 
-INSERT INTO event (eventName, venue, theme, eventDate, attendance)
+INSERT INTO event (eventName, venue, event, eventDate, attendance, theme)
 VALUES
-    ('Hackathon', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200),
-    ('Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80),
-    ('Hackathon', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200),
-    ('Seedy Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80),
-    ('How to sleep in class', 'Community Center', 'Sleep', '2024-04-15', 80)
+('Hackathon', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200, 'Tech and Innovation'),
+('Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80, 'Community Building'),
+('Seedy Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80, 'Gardening'),
+('How to sleep in class', 'Community Center', 'Sleep Education', '2024-04-15', 80, 'Health');

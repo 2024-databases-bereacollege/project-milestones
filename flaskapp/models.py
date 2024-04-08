@@ -8,7 +8,7 @@ class baseModel(Model):
     class Meta:
         database = mydb
 
-# Class Definitions
+# Class Definitionsa
 # https://docs.peewee-orm.com/en/latest/peewee/models.html
 # class OtherTable (baseModel):
 #     otherid = PrimaryKeyField()
@@ -20,43 +20,44 @@ class baseModel(Model):
 #     other = ForeignKeyField(OtherTable)
 #     isInt = BooleanField(default=0)
 #     isBool = BooleanField()
+import datetime
 
 class member (baseModel):
     memberId = PrimaryKeyField()
-    firstName = CharField(32,unique=True)
+    firstName = (32,unique=True)
     lastName = CharField(32,unique=True)
     phoneNumber = CharField(20,unique=True)
     score = IntegerField()
     NumberOfEventsAttended = IntegerField()
 
 class chapter(baseModel):
-    chapterName = PrimaryKeyField()
+    chapterName = CharField(primary_key=True)
     numberofMembers = IntegerField()
     chapterLead = CharField(32,unique=True)
     memberId = ForeignKeyField(member)
     chapterEmail = CharField(32,unique=True)
 
-class event:
+class event(baseModel):
     eventName = PrimaryKeyField()
     venue = CharField(32,unique=True)
     eventDate = DateTimeField(default=datetime.datetime.utcnow)
     attendance = IntegerField()
 
 class demographics:
-    memberId = ForeignKeyField(member),
+    memberId = ForeignKeyField(member)
     race = CharField(32,unique=True)
     age = IntegerField()
     gender = CharField(32,unique=True)
 
 class memberAddress:
-    memberId = ForeignKeyField(member),
+    memberId = ForeignKeyField(member)
     street = CharField(32,unique=True)
     city = CharField(32,unique=True)
     state =CharField(32,unique=True) 
     zipcode = IntegerField()
 
 class donation: 
-    memberId = ForeignKeyField(member),
+    memberId = ForeignKeyField(member)
     item = CharField(32,unique=True)
     monetaryWorth = IntegerField()
 
