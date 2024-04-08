@@ -9,7 +9,7 @@ class baseModel(Model):
     class Meta:
         database = mydb
 
-# Class Definitions
+# Class Definitionsa
 # https://docs.peewee-orm.com/en/latest/peewee/models.html
 class member (baseModel):
     memberId = PrimaryKeyField()

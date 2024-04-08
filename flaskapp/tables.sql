@@ -1,5 +1,3 @@
--- https://www.postgresqltutorial.com/
-
 CREATE TABLE member (
     memberId serial PRIMARY KEY,
     firstName varchar(100),
