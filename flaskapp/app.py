@@ -25,7 +25,7 @@ def register():
 
         try:
             Volunteer.create(VolunteerID = username, Email=email, Password=hashed_password, Phone = phone)
-            return redirect(url_for('login'))
+            return redirect(url_for('login.html'))
         except IntegrityError:
             # Handle duplicate username or email
             return render_template('register.html', error='Username or email already exists')
@@ -41,7 +41,7 @@ def login():
         username = Volunteer.get_or_none(VolunteerID = username)
         if username and check_password_hash(Volunteer.password, password):
             session['username'] = Volunteer.VolunteerID
-            return redirect(url_for('profile'))
+            return redirect(url_for('index.html'))
         else:
             return render_template('login.html', error='Invalid username or password')
 
@@ -53,13 +53,19 @@ def logout():
     session.clear()
     return redirect(url_for('login.html'))
 
+#sending all the neighbor information to the html
+@app.route('/Neighbor', methods=['POST'])
+def neighbor():
+    neighbors = Neighbor.query.all()
+    return render_template('neighbor.html', neighbors=neighbors)
+
 # Route for adding a neighboor
-@app.route('/add', methods=['POST'])
-def add_neighbor():
+@app.route('/Neighbor/add', methods=['POST'])
+def add_neighbor_add():
     if request.method == 'POST':
         neighbor_id = request.form.get('NeighborID')
         edit = request.args.get('edit') == 'true'
-        
+        #this is looking for the neighbor in the database and if it is it will allow to edit.
         if neighbor_id and edit:
             neighbor = Neighbor.query.get(neighbor_id)
             if neighbor:
@@ -73,7 +79,7 @@ def add_neighbor():
                 neighbor.HasPet = request.form.get('HasPet')
                 neighbor.HasStateID = request.form.get('HasStateID')
                 mydb.session.commit()
-                return redirect(url_for('neighbor_list'))
+                return redirect(url_for('neighbor.html'))
             else:
                 return render_template('error.html', message='Neighbor not found')
         else:
@@ -103,8 +109,14 @@ def add_neighbor():
                 return render_template('error.html', message='Neighbor not found')
         return render_template('create_neighbor.html')
     
-@app.route('/add', methods=['POST'])
+
+@app.route('/Provider_Services', methods=['POST'])
 def Provider_Services():
+    Provider_Services = Service_Providers.query.all()
+    return render_template('Service_Providers.html', Provider_Services=Provider_Services)
+
+@app.route('/Provider_Services/add', methods=['POST'])
+def Provider_Services_add():
     if request.method == 'POST':
         organization_id = request.form.get('Organization')
         edit = request.args.get('edit') == 'true'
@@ -144,8 +156,7 @@ def Provider_Services():
                 return render_template('home.html', message='Service Provider not found')
         return render_template('Service_Provider.html')
     
-## additions Nicholas
-# Service Providers Example ########################################
+
 @app.route('/service-providers')
 def list_service_providers():
     service_providers = get_all_service_providers()
