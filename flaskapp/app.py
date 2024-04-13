@@ -5,11 +5,23 @@ In a more complex application you would split your routes into other files as ne
 from datetime import datetime
 
 from flask import Flask, render_template, request
-
+from models import mydb, chapter, member, event, donation
 
 # from logic import *
 
 app = Flask(__name__)
+
+@app.before_request
+def before_request():
+    mydb.connect()
+
+@app.after_request
+def after_request(response):
+    mydb.close()
+    return response
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@db/data'
+
 
 @app.route('/')
 def admin_panel():
@@ -18,7 +30,28 @@ def admin_panel():
 
 @app.route('/members')
 def members():
-    return render_template("members.html")
+    members = member.select()
+    return render_template("members.html", members=members)
+
+@app.route('/main')
+def main_page():
+    # Using Peewee to query all chapters
+    chapters = chapter.select()
+    return render_template("main.html", chapters=chapters)
+
+
+@app.route('/events')
+def events():
+    event_data = event.select()
+    return render_template("events.html", events=event_data)
+   
+@app.route('/donations')
+def donations():
+    donations_query = donation.select().join(member, on=(donation.donor == member.memberid))
+    return render_template("donations.html", donations=donations_query)
+
+
+
 
 # @app.route('/register', methods=['POST'])
 # def register():
@@ -57,3 +90,5 @@ whatever the login/authentication system has stored in the session.
 # @app.before_request
 # def load_user():
 #     g.user = Student.get_by_id(2)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5001)

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Event Table</title>
+    <link rel="stylesheet" href="../static/events.css"> 
+    <!-- Link to your CSS files here -->
+</head>
+<body>
+    <aside>
+        <!-- Sidebar here -->
+    </aside>
+
+    <main>
+        <header>
+            <!-- Your header content here -->
+        </header>
+
+        <section>
+            <h2>Event Table</h2> <!-- Use appropriate heading level -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th> <!-- Assuming "Name" column is an "ID" -->
+                        <th>Venue</th>
+                        <th>StartDate</th>
+                        <th>EndDate</th>
+                        <th>Members</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <!-- Rest of your HTML above -->
+
+<tbody>
+    {% for event in events %}
+<tr>
+    <td>{{ event.eventname }}</td>
+    <td>{{ event.venue }}</td>
+    <td>{{ event.eventdate.strftime('%m/%d/%Y') }}</td>
+    <td>{{ event.numberofmembersattended }}</td>
+    <td><button>View/Update</button></td>
+</tr>
+{% endfor %}
+
+</tbody>
+
+<!-- Rest of your HTML below -->
+
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Your footer here -->
+    </footer>
+
+    <!-- Your scripts here -->
+</body>
+</html>

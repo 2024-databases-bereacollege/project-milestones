@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Members</title>
+    <link rel="stylesheet" href="../static/members.css"> 
 </head>
-
- <body> 
+<body>
     <h1>Members</h1>
-    <p>You have many members</p>
- </body>
-
- </html>
+    <p>You have many members:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Member ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Score</th>
+                <th>Address</th>
+                <th>Events Attended</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td>{{ member.memberid }}</td>
+                <td>{{ member.firstname }}</td>
+                <td>{{ member.lastname }}</td>
+                <td>{{ member.phonenumber }}</td>
+                <td>{{ member.score }}</td>
+                <td>{{ member.memberaddress }}</td>
+                <td>{{ member.numberofeventsattended }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../static/main.css">
+</head>
+<body>
+
+<aside>
+  <!-- Sidebar navigation -->
+  <nav>
+    <div class="admin-div">
+      <p>Admin Panel</p>
+      <img class="admin-pic" src="https://annemariesegal.com/wp-content/uploads/2017/04/adobestock_86346713-cropped-young-woman-in-suit.jpg?w=640">
+    </div>
+    <ul class="tables-div">
+      <li><a href="#!">View Chapter Table</a></li>
+      <li><a href="#!">View Member Table</a></li>
+      <li><a href="#!">View Donations Table</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main>
+  <!-- Main content section -->
+  <header>
+    <!-- Page header -->
+    <h1>Chapter Table</h1>
+    <input type="search" id="tableFilter" placeholder="Filter">
+  </header>
+
+  <section>
+    <!-- Table data -->
+    <table>
+      <thead>
+        <tr>
+          <th>Chapter Name</th>
+          <th>Number of Members</th>
+          <th>Chapter Lead</th>
+          <th>Chapter Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for chapter in chapters %}
+        <tr>
+          <td>{{ chapter.chaptername }}</td>  <!-- Make sure the variable matches the model case -->
+          <td>{{ chapter.numberofmembers }}</td>
+          <td>{{ chapter.chapterlead }}</td>
+          <td>{{ chapter.chapteremail }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<!-- <script>
+  // Add your JavaScript here
+</script> -->
+
+</body>
+</html>

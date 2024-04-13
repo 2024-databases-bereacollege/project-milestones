@@ -9,6 +9,7 @@ CREATE TABLE member (
     NumberOfEventsAttended integer
 );
 
+
 CREATE TABLE chapter (
     chapterName varchar(100) PRIMARY KEY,
     numberofMembers integer,
