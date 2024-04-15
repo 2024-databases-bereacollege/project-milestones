@@ -10,11 +10,12 @@ flask = "==3.0.2"
 itsdangerous = "==2.1.2"
 jinja2 = "==3.1.3"
 markupsafe = "==2.1.5"
-peewee = "==3.17.1"
+peewee = "*"
 peewee-migrations = "==0.3.32"
 psycopg2 = "==2.9.9"
 werkzeug = "==3.0.1"
-Flask-Cors==3.0.10 #personally added - NH
+Flask-Cors= "==4.0.0"
+
 [dev-packages]
 
 [requires]
