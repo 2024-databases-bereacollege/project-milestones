@@ -5,8 +5,24 @@
     <link rel="stylesheet" href="../static/members.css"> 
 </head>
 <body>
+    <aside>
+        <!-- Sidebar navigation -->
+        <nav>
+          <div class="admin-div">
+            <p>Admin Panel</p>
+            <img class="admin-pic" src="https://annemariesegal.com/wp-content/uploads/2017/04/adobestock_86346713-cropped-young-woman-in-suit.jpg?w=640">
+          </div>
+          <ul class="tables-div">
+            <li><a href="main">Chapters</a></li>
+            <li><a href="members">Members</a></li>
+            <li><a href="donations">Donations</a></li>
+            <li><a href="events">Events</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <div class="member_table">
     <h1>Members</h1>
-    <p>You have many members:</p>
+    <!-- <p>You have many members:</p> -->
     <table>
         <thead>
             <tr>
@@ -33,5 +49,7 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 </body>
+
 </html>

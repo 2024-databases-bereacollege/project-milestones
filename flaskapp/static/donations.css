@@ -1,49 +1,111 @@
-body {
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
     font-family: Arial, sans-serif;
-}
+  }
+  
+  .admin-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  aside {
+    width: 200px;
+    float: left;
+    border-right: 1px solid #ccc;
+    height: 100vh;
+  }
+  
+  .admin-pic {
+    width: 50px;
+    border-radius: 50%;
+  }
 
-section {
+  .tables-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  aside nav ul {
+    list-style: none;
+  }
+  
+  aside nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  main {
+    margin-left: 200px;
     padding: 20px;
-}
-
-table {
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  header h1 {
+    margin-right: auto;
+  }
+  
+  input[type="search"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #dddddd;
-}
-
-th, td {
+  }
+  
+  table caption {
     text-align: left;
-    padding: 8px;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-caption {
-    margin-top: 10px;
+    font-size: 1.2em;
     margin-bottom: 10px;
-    font-weight: bold;
+  }
+  
+  table thead {
+    background-color: #f9f9f9;
+  }
+  
+  table th,
+  table td {
     text-align: left;
-}
-
-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table th {
+    font-weight: bold;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  a {
+    color: #06c;
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  

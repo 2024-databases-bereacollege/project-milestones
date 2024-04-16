@@ -1,75 +1,111 @@
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-}
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .admin-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  aside {
+    width: 200px;
+    float: left;
+    border-right: 1px solid #ccc;
+    height: 100vh;
+  }
+  
+  .admin-pic {
+    width: 50px;
+    border-radius: 50%;
+  }
 
-aside {
-    /* Style your sidebar here */
-}
-
-main {
-    width: 80%;
-    margin: auto;
-    background-color: #ffffff;
+  .tables-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  aside nav ul {
+    list-style: none;
+  }
+  
+  aside nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  main {
+    margin-left: 200px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header {
-    /* Style your header here */
-}
-
-section {
-    margin-top: 20px;
-}
-
-table {
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  header h1 {
+    margin-right: auto;
+  }
+  
+  input[type="search"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
+  }
+  
+  table caption {
     text-align: left;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 8px;
-    border: 1px solid #ddd;
-}
-
-th {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  table thead {
     background-color: #f9f9f9;
-    font-weight: normal;
-}
-
-tr:nth-child(even) {
+  }
+  
+  table th,
+  table td {
+    text-align: left;
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table th {
+    font-weight: bold;
+  }
+  
+  table tr:nth-child(even) {
     background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #eaeaea;
-}
-
-button {
-    padding: 5px 10px;
-    background-color: #5c5c5c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #6e6e6e;
-}
-
-/* You can add more styles as per your layout needs */
-
-/* Responsive layout adjustments */
-@media (max-width: 768px) {
-    main {
-        width: 95%;
-        margin: 10px;
-        padding: 10px;
-    }
-}
+  }
+  
+  a {
+    color: #06c;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  
