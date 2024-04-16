@@ -12,7 +12,7 @@ rm -rf migrations.json
 pem init
 
 # Use peewee-migrate to create tables from Peewee models
-pem add models.VisitRecord
+pem add models.Visit_Record
 pem add models.VisitService
 pem add models.Volunteer
 pem add models.Neighbor
