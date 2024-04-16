@@ -1,22 +1,59 @@
 <template>
   <v-card>
-    <v-layout>
-      <v-navigation-drawer
-        expand-on-hover
-        rail
+    <v-toolbar color="primary">
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title>UP Initiative</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          align-tabs="title"
+        >
+          <v-tab
+            v-for="item in items"
+            :key="item"
+            :value="item"
+          >
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+      </template>
+    </v-toolbar>
+
+    <v-window v-model="tab">
+      <v-window-item
+        v-for="item in items"
+        :key="item"
+        :value="item"
       >
-
-
-        <v-divider></v-divider>
-
-        <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-          <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-
-      <v-main style="height: 250px"></v-main>
-    </v-layout>
+        <v-card flat>
+          <v-card-text v-text="text"></v-card-text>
+        </v-card>
+      </v-window-item>
+    </v-window>
   </v-card>
 </template>
+<script>
+  export default {
+    data () {
+      return {
+        tab: null,
+        items: [
+          'Add Visit', 'Neighbors', 'Volunteers', 'Service Providers', 'Inventory',
+        ],
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      }
+    },
+  }
+</script>

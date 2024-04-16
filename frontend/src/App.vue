@@ -1,24 +1,27 @@
 <template>
-  <div id="app">
-    <TestComponent />
-    <CRUDTable />
+  <div> <!-- Single root element -->
+    <div id="app">
+      <NavBar/>
+      <router-link to="/">HomePage</router-link> |
+      <router-link to="/test">Test</router-link>
+      <router-link to="/loginPage">LoginPage</router-link> |
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import TestComponent from './components/TestComponent.vue';
+import NavBar from './components/NavBar.vue';
 
 export default {
   name: 'App',
   components: {
-    TestComponent,
-    
+    NavBar,
   }
 }
 </script>
 
 <style>
-
 #app {
   text-align: center;
   margin-top: 50px;

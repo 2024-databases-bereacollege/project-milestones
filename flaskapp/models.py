@@ -46,7 +46,7 @@ class Services(baseModel):
 
 class Inventory(baseModel):
     Item_Number = IntegerField(primary_key=True)
-    NameOfItem = CharField(max_length=255, primary_key=True)
+    NameOfItem = CharField(max_length=255) # took this out: , primary_key=True
     VolunteerID = ForeignKeyField(Volunteer, backref='inventory')
     ExpirationDate = DateField()
     NumberOfItem = IntegerField()
