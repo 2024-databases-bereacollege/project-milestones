@@ -1,33 +1,34 @@
 <template>
   <div>
-    <h1>Message from Backend:</h1>
-    <p>{{ message }}</p>
+      <button type="button" class = "btn btn-primary">{{ msg }}</button>
   </div>
 </template>
 
+
 <script>
 import axios from 'axios';
-
 export default {
   name: 'TestComponent',
   data() {
-    return {
-      message: '',
-    };
+      return {
+          msg : ""
+      };
   },
-  methods: {
-    fetchMessage() {
-      axios.get('http://localhost:5000/test')
-        .then(response => {
-          this.message = response.data.message;
-        })
-        .catch(error => {
-          console.error('There was an error fetching the message:', error);
-        });
-    },
+  methods : {
+      getReponse(){
+          const path = 'http://localhost:5000/test';
+          axios.get(path)
+          .then ((res) => { 
+              console.log(res.data)
+              this.msg = res.data;
+          }) 
+          .catch ((err) => {
+              console.error(err);
+          });
+      },
   },
-  mounted() {
-    this.fetchMessage();
-  },
-};
+  created(){
+      this.getReponse();
+  }
+}
 </script>

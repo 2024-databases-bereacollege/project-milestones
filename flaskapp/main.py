@@ -4,15 +4,24 @@ from flask_cors import CORS #to allow the front end to communicate with the back
 from models import *
 from logic import * 
 
-#to run type flask run in the terminal or type the other
+
+
 app = Flask(__name__)
 
-CORS(app)
-#CORS(app, resources={r"/*":{'origins':"*"}}) #TODO fix before deploying -to allow the front end to communicate with the back end - allowing all origins
+app.config.from_object(__name__)
+
+CORS(app, resources={r"/*":{'origins':"*"}})
+# CORS(app, resources={r'/*':{'origins': 'http://localhost:8080',"allow_headers": "Access-Control-Allow-Origin"}})
+
+# hello world route
+@app.route('/', methods=['GET'])
+def greetings():
+    return("Hello, world!")
 
 @app.route('/test', methods=['GET'])
-def test_route():
-    return jsonify({"message": "Hello from Flask!"})
+def shark():
+    return("Shark🦈!")
+
 
 @app.route('/NeighborTable', methods=['GET'])
 def neighbor():
