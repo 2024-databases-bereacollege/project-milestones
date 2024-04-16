@@ -7,7 +7,7 @@ from logic import *
 #to run type flask run in the terminal
 app = Flask(__name__)
 
-CORS(app, resources={r"/*":{'origins':"*"}}) #to allow the front end to communicate with the back end - allowing all origins
+CORS(app, resources={r"/*":{'origins':"*"}}) #TODO fix before deploying -to allow the front end to communicate with the back end - allowing all origins
 #Root URL
 @app.route('/')
 def index():
