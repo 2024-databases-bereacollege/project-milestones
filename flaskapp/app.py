@@ -47,7 +47,8 @@ def events():
    
 @app.route('/donations')
 def donations():
-    donations_query = donation.select().join(member, on=(donation.donor == member.memberid))
+    donations_query = donation.select().join(member)
+    print(donations_query)
     return render_template("donations.html", donations=donations_query)
 
 

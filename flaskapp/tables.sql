@@ -31,4 +31,3 @@ CREATE TABLE donation (
     item VARCHAR(50),
     monetaryWorth INTEGER
 );
-

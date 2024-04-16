@@ -56,15 +56,15 @@ VALUES
     ('Wilderness Trace', 30, 'Emily Brown', 'emily@example.com');
 
 
-INSERT INTO donation (item, monetaryWorth)
+INSERT INTO donation (donor_id, item, "monetaryWorth")
 VALUES
-    ('Laptop', 800),
-    ('Books', 100),
-    ('Laptop', 800),
-    ('Books', 100),
-    ('Laptop', 800);
+    (1, 'Laptop', 800),
+    (2, 'Books', 100),
+    (3, 'Laptop', 800),
+    (2, 'Books', 100),
+    (1, 'Laptop', 800);
 
-INSERT INTO event (eventName, venue, theme, eventDate, numberofMemebersAttended)
+INSERT INTO event (eventName, venue, theme, eventDate, numberofMembersAttended)
 VALUES
     ('Community Building', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200),
     ('Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80),
