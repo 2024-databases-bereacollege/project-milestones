@@ -25,24 +25,27 @@ class Neighbor(baseModel):
     LastName = CharField(max_length=255)
     DateOfBirth = DateField()
     Phone = CharField(max_length=20)
-    Address = TextField()
+    Location = TextField() #changed from Address to Location
     Email = CharField(max_length=255)
     Created_date = DateTimeField(default=datetime.datetime.now)
     HasStateID = BooleanField()
     HasPet = BooleanField()
 
 class Service_Providers(baseModel):
-    Organization = CharField(max_length=255, primary_key=True)
+    OrganizationID = CharField(max_length=255, primary_key=True)
+    Organization_Name = CharField(max_length=255) #changed from Organization to Organization_Name
     ContactPerson = CharField(max_length=255)
     Email = CharField(max_length=255)
     Phone = CharField(max_length=20)
     DateOfStart = DateField()
 
 class Services(baseModel):
-    ServiceType = CharField(max_length=255, primary_key=True)
+    ServiceID = IntegerField(primary_key=True) #changed from Servicetype to SeriviceID
+    ServiceType = CharField(max_length=255) #added
     Organization = ForeignKeyField(Service_Providers, backref='services')
 
 class Inventory(baseModel):
+    Item_Number = IntegerField(primary_key=True)
     NameOfItem = CharField(max_length=255, primary_key=True)
     VolunteerID = ForeignKeyField(Volunteer, backref='inventory')
     ExpirationDate = DateField()
