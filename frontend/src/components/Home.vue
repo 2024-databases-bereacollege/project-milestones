@@ -10,7 +10,7 @@
         <router-link to="/crudtable">CRUD Table</router-link>
       </v-list-item>
       <v-list-item link>
-        <router-link to="/page2">List Item 2</router-link>
+        <router-link to="/neighbor">Neighbors</router-link>
       </v-list-item>
       <!-- Add more list items as needed -->
     </v-navigation-drawer>
