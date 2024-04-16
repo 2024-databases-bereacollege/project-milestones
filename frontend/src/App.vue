@@ -1,22 +1,24 @@
 <template>
   <div id="app">
     <TestComponent />
+    <CRUDTable />
   </div>
 </template>
 
 <script>
-import TestComponent from './components/TestComponent.vue'; 
+import TestComponent from './components/TestComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    TestComponent
+    TestComponent,
+    
   }
 }
 </script>
 
 <style>
-/* Your styles here */
+
 #app {
   text-align: center;
   margin-top: 50px;

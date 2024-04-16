@@ -8,7 +8,7 @@
         <v-toolbar
           flat
         >
-          <v-toolbar-title>My CRUD</v-toolbar-title>
+          <v-toolbar-title>Neigbors</v-toolbar-title>
           <v-divider
             class="mx-4"
             inset

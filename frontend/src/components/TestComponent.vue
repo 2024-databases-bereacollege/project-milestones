@@ -15,8 +15,8 @@ export default {
       };
   },
   methods : {
-      getReponse(){
-          const path = 'http://localhost:5000/test';
+      getResponse(){
+          const path = 'http://127.0.0.1:5000/test';
           axios.get(path)
           .then ((res) => { 
               console.log(res.data)
@@ -28,7 +28,7 @@ export default {
       },
   },
   created(){
-      this.getReponse();
+      this.getResponse();
   }
 }
 </script>
