@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <CRUDTable />
+    <TestComponent />
   </div>
 </template>
 
 <script>
-import CRUDTable from './components/CRUDTable.vue'; // Adjust the path as necessary
+import TestComponent from './components/TestComponent.vue'; 
 
 export default {
   name: 'App',
   components: {
-    CRUDTable
+    TestComponent
   }
 }
 </script>
