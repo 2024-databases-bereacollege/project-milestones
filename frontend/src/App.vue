@@ -1,35 +1,24 @@
 <template>
   <div id="app">
-    <header>
-      <NavBar />
-    </header>
-    <main>
-      <router-view></router-view>
-      <HelloWorld/>
-    </main>
+    <CRUDTable />
   </div>
 </template>
 
-
-
 <script>
+import CRUDTable from './components/CRUDTable.vue'; // Adjust the path as necessary
 
-import HelloWorld from './components/HelloWorld.vue'
-import NavBar from './components/NavBar.vue'
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
-    NavBar,
-  },
-
-  data: () => ({
-    //
-  }),
+    CRUDTable
+  }
 }
 </script>
 
 <style>
-/* Your CSS here */
+/* Your styles here */
+#app {
+  text-align: center;
+  margin-top: 50px;
+}
 </style>
