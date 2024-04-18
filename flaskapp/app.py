@@ -6,6 +6,8 @@ from datetime import datetime
 
 from flask import Flask, render_template, request
 from models import mydb, chapter, member, event, donation
+from flask_wtf import CSRFProtect
+
 
 # from logic import *
 
@@ -53,6 +55,27 @@ def donations():
 
 
 
+@app.route('/add_member', methods=['POST'])
+def add_member():
+    if request.method == 'POST':
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        phone_number = request.form.get('phone_number')
+        score = request.form.get('score')
+        address = request.form.get('address')
+        number_of_events_attended = request.form.get('number_of_events_attended')
+
+        new_member = member.create(
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=phone_number,
+            score=score,
+            address=address,
+            number_of_events_attended=int(number_of_events_attended)
+        )
+        new_member.save()
+
+        return redirect(url_for('members'))
 
 # @app.route('/register', methods=['POST'])
 # def register():

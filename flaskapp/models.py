@@ -35,8 +35,6 @@ class event(baseModel):
     eventdate = DateField() 
     numberofmembersattended = IntegerField() 
 
-
-
 class donation(baseModel):
     donationId = AutoField()
     donor = ForeignKeyField(member, backref='donations')  # Ensure this matches the column name in your DB
