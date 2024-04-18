@@ -200,8 +200,7 @@ Relational Schema with normalized form:
 
 	3. Create a draft SQL script of the Create Table DDL statements needed to implement your database. Pay special attention to column data types and include necessary constraints such as Primary Key, Not Null, or Foreign Key constraints. 
 
-		Revisit R7: Well-structured Relations for reminders on how to convert a conceptual model (Milestone 2) to a relation
-		You can use psql to write out statements, write out a "script" of statements in an *.sql document, or use a Jupyter notebook to test your scripts
-		Remember, you cannot create duplicate tables. You must drop (delete) the old table before you can create a new one.
 	
 	4. Create a python file (models.py) with Peewee models of your schema. Introspect your models to compare the underlying SQL with your draft from Step 3.
+
+		Models.py stored under flaskapp.
