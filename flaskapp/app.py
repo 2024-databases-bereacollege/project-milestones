@@ -5,8 +5,11 @@ In a more complex application you would split your routes into other files as ne
 from datetime import datetime
 
 from flask import Flask, render_template, request
+from peewee import IntegrityError
 from models import mydb, chapter, member, event, donation
 from flask_wtf import CSRFProtect
+from flask import redirect
+from flask import url_for
 
 
 # from logic import *
@@ -59,6 +62,7 @@ def donations():
 def add_member():
     if request.method == 'POST':
         first_name = request.form.get('first_name')
+        middle_name = request.form.get('middle_name')
         last_name = request.form.get('last_name')
         phone_number = request.form.get('phone_number')
         score = request.form.get('score')
@@ -66,12 +70,13 @@ def add_member():
         number_of_events_attended = request.form.get('number_of_events_attended')
 
         new_member = member.create(
-            first_name=first_name,
-            last_name=last_name,
-            phone_number=phone_number,
+            firstname=first_name,
+            middlename=middle_name,
+            lastname=last_name,
+            phonenumber=phone_number,
             score=score,
-            address=address,
-            number_of_events_attended=int(number_of_events_attended)
+            memberaddress=address,
+            numberofeventsattended=int(number_of_events_attended)
         )
         new_member.save()
 
