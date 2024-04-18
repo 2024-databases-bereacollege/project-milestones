@@ -13,15 +13,22 @@ app.config.from_object(__name__)
 CORS(app, resources={r"/*":{'origins':"*"}})
 # CORS(app, resources={r'/*':{'origins': 'http://localhost:8080',"allow_headers": "Access-Control-Allow-Origin"}})
 
-# hello world route
-@app.route('/', methods=['GET'])
-def greetings():
-    return("Hello, world!")
+
 
 @app.route('/test', methods=['GET'])
 def shark():
-    return("Shark🦈!!!!!")
+    return("Shark!!!!!")
 
+
+
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "Response from root - Home page /"})
+
+# @app.route('/NeighborTable', methods=['GET'])
+# def neighbor_table():
+#     # Assuming you're returning a simple message for demonstration
+#     return jsonify({"message": "Hello from /NeighborTable"})
 
 @app.route('/NeighborTable', methods=['GET'])
 def neighbor():

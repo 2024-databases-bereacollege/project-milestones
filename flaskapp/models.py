@@ -65,6 +65,15 @@ class Services(baseModel):
     Organization = ForeignKeyField(Service_Providers, backref='services')
 
 
+# class Inventory(baseModel):
+#     Item_Number = IntegerField(primary_key=True)
+#     NameOfItem = CharField(max_length=255) # took this out: , primary_key=True
+#     VolunteerID = ForeignKeyField(Volunteer, backref='inventory')
+#     ExpirationDate = DateField()
+#     NumberOfItem = IntegerField()
+
+
+
 class Visit_Service(baseModel):
     ServiceOrder = IntegerField(primary_key=True)
     ServiceID = ForeignKeyField(Service, backref='visit_services')
@@ -91,4 +100,12 @@ class Inventory(baseModel):
 
 
 
+
+
+# class Visit_Record(baseModel):
+#     RecordID = IntegerField(primary_key=True)
+#     ServiceOrder = ForeignKeyField(Visit_Service, backref='visit_records')
+#     Date = DateField()
+#     Time = DateField()
+#     Notes = TextField()
 
