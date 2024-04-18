@@ -1,19 +1,14 @@
 <template>
     <div class="Main">
-      <div class="links">
-        <router-link to="/Main">History</router-link> <!-- History is the default tab here -->
-        <router-link to="/Main/contact">Contact</router-link>
-        <router-link to ="Main/NeighborTable">NeighborTable</router-link>
-      </div>
       <div class="content">
-        <h1>DatabaseTables</h1>
+        <h1>Database Tables</h1>
         <router-view></router-view>
       </div>
     </div>
   </template>
   
-  <script>
-  export default {
+  <script> 
+  export default { // THIS FILE SHIFTS THE CONTENT TO THE RIGHT, ALL VIEWS ARE ATTACHED TO THIS ONE, AND APP.PY ADDS THE SIDEBAR COMPONENT
     name: 'Main',
     props: {},
     data() {

@@ -1,9 +1,18 @@
-<script setup lang="ts">
-import CRUDTable from '../components/CRUDTable.vue';
+<template>
+  <h1>This is the home page</h1>
+</template>
+
+<script>
+export default {
+  name: 'HomeView',
+  props: {},
+  data() {
+    return {
+    }
+  }
+}
 </script>
 
-<template>
-  <main>
-    <CRUDTable />
-  </main>
-</template>
+<style scoped>
+</style>
+

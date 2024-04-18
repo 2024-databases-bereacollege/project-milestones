@@ -1,7 +1,7 @@
 <template>
   <div> <!-- Single root element -->
     <div id="app">
-      <NavBar/>
+
       <Sidebar />
 
 
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue';
+//import NavBar from './components/NavBar.vue';
 import Sidebar from './components/Sidebar.vue';
 
 export default {
   name: 'App',
   components: {
-    NavBar,
+  //  NavBar,
     Sidebar
   }
 }
