@@ -1,15 +1,18 @@
 <template>
-  <main>
-    <CRUDTable />
-  </main>
+  <h1>Contact</h1>
 </template>
 
 <script>
-import CRUDTable from './CRUDTable.vue';
-
 export default {
-  components: {
-    CRUDTable
+  name: 'HomeView',
+  props: {},
+  data() {
+    return {
+    }
   }
 }
 </script>
+
+<style scoped>
+</style>
+

@@ -7,6 +7,10 @@ import TestComponent from '@/components/TestComponent.vue';
 import CRUDTable from "@/components/CRUDTable.vue";
 import HomeView from "@/components/HomeView.vue";
 import LoginPage from "@/components/LoginPage.vue";
+
+// Import Views Components
+import Contact from '@/views/Contact.vue';
+import History from '@/views/History.vue';
 // Import other components for routes
 
 const routes = [
@@ -16,12 +20,25 @@ const routes = [
     { path: '/login', component: LoginPage },
     { path: '/crudtable', name : 'crudtable', component: CRUDTable },
 
-  // Define other routes here
+    { path: '/contact', name : 'contact', component: Contact },
+    { path: '/history', name : 'history', component: History },
+    {
+      path: '/Main',
+      name: 'Main',
+      // route level code-splitting
+      // this generates a separate chunk (Main.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "Main" */ '../views/Main.vue'),
+      children: [
+        { path: '', component: History }, // default tab that shows on /Main route
+        { path: 'contact', component: Contact }
+      ]
+    }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes // maybe , is needed here?
+  routes 
 })
 
-export default router // maybe ; is needed here?
+export default router 

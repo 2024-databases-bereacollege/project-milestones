@@ -25,10 +25,10 @@ def shark():
 def home():
     return jsonify({"message": "Response from root - Home page /"})
 
-@app.route('/NeighborTable', methods=['GET'])
-def neighbor_table():
-    # Assuming you're returning a simple message for demonstration
-    return jsonify({"message": "Hello from /NeighborTable"})
+# @app.route('/NeighborTable', methods=['GET'])
+# def neighbor_table():
+#     # Assuming you're returning a simple message for demonstration
+#     return jsonify({"message": "Hello from /NeighborTable"})
 
 @app.route('/NeighborTable', methods=['GET'])
 def neighbor():

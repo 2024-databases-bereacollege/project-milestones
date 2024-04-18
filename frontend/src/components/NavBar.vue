@@ -38,6 +38,7 @@
         :value="item"
       >
         <v-card flat>
+          <v-card-title>{{ CRUDTableVue }}</v-card-title>
           <v-card-text v-text="text"></v-card-text>
         </v-card>
       </v-window-item>
@@ -45,6 +46,7 @@
   </v-card>
 </template>
 <script>
+import CRUDTableVue from './CRUDTable.vue'
   export default {
     data () {
       return {
@@ -52,8 +54,21 @@
         items: [
           'Add Visit', 'Neighbors', 'Volunteers', 'Service Providers', 'Inventory',
         ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        component: CRUDTableVue
+        //text: 'hello',
       }
     },
   }
+  
 </script>
+
+<style>
+#app {
+  text-align: center;
+  margin-top: 50px;
+}
+.content {
+  margin-left: 16rem; /* Push content to the right of the sidebar */
+  padding: 1rem; /* Padding around content */
+}
+</style>

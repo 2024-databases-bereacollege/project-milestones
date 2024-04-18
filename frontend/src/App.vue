@@ -2,9 +2,9 @@
   <div> <!-- Single root element -->
     <div id="app">
       <NavBar/>
-      <router-link to="/">HomePage</router-link> |
-      <router-link to="/test">Test</router-link>
-      <router-link to="/loginPage">LoginPage</router-link> |
+      <Sidebar />
+
+
     </div>
     <router-view/>
   </div>
@@ -12,11 +12,13 @@
 
 <script>
 import NavBar from './components/NavBar.vue';
+import Sidebar from './components/Sidebar.vue';
 
 export default {
   name: 'App',
   components: {
     NavBar,
+    Sidebar
   }
 }
 </script>
@@ -25,5 +27,9 @@ export default {
 #app {
   text-align: center;
   margin-top: 50px;
+}
+.content {
+  margin-left: 16rem; /* Push content to the right of the sidebar */
+  padding: 1rem; /* Padding around content */
 }
 </style>
