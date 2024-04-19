@@ -34,6 +34,7 @@ class event(baseModel):
     theme = CharField() 
     eventdate = DateField() 
     numberofmembersattended = IntegerField() 
+    # chaptername = CharField()
 
 class donation(baseModel):
     donationId = AutoField()

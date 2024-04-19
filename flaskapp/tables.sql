@@ -6,7 +6,8 @@ CREATE TABLE member (
     phoneNumber varchar(20),
     score integer NOT NULL,
     memberAddress varchar(100),
-    NumberOfEventsAttended integer
+    NumberOfEventsAttended integer, 
+    -- chapterName varchar(50)
 );
 
 
@@ -23,6 +24,7 @@ CREATE TABLE event (
     theme varchar(100),
     eventDate date,
     numberofMemebersAttended integer
+    -- chapterName VARCHAR(50) REFERENCES chapter(chapterName)
 );
 
 CREATE TABLE donation (

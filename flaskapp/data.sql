@@ -48,7 +48,7 @@ VALUES
     (654, 2345678901, 'Landra', '', 'Lewis', '619 Chestnut St, Berea, KY, 40403', 3),
     (321, 3456789012, 'Travis', '', 'Bolinger', '314 University Dr Apt A, Richmond, KY, 2841',  2),
     (432, 4567890123, 'Rachel', '',  'White', '1101 Elm St, Danville, KY, 40422', 7),
-    (876, 5678901234, 'Joanie', '', 'Lukins', '503 Ohara Dr, Daville, KY, 40422', 4);
+    (876, 5678901234, 'Joanie', '', 'Lukins', '503 Ohara Dr, Daville, KY, 40422', 4);   
 
 INSERT INTO chapter (chapterName, numberofMembers, chapterLead, chapterEmail)
 VALUES

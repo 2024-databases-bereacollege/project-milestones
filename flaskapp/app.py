@@ -4,6 +4,9 @@ In a more complex application you would split your routes into other files as ne
 """
 from datetime import datetime
 
+from flask import jsonify
+
+
 from flask import Flask, render_template, request
 from peewee import IntegrityError
 from models import mydb, chapter, member, event, donation
@@ -69,18 +72,27 @@ def add_member():
         address = request.form.get('address')
         number_of_events_attended = request.form.get('number_of_events_attended')
 
-        new_member = member.create(
-            firstname=first_name,
-            middlename=middle_name,
-            lastname=last_name,
-            phonenumber=phone_number,
-            score=score,
-            memberaddress=address,
-            numberofeventsattended=int(number_of_events_attended)
-        )
-        new_member.save()
+        try:
+            new_member = member.create(
+                firstname=first_name,
+                middlename=middle_name,
+                lastname=last_name,
+                phonenumber=phone_number,
+                score=score,
+                memberaddress=address,
+                numberofeventsattended=int(number_of_events_attended)
+            )
+            new_member.save()
 
-        return redirect(url_for('members'))
+            return redirect(url_for('members'))
+        except Exception as e:
+            # Here, consider adding error logging or handling
+            print(f"An error occurred: {e}")
+            # Optionally, return an error message or status
+            return "An error occurred", 500
+
+    
+
 
 # @app.route('/register', methods=['POST'])
 # def register():
