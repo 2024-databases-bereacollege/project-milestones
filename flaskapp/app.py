@@ -92,26 +92,40 @@ def add_member():
             return "An error occurred", 500
 
     
+@app.route('/add_event', methods=['POST'])
+def add_event():
+    try:
+        new_event = event.create(
+            eventname=request.form['event_name'],
+            venue=request.form['venue'],
+            eventdate=request.form['event_date'],
+            theme=request.form['theme'],
+            numberofmembersattended=request.form['attendance']
+        )
+        new_event.save()
+        return redirect(url_for('events'))
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "An error occurred", 500
+
+@app.route('/add_donation', methods=['POST'])
+def add_donation():
+    try:
+        new_donation = donation.create(
+            donor=request.form['donor_id'],
+            item=request.form['item'],
+            monetaryWorth=request.form['monetaryWorth']
+        )
+        new_donation.save()
+        return redirect(url_for('donations'))
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "An error occurred", 500
+    
+    return jsonify({"success": True, "message": "Donation added successfully"})
 
 
-# @app.route('/register', methods=['POST'])
-# def register():
-#     """
-#     """
-#     course_id = request.form.get('course_id')
-#     user_id = request.form.get('user_id')
 
-#     StudentCourse.insert(course=course_id,
-#                          student=user_id,registered_on=datetime.now()).execute()
-
-#     return ''
-
-# @app.route('/current/<int:id>', methods=['GET', 'POST'])
-# def currentCourses(id):
-#    ''' View courses for the given user
-#    '''
-#    mycourses = [Course.get(1),Course.get(2)]
-#    return ""
 
 """
 Flask can use a variety of decorators to enhance application functionality.
