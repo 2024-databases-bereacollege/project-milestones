@@ -20,6 +20,7 @@ class member(baseModel):
     score = IntegerField()
     memberaddress = CharField(255)
     numberofeventsattended = IntegerField()
+    status = CharField(15)
    
 
 class chapter(baseModel):

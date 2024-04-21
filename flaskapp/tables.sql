@@ -8,6 +8,7 @@ CREATE TABLE member (
     memberAddress varchar(100),
     NumberOfEventsAttended integer, 
     -- chapterName varchar(50)
+    status varchar(15)
 );
 
 

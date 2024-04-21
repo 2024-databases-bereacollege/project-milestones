@@ -38,8 +38,9 @@ def admin_panel():
 
 @app.route('/members')
 def members():
-    members = member.select()
-    return render_template("members.html", members=members)
+    members_query = member.select()
+    members_list = [member_to_dict(m) for m in members_query]  # Convert each member to a dict
+    return render_template("members.html", members=members_list)
 
 @app.route('/main')
 def main_page():
@@ -63,33 +64,37 @@ def donations():
 
 @app.route('/add_member', methods=['POST'])
 def add_member():
-    if request.method == 'POST':
-        first_name = request.form.get('first_name')
-        middle_name = request.form.get('middle_name')
-        last_name = request.form.get('last_name')
-        phone_number = request.form.get('phone_number')
-        score = request.form.get('score')
-        address = request.form.get('address')
-        number_of_events_attended = request.form.get('number_of_events_attended')
+    try:
+        # Assuming you are sending these fields in the request
+        first_name = request.form['first_name']
+        middle_name = request.form.get('middle_name', '')  # Use .get for optional fields
+        last_name = request.form['last_name']
+        phone_number = request.form['phone_number']
+        score = request.form['score']
+        address = request.form['address']
+        number_of_events_attended = request.form['number_of_events_attended']
+        status = request.form['status'] 
 
-        try:
-            new_member = member.create(
-                firstname=first_name,
-                middlename=middle_name,
-                lastname=last_name,
-                phonenumber=phone_number,
-                score=score,
-                memberaddress=address,
-                numberofeventsattended=int(number_of_events_attended)
-            )
-            new_member.save()
+        # Create new member instance and save to the database
+        new_member = member.create(
+            firstname=first_name,
+            middlename=middle_name,
+            lastname=last_name,
+            phonenumber=phone_number,
+            score=score,
+            memberaddress=address,
+            numberofeventsattended=number_of_events_attended,
+            status = status
+        )
+        status = 'active'
+        new_member.save()
+        return redirect(url_for('members'))
 
-            return redirect(url_for('members'))
-        except Exception as e:
-            # Here, consider adding error logging or handling
-            print(f"An error occurred: {e}")
-            # Optionally, return an error message or status
-            return "An error occurred", 500
+    except Exception as e:
+        # If an error occurs, log it and send a 500 error response
+        print(f"Error: {e}")
+        return jsonify({'error': str(e)}), 500
+
 
     
 @app.route('/add_event', methods=['POST'])
@@ -124,7 +129,48 @@ def add_donation():
     
     return jsonify({"success": True, "message": "Donation added successfully"})
 
+@app.route('/update_member', methods=['POST'])
+def update_member():
+    member_id = request.form['member_id']
+    try:
+        # Use a different variable name for the member instance
+        member_instance = member.get_by_id(member_id)  # Assuming 'Member' is your model class name
+        member_instance.firstname = request.form['first_name']
+        member_instance.middlename = request.form['middle_name']
+        member_instance.lastname = request.form['last_name']
+        member_instance.phonenumber = request.form['phone_number']
+        member_instance.score = request.form['score']
+        member_instance.memberaddress = request.form['address']
+        member_instance.numberofeventsattended = request.form['number_of_events_attended']
+        member_instance.save()
+        return jsonify({'message': 'Member updated successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
+
+
+def member_to_dict(member):
+    return {
+        "memberid": member.memberid,
+        "firstname": member.firstname,
+        "middlename": member.middlename,
+        "lastname": member.lastname,
+        "phonenumber": member.phonenumber,
+        "score": member.score,
+        "memberaddress": member.memberaddress,
+        "numberofeventsattended": member.numberofeventsattended,
+        "status": member.status
+    }
+
+
+@app.route('/delete_member/<int:member_id>', methods=['DELETE'])
+def delete_member(member_id):
+    try:
+        member = member.get(member.memberid == member_id)
+        member.delete_instance()
+        return jsonify({'message': 'Member deleted successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 """
