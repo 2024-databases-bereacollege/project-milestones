@@ -74,11 +74,6 @@ class Services(baseModel):
 
 
 
-class Visit_Service(baseModel):
-    ServiceOrder = IntegerField(primary_key=True)
-    ServiceID = ForeignKeyField(Service, backref='visit_services')
-    Description = TextField()
-    RecordID = ForeignKeyField(Visit_Record, backref='visit_service')
 
 
 class Inventory_Usage(baseModel):

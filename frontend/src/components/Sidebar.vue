@@ -7,6 +7,7 @@
       <router-link to="/VisitRecord">VisitRecord</router-link>
       <router-link to="/Services">Services</router-link>
       <router-link to="/ServiceProviders">ServiceProviders</router-link>
+      <router-link to="/Inventory">Inventory</router-link>
       <router-link to="/test">Test</router-link>
 
     </div>
@@ -15,7 +16,7 @@
   <style>
   .sidebar {
     width: 16rem; /* Set the width of the sidebar */
-    background-color: #1c8583; /* Shaded background */
+    background-color: rgb(122, 211, 255); /* Shaded background */
     height: 100vh; /* Full viewport height */
     position: fixed; /* Fix position to the left */
     left: 0;

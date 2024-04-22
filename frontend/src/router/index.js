@@ -15,6 +15,7 @@ import Services from '@/views/Services.vue';
 import VolunteerTable from '@/views/VolunteerTable.vue';
 import NeighborTable from '@/views/NeighborTable.vue';
 import VisitRecord from '@/views/VisitRecord.vue';
+import Inventory from '@/views/Inventory.vue';
 
 // Import other components for routes
 
@@ -35,7 +36,8 @@ const routes = [
         { path: '/Services', name : 'Services', component: Services },
         { path: '/VolunteerTable', name : 'VolunteerTable', component: VolunteerTable },
         { path: '/NeighborTable', name : 'NeighborTable', component: NeighborTable },
-        { path: '/VisitRecord', name : 'VisitRecord', component: VisitRecord }
+        { path: '/VisitRecord', name : 'VisitRecord', component: VisitRecord },
+        { path: '/inventory', name : 'inventory', component: Inventory}
 
       ]
     }

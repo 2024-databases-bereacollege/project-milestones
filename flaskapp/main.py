@@ -47,7 +47,26 @@ def neighbor():
         "HasStateID": True,
         "HasPet": False
     }
-    return jsonify(mock_neighbor)
+    mock_neighborTwo = {
+        "NeighborID": 2,
+        "VolunteerID": 102,  # Assuming a volunteer ID; replace with relevant data
+        "Organization:": "Helping Hands",
+        "FirstName": "Jane",
+        "LastName": "Doe",
+        "DateOfBirth": "1990-01-01",
+        "Phone": "555-1234",
+        "Address": "123 Main St, Anytown, USA",
+        "Email": "janedoe@example.com",
+        "Created_date": datetime.datetime.now().isoformat(),
+        "HasStateID": True,
+        "HasPet": False
+    }
+    return mock_neighbor, mock_neighborTwo
+
+
+def neighbors():
+    neighbors = neighbor()
+    return jsonify(neighbors)
 
 if __name__ == '__main__':
     app.run(debug=True)
