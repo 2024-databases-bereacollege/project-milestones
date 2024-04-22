@@ -46,15 +46,15 @@
   </v-card>
 </template>
 <script>
-import CRUDTableVue from './CRUDTable.vue'
+//import CRUDTableVue from './CRUDTable.vue'
   export default {
     data () {
       return {
         tab: null,
-        items: [
-          'Add Visit', 'Neighbors', 'Volunteers', 'Service Providers', 'Inventory',
-        ],
-        component: CRUDTableVue
+        // items: [
+        //   'Add Visit', 'Neighbors', 'Volunteers', 'Service Providers', 'Inventory',
+        // ],
+        //component: CRUDTableVue
         //text: 'hello',
       }
     },
@@ -69,6 +69,6 @@ import CRUDTableVue from './CRUDTable.vue'
 }
 .content {
   margin-left: 16rem; /* Push content to the right of the sidebar */
-  padding: 1rem; /* Padding around content */
+  padding: 1rem; /* padding: 1rem; Padding around content */
 }
 </style>
