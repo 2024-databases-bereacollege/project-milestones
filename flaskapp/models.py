@@ -2,11 +2,11 @@ from peewee import *
 import datetime
 
 # Database Configuration
-mydb = PostgresqlDatabase("myappdb",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
+myappdb = PostgresqlDatabase("myappdb",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
 
 class baseModel(Model):
     class Meta:
-        database = mydb
+        database = myappdb
 
 # Class Definitions
 # https://docs.peewee-orm.com/en/latest/peewee/models.html
