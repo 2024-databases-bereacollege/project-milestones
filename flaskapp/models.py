@@ -1,10 +1,12 @@
 from peewee import *
 import datetime
-
+from playhouse.shortcuts import model_to_dict
 # Database Configuration
 myappdb = PostgresqlDatabase("myappdb",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
 
 class baseModel(Model):
+    def to_dict(self):
+        return model_to_dict(self)    
     class Meta:
         database = myappdb
 
