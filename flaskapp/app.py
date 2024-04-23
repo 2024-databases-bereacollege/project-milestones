@@ -136,22 +136,52 @@ def add_event():
     except Exception as e:
         print(f"An error occurred: {e}")
         return "An error occurred", 500
+    
+
 
 @app.route('/add_donation', methods=['POST'])
 def add_donation():
     try:
+        donor_id = request.form['donor_id']
+        item = request.form['item']
+        monetaryWorth = request.form['monetaryWorth']
+
         new_donation = donation.create(
-            donor=request.form['donor_id'],
-            item=request.form['item'],
-            monetaryWorth=request.form['monetaryWorth']
+            donor=donor_id, 
+            item=item,
+            monetaryWorth=monetaryWorth
         )
-        new_donation.save()
-        return redirect(url_for('donations'))
+        return jsonify({
+            'id': new_donation.id,
+            'donor_id': donor_id,
+            'item': item,
+            'monetaryWorth': monetaryWorth
+        })
     except Exception as e:
-        print(f"An error occurred: {e}")
-        return "An error occurred", 500
-    
-    return jsonify({"success": True, "message": "Donation added successfully"})
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/update_donation', methods=['POST'])
+def update_donation():
+    try:
+        donation_id = request.form['donation_id']
+        donor_id = request.form['donor_id']
+        item = request.form['item']
+        monetaryWorth = request.form['monetaryWorth']
+
+        donation_instance = donation.get_by_id(donation_id)
+        donation_instance.donor = donor_id
+        donation_instance.item = item
+        donation_instance.monetaryWorth = monetaryWorth
+        donation_instance.save()
+
+        return jsonify({
+            'id': donation_id,
+            'donor_id': donor_id,
+            'item': item,
+            'monetaryWorth': monetaryWorth
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/update_member', methods=['POST'])
 def update_member():
