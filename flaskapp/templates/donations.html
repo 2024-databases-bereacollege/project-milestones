@@ -33,7 +33,8 @@
         <table id="donationsTable">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Donation ID</th>
+                    <th>Donor ID</th>
                     <th>Item</th>
                     <th>Monetary Worth</th>
                     <th>Action</th>
@@ -43,9 +44,10 @@
                 {% for donation in donations %}
                 <tr id="donation-{{ donation.id }}">
                     <td>{{ donation.donor_id }}</td>
+                    <td>{{ donation.donation_id }}</td>
                     <td>{{ donation.item }}</td>
                     <td>${{ donation.monetaryWorth }}</td>
-                    <td><button type="button" onclick="openUpdateModal('{{ donation.id }}', '{{ donation.donor_id }}', '{{ donation.item }}', '{{ donation.monetaryWorth }}')">View/Update</button></td>
+                    <td><button type="button" onclick="openUpdateModal('{{ donation.id }}', '{{ donation.donor }}', '{{ donation.item }}', '{{ donation.monetaryWorth }}')">View/Update</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
