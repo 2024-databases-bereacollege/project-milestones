@@ -44,7 +44,7 @@
                     >
                       <v-text-field
                         v-model="editedItem.name"
-                        label="Dessert name"
+                        label="Edited"
                       ></v-text-field>
                     </v-col>
                     <v-col

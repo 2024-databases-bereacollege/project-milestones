@@ -2,7 +2,7 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      :sort-by="[{ key: 'calories', order: 'asc' }]"
+      :sort-by="[{ key: items, order: 'asc' }]"
     >
       <template v-slot:top>
         <v-toolbar
