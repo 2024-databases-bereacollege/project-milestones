@@ -4,7 +4,9 @@ In a more complex application you would split your routes into other files as ne
 """
 from datetime import datetime
 
-from flask import jsonify
+from flask import  jsonify
+from models import event  # Adjust import based on your project structure
+
 
 
 from flask import Flask, render_template, request
@@ -51,8 +53,20 @@ def main_page():
 
 @app.route('/events')
 def events():
-    event_data = event.select()
+    events_query = event.select()  # Or your ORM's equivalent query
+    event_data = [
+        {
+            'eventname': e.eventname,
+            'venue': e.venue,
+            'eventdate': e.eventdate.strftime('%Y-%m-%d'),
+            'theme': e.theme,  # Make sure 'theme' is the correct field name
+            'attendance': e.numberofmembersattended  # Ensure this is the correct field name
+        }
+        for e in events_query
+    ]
     return render_template("events.html", events=event_data)
+
+
    
 @app.route('/donations')
 def donations():
@@ -128,6 +142,37 @@ def add_donation():
         return "An error occurred", 500
     
     return jsonify({"success": True, "message": "Donation added successfully"})
+
+@app.route('/update_event', methods=['POST'])
+def update_event():
+    try:
+        event_id = request.form['event_id']  # Use a hidden input in your form to send the event's ID
+        venue = request.form['venue']
+        event_date = request.form['event_date']
+        theme = request.form['theme']
+        attendance = request.form['attendance']
+
+        # Retrieve the event by ID
+        event_to_update = event.get_by_id(event_id)
+
+        # Update the event's properties
+        event_to_update.venue = venue
+        event_to_update.eventdate = datetime.strptime(event_date, '%Y-%m-%d')
+        event_to_update.theme = theme
+        event_to_update.numberofmembersattended = attendance
+        event_to_update.save()
+
+        # Redirect or return a success response
+        return redirect(url_for('events'))
+    
+    except event.DoesNotExist:
+        # Event with the given ID does not exist
+        return jsonify({'error': 'Event not found'}), 404
+    except Exception as e:
+        # Handle other exceptions
+        return jsonify({'error': str(e)}), 500
+
+
 
 @app.route('/update_member', methods=['POST'])
 def update_member():
