@@ -23,7 +23,7 @@ class baseModel(Model):
 #    isInt = BooleanField(default=0)
 #    isBool = BooleanField()
 
-class Service_Providers(BaseModel):
+class Service_Providers(baseModel):
     OrganizationID = CharField(max_length=255, primary_key=True)
     Organization_Name = CharField(max_length=255)
     ContactPerson = CharField(max_length=255)
