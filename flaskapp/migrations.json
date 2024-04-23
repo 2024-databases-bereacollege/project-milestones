@@ -3,12 +3,13 @@
   "directory": "migrations",
   "history": "migratehistory",
   "models": [
-    "models.Volunteer",
-    "models.Service_Provider",
+    "models.Service_Providers",
     "models.Services",
+    "models.Volunteer",
     "models.Neighbor",
     "models.Visit_Record",
-    "models.Inventory",
-    "models.Inventory_Usage"
+    "models.Visit_Service",
+    "models.Inventory_Usage",
+    "models.Inventory"
   ]
 }
