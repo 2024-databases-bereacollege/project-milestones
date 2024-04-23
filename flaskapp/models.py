@@ -21,6 +21,21 @@ class baseModel(Model):
 #    isInt = BooleanField(default=0)
 #    isBool = BooleanField()
 
+class Service_Providers(BaseModel):
+    OrganizationID = CharField(max_length=255, primary_key=True)
+    Organization_Name = CharField(max_length=255)
+    ContactPerson = CharField(max_length=255)
+    Email = CharField(max_length=255)
+    Phone = CharField(max_length=20)
+    DateOfStart = DateField()
+
+
+class Services(BaseModel):
+    ServiceID = IntegerField(primary_key=True)
+    ServiceType = CharField(max_length=255)
+    Organization =
+
+
 class Volunteer(baseModel):
     VolunteerID = IntegerField(primary_key=True)
     FirstName = CharField(max_length=255)
@@ -51,20 +66,6 @@ class Visit_Record(baseModel):
     NeighborID = ForeignKeyField(Neighbor, backref='visit_record')
     VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')
 
-class Service_Providers(baseModel):
-    OrganizationID = CharField(max_length=255, primary_key=True)
-    Organization_Name = CharField(max_length=255) #changed from Organization to Organization_Name
-    ContactPerson = CharField(max_length=255)
-    Email = CharField(max_length=255)
-    Phone = CharField(max_length=20)
-    DateOfStart = DateField()
-
-class Services(baseModel):
-    ServiceID = IntegerField(primary_key=True) #changed from Servicetype to SeriviceID
-    ServiceType = CharField(max_length=255) #added
-    Organization = ForeignKeyField(Service_Providers, backref='services')
-
-
 class Visit_Service(baseModel):
     ServiceOrder = IntegerField(primary_key=True)
     ServiceID = ForeignKeyField(Service, backref='visit_services')
@@ -87,8 +88,3 @@ class Inventory(baseModel):
     ExpirationDate = DateField()
     Number_Of_Item = IntegerField()
     Order_Number = ForeignKeyField(Inventory_Usage, backref='Inventory')
-
-
-
-
-

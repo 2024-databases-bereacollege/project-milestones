@@ -14,63 +14,83 @@
 --     isBool boolean
 -- );
 
-CREATE TABLE Volunteer (
-    VolunteerID SERIAL PRIMARY KEY,
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    Email VARCHAR(255),
-    Phone VARCHAR(20),
-    HasRecordAccess BOOLEAN
-);
-
-CREATE TABLE Neighbor (
-    NeighborID SERIAL PRIMARY KEY,
-    VolunteerID INT REFERENCES Volunteer(VolunteerID),
-    Organization VARCHAR(255),
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    DateOfBirth DATE,
-    Phone VARCHAR(20),
-    Address TEXT,
-    Email VARCHAR(255),
-    HasStateID BOOLEAN,
-    HasPet BOOLEAN
-);
-
+-- Service Providers
 CREATE TABLE Service_Providers (
-    Organization VARCHAR(255) PRIMARY KEY,
+    OrganizationID VARCHAR(255) PRIMARY KEY,
+    Organization_Name VARCHAR(255),
     ContactPerson VARCHAR(255),
     Email VARCHAR(255),
     Phone VARCHAR(20),
     DateOfStart DATE
 );
 
+-- Services
 CREATE TABLE Services (
-    ServiceType VARCHAR(255) PRIMARY KEY,
-    Organization VARCHAR(255) REFERENCES Service_Providers(Organization)
+    ServiceID SERIAL PRIMARY KEY,
+    ServiceType VARCHAR(255),
+    Organization VARCHAR(255) REFERENCES Service_Providers(OrganizationID)
 );
 
-CREATE TABLE Inventory (
-    NameOfItem VARCHAR(255) PRIMARY KEY,
-    VolunteerID INT REFERENCES Volunteer(VolunteerID),
-    ExpirationDate DATE,
-    NumberOfItem INT
+-- Volunteer
+CREATE TABLE Volunteer (
+    VolunteerID SERIAL PRIMARY KEY,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    Password VARCHAR(255),
+    Email VARCHAR(255),
+    Phone VARCHAR(20),
+    HasRecordAccess BOOLEAN
 );
 
-CREATE TABLE Visit_Service (
-    ServiceOrder SERIAL PRIMARY KEY,
-    Organization VARCHAR(255) REFERENCES Service_Providers(Organization),
-    NeighborID INT REFERENCES Neighbor(NeighborID),
-    ServiceType VARCHAR(255) REFERENCES Services(ServiceType),
-    Description TEXT,
-    VolunteerID INT REFERENCES Volunteer(VolunteerID)
+-- Neighbor
+CREATE TABLE Neighbor (
+    NeighborID SERIAL PRIMARY KEY,
+    VolunteerID INTEGER REFERENCES Volunteer(VolunteerID),
+    OrganizationID VARCHAR(255) REFERENCES Service_Providers(OrganizationID),
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    DateOfBirth DATE,
+    Phone VARCHAR(20),
+    Location TEXT,
+    Email VARCHAR(255),
+    Created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    HasStateID BOOLEAN,
+    HasPet BOOLEAN
 );
 
+-- Visit Record
 CREATE TABLE Visit_Record (
     RecordID SERIAL PRIMARY KEY,
-    ServiceOrder INT NOT NULL,
+    ServiceOrder INTEGER, -- Assuming relation or change as needed
     Date DATE,
-    Time TIME,
-    Notes TEXT,
-    FOREIGN KEY (ServiceOrder) REFERENCES Visit_Service(ServiceOrder)
+    NeighborID INTEGER REFERENCES Neighbor(NeighborID),
+    VolunteerID INTEGER REFERENCES Volunteer(VolunteerID)
 );
+
+-- Visit Service
+CREATE TABLE Visit_Service (
+    ServiceOrder SERIAL PRIMARY KEY,
+    ServiceID INTEGER REFERENCES Services(ServiceID),
+    Description TEXT,
+    RecordID INTEGER REFERENCES Visit_Record(RecordID)
+);
+
+-- Inventory Usage
+CREATE TABLE Inventory_Usage (
+    Inventory_UseID SERIAL PRIMARY KEY,
+    NameOfItem VARCHAR(255),
+    RecordID INTEGER REFERENCES Visit_Record(RecordID),
+    Description_of_Item VARCHAR(255),
+    Number_Of_Item_Used INTEGER
+);
+
+-- Inventory
+CREATE TABLE Inventory (
+    InventoryID SERIAL PRIMARY KEY,
+    NameOfItem VARCHAR(255),
+    VolunteerID INTEGER REFERENCES Volunteer(VolunteerID),
+    Description_of_Item VARCHAR(255),
+    ExpirationDate DATE,
+    Number_Of_Item INTEGER
+);
+
