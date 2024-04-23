@@ -4,7 +4,7 @@ psql -c "DROP TABLE IF EXISTS Inventory CASCADE;"
 psql -c "DROP TABLE IF EXISTS Visit_Record CASCADE;"
 psql -c "DROP TABLE IF EXISTS Neighbor CASCADE;"
 psql -c "DROP TABLE IF EXISTS Services CASCADE;"
-psql -c "DROP TABLE IF EXISTS Service_Provider CASCADE;"  # Adjusted name to singular
+psql -c "DROP TABLE IF EXISTS Service_Providers CASCADE;"  
 psql -c "DROP TABLE IF EXISTS Volunteer CASCADE;"
 
 # Assuming migrations and migrations.json are related to peewee-migrate

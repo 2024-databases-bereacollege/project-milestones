@@ -23,7 +23,7 @@ def get_volunteers():
 
 @app.route('/api/service_providers', methods=['GET'])
 def get_service_providers():
-    query = Service_Provider.select()
+    query = Service_Providers.select()
     service_providers = [provider.to_dict() for provider in query]
     return jsonify(service_providers)
 
