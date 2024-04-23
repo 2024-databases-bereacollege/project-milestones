@@ -1,5 +1,6 @@
 -- https://www.postgresqltutorial.com/
 
+
 -- CREATE TABLE othertable (
 --     otherid integer PRIMARY KEY,
 --     data varchar
@@ -33,6 +34,7 @@ CREATE TABLE Services (
 
 -- Volunteer
 CREATE TABLE Volunteer (
+
     VolunteerID SERIAL PRIMARY KEY,
     FirstName VARCHAR(255),
     LastName VARCHAR(255),
@@ -41,6 +43,7 @@ CREATE TABLE Volunteer (
     Phone VARCHAR(20),
     HasRecordAccess BOOLEAN
 );
+
 
 -- Neighbor
 CREATE TABLE Neighbor (
@@ -57,6 +60,7 @@ CREATE TABLE Neighbor (
     HasStateID BOOLEAN,
     HasPet BOOLEAN
 );
+
 
 -- Visit Record
 CREATE TABLE Visit_Record (
@@ -93,4 +97,5 @@ CREATE TABLE Inventory (
     ExpirationDate DATE,
     Number_Of_Item INTEGER
 );
+
 

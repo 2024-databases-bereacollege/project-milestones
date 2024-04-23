@@ -1,5 +1,5 @@
 from models import *
-
+#WE ARE NOT USING THIS FILE :)
 
 # First example below- Service providers table 
 # Service Providers Table ####################################
