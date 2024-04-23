@@ -21,9 +21,41 @@ def get_volunteers():
     
     return jsonify(volunteers)
 
-@app.route('/test', methods=['GET'])
-def shark():
-    return("Shark!!!!!")
+@app.route('/api/service_providers', methods=['GET'])
+def get_service_providers():
+    query = Service_Provider.select()
+    service_providers = [provider.to_dict() for provider in query]
+    return jsonify(service_providers)
+
+@app.route('/api/services', methods=['GET'])
+def get_services():
+    query = Services.select()
+    services = [service.to_dict() for service in query]
+    return jsonify(services)
+
+@app.route('/api/neighbors', methods=['GET'])
+def get_neighbors():
+    query = Neighbor.select()
+    neighbors = [neighbor.to_dict() for neighbor in query]
+    return jsonify(neighbors)
+
+@app.route('/api/visit_records', methods=['GET'])
+def get_visit_records():
+    query = Visit_Record.select()
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
+
+@app.route('/api/inventory', methods=['GET'])
+def get_inventory():
+    query = Inventory.select()
+    inventory = [item.to_dict() for item in query]
+    return jsonify(inventory)
+
+@app.route('/api/inventory_usage', methods=['GET'])
+def get_inventory_usage():
+    query = Inventory_Usage.select()
+    inventory_usage = [usage.to_dict() for usage in query]
+    return jsonify(inventory_usage)
 
 
 
@@ -31,47 +63,49 @@ def shark():
 def home():
     return jsonify({"message": "Response from root - Home page - This is being sent by backend /"})
 
-# @app.route('/NeighborTable', methods=['GET'])
-# def neighbor_table():
-#     # Assuming you're returning a simple message for demonstration
-#     return jsonify({"message": "Hello from /NeighborTable"})
-
-@app.route('/NeighborTableAdd', methods=['GET'])
-def neighbor():
-    # Mock neighbor object
-    mock_neighbor = {
-        "NeighborID": 1,
-        "VolunteerID": 101,  # Assuming a volunteer ID; replace with relevant data
-        "Organization": "Helping Hands",
-        "FirstName": "John",
-        "LastName": "Doe",
-        "DateOfBirth": "1990-01-01",
-        "Phone": "555-1234",
-        "Address": "123 Main St, Anytown, USA",
-        "Email": "johndoe@example.com",
-        "Created_date": datetime.datetime.now().isoformat(),
-        "HasStateID": True,
-        "HasPet": False
-    }
-    mock_neighborTwo = {
-        "NeighborID": 2,
-        "VolunteerID": 102,  # Assuming a volunteer ID; replace with relevant data
-        "Organization:": "Helping Hands",
-        "FirstName": "Jane",
-        "LastName": "Doe",
-        "DateOfBirth": "1990-01-01",
-        "Phone": "555-1234",
-        "Address": "123 Main St, Anytown, USA",
-        "Email": "janedoe@example.com",
-        "Created_date": datetime.datetime.now().isoformat(),
-        "HasStateID": True,
-        "HasPet": False
-    }
-    return mock_neighbor, mock_neighborTwo
-
-def neighbors():
-    neighbors = neighbor()
-    return jsonify(neighbors)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# @app.route('/test', methods=['GET'])
+# def shark():
+#     return("Shark!!!!!")
+    
+
+# @app.route('/NeighborTableAdd', methods=['GET'])
+# def neighbor():
+#     # Mock neighbor object
+#     mock_neighbor = {
+#         "NeighborID": 1,
+#         "VolunteerID": 101,  # Assuming a volunteer ID; replace with relevant data
+#         "Organization": "Helping Hands",
+#         "FirstName": "John",
+#         "LastName": "Doe",
+#         "DateOfBirth": "1990-01-01",
+#         "Phone": "555-1234",
+#         "Address": "123 Main St, Anytown, USA",
+#         "Email": "johndoe@example.com",
+#         "Created_date": datetime.datetime.now().isoformat(),
+#         "HasStateID": True,
+#         "HasPet": False
+#     }
+#     mock_neighborTwo = {
+#         "NeighborID": 2,
+#         "VolunteerID": 102,  # Assuming a volunteer ID; replace with relevant data
+#         "Organization:": "Helping Hands",
+#         "FirstName": "Jane",
+#         "LastName": "Doe",
+#         "DateOfBirth": "1990-01-01",
+#         "Phone": "555-1234",
+#         "Address": "123 Main St, Anytown, USA",
+#         "Email": "janedoe@example.com",
+#         "Created_date": datetime.datetime.now().isoformat(),
+#         "HasStateID": True,
+#         "HasPet": False
+#     }
+#     return mock_neighbor, mock_neighborTwo
+    
+    # def neighbors():
+    # neighbors = neighbor()
+    # return jsonify(neighbors)
