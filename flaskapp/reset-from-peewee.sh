@@ -1,6 +1,8 @@
 # Remove objects from the database
-psql -c "DROP table example;"
-psql -c "DROP table othertable;"
+psql -c "DROP table IF EXISTS donation;"
+psql -c "DROP table IF EXISTS member;"
+psql -c "DROP table IF EXISTS chapter;"
+psql -c "DROP table IF EXISTS event;"
 
 psql -c "DELETE FROM migratehistory;"
 rm -rf migrations
@@ -9,8 +11,11 @@ rm -rf migrations.json
 pem init
 
 # Use peewee-migrate to create tables from Peewee models
-pem add models.OtherTable
-pem add models.Example
+pem add models.donation
+pem add models.member
+pem add models.chapter
+pem add models.event
+
 
 pem watch
 pem migrate
