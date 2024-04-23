@@ -4,7 +4,7 @@
   "history": "migratehistory",
   "models": [
     "models.Volunteer",
-    "models.Service_Provider",
+    "models.Service_Providers",
     "models.Services",
     "models.Neighbor",
     "models.Visit_Record",

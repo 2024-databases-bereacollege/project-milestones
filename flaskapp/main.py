@@ -2,7 +2,6 @@ from flask import Flask, request, redirect, render_template, url_for, session, j
 from werkzeug.security import generate_password_hash, check_password_hash #Using for passwords 
 from flask_cors import CORS #to allow the front end to communicate with the back end
 from models import *
-#from logic import * 
 
 
 
@@ -68,11 +67,8 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-# @app.route('/test', methods=['GET'])
-# def shark():
-#     return("Shark!!!!!")
-    
 
+#Below is example api call to get the neighbors from passing in, but with mock neighbors instead of real data
 # @app.route('/NeighborTableAdd', methods=['GET'])
 # def neighbor():
 #     # Mock neighbor object

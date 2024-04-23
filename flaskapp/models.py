@@ -1,6 +1,6 @@
 from peewee import *
 import datetime
-from playhouse.shortcuts import model_to_dict
+from playhouse.shortcuts import model_to_dict # Allows us to send data as dictionaries
 # Database Configuration
 myappdb = PostgresqlDatabase("myappdb",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
 
@@ -9,19 +9,6 @@ class baseModel(Model):
         return model_to_dict(self)    
     class Meta:
         database = myappdb
-
-# Class Definitions
-# https://docs.peewee-orm.com/en/latest/peewee/models.html
-#class OtherTable (baseModel):
- #   otherid = PrimaryKeyField()
-  #  data = CharField(null=False)
-
-#class Example (baseModel):
-#    username = CharField(32,unique=True)
-#    description = CharField(255)
-#    other = ForeignKeyField(OtherTable)
-#    isInt = BooleanField(default=0)
-#    isBool = BooleanField()
 
 class Service_Providers(baseModel):
     OrganizationID = CharField(max_length=255, primary_key=True)
