@@ -23,6 +23,21 @@ class baseModel(Model):
 #    isInt = BooleanField(default=0)
 #    isBool = BooleanField()
 
+class Service_Providers(BaseModel):
+    OrganizationID = CharField(max_length=255, primary_key=True)
+    Organization_Name = CharField(max_length=255)
+    ContactPerson = CharField(max_length=255)
+    Email = CharField(max_length=255)
+    Phone = CharField(max_length=20)
+    DateOfStart = DateField()
+
+
+class Services(BaseModel):
+    ServiceID = IntegerField(primary_key=True)
+    ServiceType = CharField(max_length=255)
+    Organization =
+
+
 class Volunteer(baseModel):
     VolunteerID = IntegerField(primary_key=True)
     FirstName = CharField(max_length=255)
@@ -65,6 +80,24 @@ class Visit_Record(baseModel):
     VolunteerID = ForeignKeyField(Volunteer, backref='visit_records')  # Ensured consistency in backref
     Date = DateField()
 
+    NeighborID = ForeignKeyField(Neighbor, backref='visit_record')
+    VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')
+
+class Visit_Service(baseModel):
+    ServiceOrder = IntegerField(primary_key=True)
+    ServiceID = ForeignKeyField(Service, backref='visit_services')
+    Description = TextField()
+    RecordID = ForeignKeyField(Visit_Record, backref='visit_service')
+
+
+class Inventory_Usage(baseModel):
+    Inventory_UseID = IntegerField(primary_key=True)
+    NameOfItem = CharField(max_length=255)
+    RecordID = ForeignKeyField(Visit_Record, backref='Inventory_Usage')
+    Description_of_Item = CharField(max_length=255)
+    Number_Of_Item_Used = IntegerField()
+
+
 class Inventory(baseModel):
     InventoryID = IntegerField(primary_key=True)
     NameOfItem = CharField(max_length=255)
@@ -72,10 +105,5 @@ class Inventory(baseModel):
     Description_of_Item = CharField(max_length=255)
     ExpirationDate = DateField()
     Number_Of_Item = IntegerField()
+    Order_Number = ForeignKeyField(Inventory_Usage, backref='Inventory')
 
-class Inventory_Usage(baseModel):
-    Inventory_UseID = IntegerField(primary_key=True)
-    InventoryID = ForeignKeyField(Inventory, backref='inventory_usage')  # Adjusted for direct relationship with Inventory
-    RecordID = ForeignKeyField(Visit_Record, backref='inventory_usage')  # Ensured consistency in backref
-    Description_of_Item = CharField(max_length=255)
-    Number_Of_Item_Used = IntegerField()

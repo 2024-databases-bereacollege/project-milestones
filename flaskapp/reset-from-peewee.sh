@@ -15,13 +15,16 @@ rm -f migrations.json
 # Initialize peewee-migrate if not already initialized
 pem init
 
-# Use peewee-migrate to create migration files from Peewee models
-# Updated model names and sequence to reflect your provided models and their dependencies
-pem add models.Volunteer
-pem add models.Service_Provider  # Adjusted name to singular
+
+# Use peewee-migrate to create tables from Peewee models
+pem add models.Service_Providers
 pem add models.Services
+pem add models.Volunteer
 pem add models.Neighbor
 pem add models.Visit_Record
+pem add models.Visit_Service
+pem add models.Inventory_Usage
+
 pem add models.Inventory
 pem add models.Inventory_Usage
 
