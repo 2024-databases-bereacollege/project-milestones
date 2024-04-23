@@ -1,11 +1,13 @@
+
+
 # Remove objects from the database
-psql -c "DROP TABLE IF EXISTS Inventory_Usage CASCADE;"
-psql -c "DROP TABLE IF EXISTS Inventory CASCADE;"
-psql -c "DROP TABLE IF EXISTS Visit_Record CASCADE;"
-psql -c "DROP TABLE IF EXISTS Neighbor CASCADE;"
-psql -c "DROP TABLE IF EXISTS Services CASCADE;"
-psql -c "DROP TABLE IF EXISTS Service_Providers CASCADE;"  
-psql -c "DROP TABLE IF EXISTS Volunteer CASCADE;"
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Inventory_Usage CASCADE;"
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Inventory CASCADE;"
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Visit_Record CASCADE;"
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Neighbor CASCADE;"
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Services CASCADE;"
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Service_Providers CASCADE;"  
+psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Volunteer CASCADE;"
 
 # Cleaning up any existing migration files
 rm -rf migrations
@@ -23,9 +25,7 @@ pem add models.Neighbor
 pem add models.Visit_Record
 pem add models.Visit_Service
 pem add models.Inventory_Usage
-
 pem add models.Inventory
-pem add models.Inventory_Usage
 
 # Apply migrations to create tables based on models
 pem migrate
