@@ -44,9 +44,33 @@ def members():
 
 @app.route('/main')
 def main_page():
-    # Using Peewee to query all chapters
-    chapters = chapter.select()
+    # Get the sort parameter or use a default value
+    sort_by = request.args.get('sort_by', 'chaptername-asc')
+    # Use a try-except block to handle the possibility of unpacking failure
+    try:
+        field, order = sort_by.split('-')
+    except ValueError:
+        # Set default values if the input is not valid
+        field = 'chaptername'
+        order = 'asc'
+    
+    # Logic to determine how to sort the query
+    if field == 'chaptername':
+        if order == 'desc':
+            chapters = chapter.select().order_by(chapter.chaptername.desc())
+        else:
+            chapters = chapter.select().order_by(chapter.chaptername.asc())
+    elif field == 'numberofmembers':
+        if order == 'desc':
+            chapters = chapter.select().order_by(chapter.numberofmembers.desc())
+        else:
+            chapters = chapter.select().order_by(chapter.numberofmembers.asc())
+    else:
+        # Fallback if the field is unknown
+        chapters = chapter.select()
+
     return render_template("main.html", chapters=chapters)
+
 
 
 @app.route('/events')
