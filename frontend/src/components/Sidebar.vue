@@ -1,6 +1,7 @@
 <template>
     <div class="sidebar">
       <router-link to="/">HomePage</router-link> 
+      <router-link to="/AddVisit">AddVisit</router-link>  
       <router-link to="/login">LoginPage</router-link>
       <router-link to="/VolunteerTable">VolunteerTable</router-link>
       <router-link to="/NeighborTable">NeighborTable</router-link>
@@ -9,6 +10,7 @@
       <router-link to="/ServiceProviders">ServiceProviders</router-link>
       <router-link to="/Inventory">Inventory</router-link>
       <router-link to="/test">Test</router-link>
+      <router-link to="/TestCRUD"> TestCRUD</router-link> 
 
     </div>
   </template>

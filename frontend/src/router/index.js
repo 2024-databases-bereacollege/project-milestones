@@ -10,6 +10,8 @@ import NeighborTable from '@/views/NeighborTable.vue';
 import VisitRecord from '@/views/VisitRecord.vue';
 import Inventory from '@/views/Inventory.vue';
 import TestComponent from '@/components/TestComponent.vue';
+import TestCRUD from '@/views/TestCRUD.vue';
+import AddVisit from '@/views/AddVisit.vue';
 
 
 const routes = [
@@ -32,6 +34,9 @@ const routes = [
     { path: '/VisitRecord', component: VisitRecord },
     { path: '/inventory', component: Inventory },
     { path: '/test', component: TestComponent},
+    { path: '/testcrud', component: TestCRUD},
+    { path: '/addvisit', component: AddVisit},
+    { path: '/:pathMatch(.*)*', redirect: '/home' } // Redirect all other paths to home
 ]
 
 const router = createRouter({
