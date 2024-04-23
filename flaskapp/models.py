@@ -23,7 +23,7 @@ class baseModel(Model):
 #    isInt = BooleanField(default=0)
 #    isBool = BooleanField()
 
-class Service_Providers(BaseModel):
+class Service_Providers(baseModel):
     OrganizationID = CharField(max_length=255, primary_key=True)
     Organization_Name = CharField(max_length=255)
     ContactPerson = CharField(max_length=255)
@@ -31,12 +31,10 @@ class Service_Providers(BaseModel):
     Phone = CharField(max_length=20)
     DateOfStart = DateField()
 
-
-class Services(BaseModel):
+class Services(baseModel):
     ServiceID = IntegerField(primary_key=True)
     ServiceType = CharField(max_length=255)
-    Organization =
-
+    OrganizationID = ForeignKeyField(Service_Providers, backref='services')  # Adjusted for clarity and consistency
 
 class Volunteer(baseModel):
     VolunteerID = IntegerField(primary_key=True)
@@ -46,24 +44,11 @@ class Volunteer(baseModel):
     Email = CharField(max_length=255)
     Phone = CharField(max_length=20)
     HasRecordAccess = BooleanField()
-
-class Service_Provider(baseModel):  # Renamed to singular
-    OrganizationID = CharField(max_length=255, primary_key=True)
-    OrganizationName = CharField(max_length=255)  # Corrected field name for clarity
-    ContactPerson = CharField(max_length=255)
-    Email = CharField(max_length=255)
-    Phone = CharField(max_length=20)
-    DateOfStart = DateField()
-
-class Services(baseModel):
-    ServiceID = IntegerField(primary_key=True)
-    ServiceType = CharField(max_length=255)
-    OrganizationID = ForeignKeyField(Service_Provider, backref='services')  # Adjusted for clarity and consistency
-
+    
 class Neighbor(baseModel):
     NeighborID = IntegerField(primary_key=True)
-    VolunteerID = ForeignKeyField(Volunteer, backref='neighbors')  # Ensured consistency in backref
-    OrganizationID = ForeignKeyField(Service_Provider, backref='neighbors')  # Adjusted for clarity and consistency
+    VolunteerID = ForeignKeyField(Volunteer, backref='neighbor')  # Ensured consistency in backref
+    OrganizationID = ForeignKeyField(Service_Providers, backref='neighbor')  # Adjusted for clarity and consistency
     FirstName = CharField(max_length=255)
     LastName = CharField(max_length=255)
     DateOfBirth = DateField()
@@ -76,16 +61,15 @@ class Neighbor(baseModel):
 
 class Visit_Record(baseModel):
     RecordID = IntegerField(primary_key=True)
-    NeighborID = ForeignKeyField(Neighbor, backref='visit_records')  # Ensured consistency in backref
-    VolunteerID = ForeignKeyField(Volunteer, backref='visit_records')  # Ensured consistency in backref
+    NeighborID = ForeignKeyField(Neighbor, backref='visit_record')  # Ensured consistency in backref
+    VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')  # Ensured consistency in backref
     Date = DateField()
-
     NeighborID = ForeignKeyField(Neighbor, backref='visit_record')
     VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')
 
 class Visit_Service(baseModel):
     ServiceOrder = IntegerField(primary_key=True)
-    ServiceID = ForeignKeyField(Service, backref='visit_services')
+    ServiceID = ForeignKeyField(Services, backref='visit_services')
     Description = TextField()
     RecordID = ForeignKeyField(Visit_Record, backref='visit_service')
 
