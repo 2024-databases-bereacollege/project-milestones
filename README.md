@@ -90,7 +90,7 @@ One-to-Many: A VOLUNTEER is controls optional many INVENTORY, whereas an INVENTO
 
 ## **Entity Relationship Diagram (ERD)**: 
 
-![brief alt text](Conceptual_Schema_v1.png)
+![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Schemas/Conceptual_Schema_v1.png)
 
 # Milestone 2: Project Schema Design
 **Learning Objective:** 
@@ -105,10 +105,10 @@ We would have been more specific with our attributes to prevent confusion. We al
 
 
 ## Changes from the ERD model: 
-In order to reorganize our model, we created two one new associative entity called Visit Service. Our information now is restructured in a way that the neighbor will be registered on the Visit Record through the Visit Service entity. 
+In order to reorganize our model, we created the entity called Visit Service, which serves to describe what was done during a neighbor visit to UP. Our information now is restructured in a way that the neighbor will be registered on the Visit Record through the Visit Service entity. Additionally, inventory usage is an entity to support information about which items of the inventory were used per visit record. Service Provider was added to ensure coherence with Service, which can be one of UP partners or UP itself. Since a service provider can have more than one service, we created an associative entity called "service" so the visit service has exactly which service was provided by which service provider. Visit record is the central piece of this diagram, and it contains the information regarding what happened in a certain day to a certain neighbor who sought UP assistance.
 
 ## Schema
-![brief alt text](Conceptual_Schema_3_26_24.png)
+![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Schemas/Conceptual_Schema_04-03-2024.png)
 
 # Milestone 3: Data-Driven Application - Getting Started
 **Deliverable 1:**
@@ -142,16 +142,16 @@ R
 **Deliverable 3:** 
 3-4 data flow diagrams, each with 2 information needs depicted.
 Flow Diagram 1:
-![brief alt text](Flow_Diagram_1.png)
+![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_1.png)
 
 Flow Diagram 2:
-![brief alt text](Flow_Diagram_2.png)
+![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_2.png)
 
 Flow Diagram 3:
-![brief alt text](Flow_Diagram_3.png)
+![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_3.png)
 
 Flow Diagram 4:
-![brief alt text](Flow_Diagram_4.png)
+![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_4.png)
 
 
 **Deliverable 4:** 
@@ -161,10 +161,10 @@ one for output).
 
 UI Sketch 1:
 
-![alt text](UI_1.png)
+![alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/UI_Sketches/UI_1.png)
 
 UI Sketch 2:
-![alt text](UI_2.png)
+![alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/UI_Sketches/UI_2.png)
 
 # Milestone 4: Create Database Schema
 **Deliverables:**
@@ -196,9 +196,10 @@ UI Sketch 2:
 		Renamed in Neighbor “address” to “location” since the population served may not have an address but a certain location they can be found.
 
 Relational Schema with normalized form:
-	![alt text](Relational_Schema_03-27-24.png)
+	![alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Schemas/Relational_Schema_03-27-24.png)
 
 	3. Create a draft SQL script of the Create Table DDL statements needed to implement your database. Pay special attention to column data types and include necessary constraints such as Primary Key, Not Null, or Foreign Key constraints. 
+
 
 	
 	4. Create a python file (models.py) with Peewee models of your schema. Introspect your models to compare the underlying SQL with your draft from Step 3.
