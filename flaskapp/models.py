@@ -51,8 +51,6 @@ class Visit_Record(baseModel):
     NeighborID = ForeignKeyField(Neighbor, backref='visit_record')  # Ensured consistency in backref
     VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')  # Ensured consistency in backref
     Date = DateField()
-    NeighborID = ForeignKeyField(Neighbor, backref='visit_record')
-    VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')
 
 class Visit_Service(baseModel):
     ServiceOrder = IntegerField(primary_key=True)
@@ -77,4 +75,5 @@ class Inventory(baseModel):
     ExpirationDate = DateField()
     Number_Of_Item = IntegerField()
     Order_Number = ForeignKeyField(Inventory_Usage, backref='Inventory')
+
 
