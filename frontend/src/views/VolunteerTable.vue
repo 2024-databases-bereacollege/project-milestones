@@ -157,10 +157,15 @@ export default {
       this.dialogDelete = true;
     },
 
+    
     deleteItemConfirm() {
+  axios.delete(`http://127.0.0.1:5000/api/volunteers/${this.editedItem.id}`)
+    .then(() => { // Deleting this .then(response => {})
       this.tableData.splice(this.editedIndex, 1);
-      this.closeDelete();
-    },
+      this.closeDelete(); // Assuming this closes your confirmation dialog
+    })
+    .catch(error => console.error('Error deleting volunteer:', error));
+},
 
     close() {
       this.dialog = false;
@@ -184,6 +189,27 @@ export default {
     },
   },
 };
+
+
+// saveItem() {
+//   if (this.editedIndex > -1) {
+//     axios.put(`http://127.0.0.1:5000/api/volunteers/${this.editedItem.id}`, this.editedItem)
+//       .then(response => {
+//         Object.assign(this.tableData[this.editedIndex], this.editedItem);
+//         this.close(); // Assuming this method closes the dialog
+//       })
+//       .catch(error => console.error('Error updating volunteer:', error));
+//   } else {
+//     // If it's a new item, you might want to post it instead
+//     axios.post('http://127.0.0.1:5000/api/volunteers', this.editedItem)
+//       .then(response => {
+//         this.tableData.push(response.data);
+//         this.close();
+//       })
+//       .catch(error => console.error('Error adding new volunteer:', error));
+//   }
+// }
+
 </script>
 
 

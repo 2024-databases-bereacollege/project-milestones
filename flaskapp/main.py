@@ -20,6 +20,33 @@ def get_volunteers():
     
     return jsonify(volunteers)
 
+@app.route('/api/volunteers/<int:id>', methods=['PUT'])
+def update_volunteer(id):
+    volunteer = Volunteer.query.get(id)
+    data = request.get_json()
+    print("data is ", data) 
+    if not volunteer:
+        return jsonify({'error': 'Volunteer not found'}), 404
+
+    data = request.get_json()
+    for key, value in data.items():
+        setattr(volunteer, key, value)
+    myappdb.session.commit()
+    return jsonify(volunteer.to_dict()), 200
+
+@app.route('/api/volunteers/<int:id>', methods=['DELETE'])
+def delete_volunteer(id):
+    volunteer = Volunteer.query.get(id)
+    if not volunteer:
+        return jsonify({'error': 'Volunteer not found'}), 404
+
+    myappdb.session.delete(volunteer)
+    myappdb.session.commit()
+    return jsonify({'success': 'Volunteer deleted'}), 200
+
+
+
+
 @app.route('/api/service_providers', methods=['GET'])
 def get_service_providers():
     query = Service_Providers.select()
