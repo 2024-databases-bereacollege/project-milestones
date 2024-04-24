@@ -15,17 +15,25 @@ UP data: Since UP is a local, small non-profit, the only data they want to use i
 
 ## Business Rules (both data and non-data) 
 
-A NEIGHBOR is registered by a VOLUNTEER on the VISIT RECORD only once on their second visit to UP, whereas the RECORD registers optional one NEIGHBOR by at least one VOLUNTEER.
+A NEIGHBOR is registered by a VOLUNTEER on the VISIT RECORD only once on their second visit to UP, whereas the RECORD registers only one NEIGHBOR by at least one VOLUNTEER.
 
-A NEIGHBOR can receive one VISIT SERVICE registration per action registered many times on the VISIT RECORD, and a VISIT SERVICE can be received by optional one NEIGHBOR registred optionally on the VISIT RECORD. 
+A VISIT SERVICE can be part of only one VISIT RECORD, and a VISIT RECORD can be part of many VISIT SERVICE. 
 
-A NEIGHBOR follows guidelines on the usage of INVENTORY items. The NEIGHBOR can acquire optional many items from the INVENTORY, whereas the INVENTORY may have a NEIGHBOR acquiring items optionally many times. 
+A VISIT SERVICE uses only one SERVICE, whereas a SERVICE is used in at least one VISIT SERVICE.
+
+A SERVICE PROVIDER provides at least one SERVICE, whereas a SERVICE can be provided by at least one SERVICE PROVIDER.
+
+The INVENTORY is controled by at least one VOLUNTEER, whereas a VOLUNTEER controls optional many INVENTORY items.
+
+The INVENTORY is updated by at least one INVENTORY USAGE form, whereas an INVENTORY USAGE log updates at least one INVENTORY item.
+
+The VISIT RECORD catalogs at least one INVENTORY USAGE, whereas an INVENTORY USAGE is cataloged by only one VISIT RECORD.
 
 An VOLUNTEER has access to many VISIT RECORD data, whereas the VISIT RECORD can be accessed by many VOLUNTEERS with access.
 
 Using the VISIT SERVICE, a VOLUNTEER can start a process to assist the NEIGHBOR in receiving many VISIT SERVICE. 
 
-A VISIT SERVICE is provided by optional one PARTNER ORGANIZATION, whereas a PARTNER ORGANIZATION can provide at least one SERVICE. The SERVICE is then tracked on the NEIGHBOR’s record and followed up as necessary by at least one UP ADMINISTRATOR. 
+A VISIT SERVICE is provided by one SERVICE PROVIDER , whereas a SERVICE PROVIDER can provide at least one SERVICE. The SERVICE is then tracked on the NEIGHBOR’s record and followed up as necessary by at least one UP ADMINISTRATOR. 
 
 
 ## Entity Names and Definitions
@@ -35,7 +43,6 @@ Attributes: NeighborID, FirstName, LastName, Date of Birth, phone, email HasStat
 
 Volunteer: a person who works at UP initiative and can or cannot have access to records.
 Attributes: VolunteerID, FirstName, LastName, Email, Phone, HasRecordAccess (bool)
-
 
 Visit Service: in order to catalog what activities UP is doing, the visit service registers what specific unique work was done to the Neighbor in consultation.
 Attributes: ServiceOrder, description, RecordID (foreignKey)
@@ -47,7 +54,7 @@ Service Providers: every organization that assist the neighbors, being UP itself
 Attributes: OrganizationID, Organization_Name, Email, Phone, DateofStart, ContactPerson.
 
 Service: The type of services that one organization can provide
-Attributes: ServiceID, Service_Type OrganizationID (foreign key)
+Attributes: ServiceID, Service_Type, OrganizationID (foreign key)
 
 Inventory: the organization has an inventory of clothing, hygiene kits, and food, and there are some guidelines about how many items can a neighbor have. These guidelines are always changing on a case-by-case basis. UP also envisions this process being automatize and displayed on their website so donors can see what the organization needs the most.
 Attributes: Item_Number, VolunteerID, ExpirationDate, NumerofItem, Description_of_Item
@@ -61,12 +68,11 @@ Attributes: Order_Number, RecordID (foreign key), NumberofItem, DescriptionOfIte
 ## Relationships
 
 ### Neighbors to Visit Records
-
 One-to-Many: A NEIGHBOR is registered in at least one VISIT_RECORD, and a VISIT_RECORD registers only one NEIGHBOR per entry.
 
 
 ### Visit Record to Visit Service
-One-to-Many: A VISIT_SERVICE is part of only one VISIT_RECORD, whereas a VISIT_RECORD is part of many VISIT_SERVICE.
+One-to-Many: A VISIT_SERVICE is part of at least one VISIT_RECORD, whereas a VISIT_RECORD is part of one VISIT_SERVICE.
 
 ### Visit Service to Service
 One-to-Many: A VISIT_SERVICE uses only one SERVICE, whereas a SERVICE can be used by many VISIT_SERVICE.
@@ -90,7 +96,7 @@ One-to-Many: A VOLUNTEER is controls optional many INVENTORY, whereas an INVENTO
 
 ## **Entity Relationship Diagram (ERD)**: 
 
-![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Schemas/Conceptual_Schema_v1.png)
+![brief alt text](Images/Schemas/Conceptual_Schema_v1.png)
 
 # Milestone 2: Project Schema Design
 **Learning Objective:** 
@@ -108,7 +114,7 @@ We would have been more specific with our attributes to prevent confusion. We al
 In order to reorganize our model, we created the entity called Visit Service, which serves to describe what was done during a neighbor visit to UP. Our information now is restructured in a way that the neighbor will be registered on the Visit Record through the Visit Service entity. Additionally, inventory usage is an entity to support information about which items of the inventory were used per visit record. Service Provider was added to ensure coherence with Service, which can be one of UP partners or UP itself. Since a service provider can have more than one service, we created an associative entity called "service" so the visit service has exactly which service was provided by which service provider. Visit record is the central piece of this diagram, and it contains the information regarding what happened in a certain day to a certain neighbor who sought UP assistance.
 
 ## Schema
-![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Schemas/Conceptual_Schema_04-03-2024.png)
+![brief alt text](Images/Schemas/Conceptual_Schema_04-03-2024.png)
 
 # Milestone 3: Data-Driven Application - Getting Started
 **Deliverable 1:**
@@ -142,16 +148,16 @@ R
 **Deliverable 3:** 
 3-4 data flow diagrams, each with 2 information needs depicted.
 Flow Diagram 1:
-![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_1.png)
+![brief alt text](Images/Flow_Diagrams/Flow_Diagram_1.png)
 
 Flow Diagram 2:
-![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_2.png)
+![brief alt text](Images/Flow_Diagrams/Flow_Diagram_2.png)
 
 Flow Diagram 3:
-![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_3.png)
+![brief alt text](Images/Flow_Diagrams/Flow_Diagram_3.png)
 
 Flow Diagram 4:
-![brief alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Flow_Diagrams/Flow_Diagram_4.png)
+![brief alt text](Images/Flow_Diagrams/Flow_Diagram_4.png)
 
 
 **Deliverable 4:** 
@@ -161,10 +167,10 @@ one for output).
 
 UI Sketch 1:
 
-![alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/UI_Sketches/UI_1.png)
+![alt text](Images/UI_Sketches/UI_1.png)
 
 UI Sketch 2:
-![alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/UI_Sketches/UI_2.png)
+![alt text](Images/UI_Sketches/UI_2.png)
 
 # Milestone 4: Create Database Schema
 **Deliverables:**
@@ -196,7 +202,7 @@ UI Sketch 2:
 		Renamed in Neighbor “address” to “location” since the population served may not have an address but a certain location they can be found.
 
 Relational Schema with normalized form:
-	![alt text](/workspaces/client-project-up-unhoused-persons-initiative-team/Images/Schemas/Relational_Schema_03-27-24.png)
+	![alt text](Images/Schemas/Relational_Schema_03-27-24.png)
 
 	3. Create a draft SQL script of the Create Table DDL statements needed to implement your database. Pay special attention to column data types and include necessary constraints such as Primary Key, Not Null, or Foreign Key constraints. 
 
@@ -204,4 +210,4 @@ Relational Schema with normalized form:
 	
 	4. Create a python file (models.py) with Peewee models of your schema. Introspect your models to compare the underlying SQL with your draft from Step 3.
 
-		Models.py stored under flaskapp.
+		Models.py stored under flaskapp. (flaskapp/models.py)
