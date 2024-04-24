@@ -64,6 +64,7 @@ def generate_sample_data():
         }
     ]
 
+
     services_sample_data = [
         {"ServiceID": 1, "ServiceType": "Meal Delivery", "OrganizationID": "SP002"},
         {"ServiceID": 2, "ServiceType": "Legal Aid", "OrganizationID": "SP001"},
@@ -131,7 +132,6 @@ def generate_sample_data():
             "Notes": "Repairs completed successfully. Consider safety audit.",
         }
     ]
-
     inventory_sample_data = [
     {"InventoryID": 1, "NameOfItem": "Canned Beans", "VolunteerID": 1, "Description_of_Item": "Food item", "ExpirationDate": datetime.date(2025, 12, 31), "Number_Of_Item": 100},
     {"InventoryID": 2, "NameOfItem": "Winter Coats", "VolunteerID": 2, "Description_of_Item": "Clothing item", "ExpirationDate": datetime.date(2024, 11, 30), "Number_Of_Item": 40},
