@@ -65,7 +65,7 @@ CREATE TABLE Neighbor (
 -- Visit Record
 CREATE TABLE Visit_Record (
     RecordID SERIAL PRIMARY KEY,
-    ServiceOrder INTEGER, -- Assuming relation or change as needed
+    ServiceOrder INTEGER, 
     Date DATE,
     NeighborID INTEGER REFERENCES Neighbor(NeighborID),
     VolunteerID INTEGER REFERENCES Volunteer(VolunteerID)

@@ -1,11 +1,15 @@
 <template>
-  <h1>This is the home page</h1>
+   <Menu />
 </template>
 
 <script>
+import Menu from '../components/Menu.vue'
 export default {
   name: 'HomeView',
-  props: {},
+  props: {},//Neighbors, Volunteers, Services, Inventory},
+  components: {
+    Menu
+  },
   data() {
     return {
     }

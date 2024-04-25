@@ -24,18 +24,18 @@ const routes = [
         component: HomeView,
     },
     { 
-        path: '/login', 
+        path: '/login_page', 
         component: LoginPage,
     },
-    { path: '/ServiceProviders', component: ServiceProviders },
+    { path: '/Service_Providers', component: ServiceProviders },
     { path: '/Services', component: Services },
-    { path: '/VolunteerTable', component: VolunteerTable },
-    { path: '/NeighborTable', component: NeighborTable },
-    { path: '/VisitRecord', component: VisitRecord },
-    { path: '/inventory', component: Inventory },
+    { path: '/Volunteers', component: VolunteerTable },
+    { path: '/Neighbors', component: NeighborTable },
+    { path: '/Visit_Records', component: VisitRecord },
+    { path: '/Inventory', component: Inventory },
     { path: '/test', component: TestComponent},
     { path: '/testcrud', component: TestCRUD},
-    { path: '/addvisit', component: AddVisit},
+    { path: '/Add_Visit', component: AddVisit},
     { path: '/:pathMatch(.*)*', redirect: '/home' } // Redirect all other paths to home
 ]
 

@@ -98,7 +98,7 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [], // Will be dynamically set based on fetched data
-      tableData: [], // Renamed from 'desserts' for clarity and consistency
+      tableData: [], // Will be fetched from API
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
@@ -179,6 +179,27 @@ export default {
       this.dialogDelete = false;
     },
 
+    saveItem() {
+  if (this.editedIndex > -1) {
+    // This is for updating an existing item
+    axios.put(`http://127.0.0.1:5000/api/volunteers/${this.editedItem.id}`, this.editedItem)
+      .then(response => {
+        // Assuming response.data contains the updated volunteer data from the server
+        Object.assign(this.tableData[this.editedIndex], response.data);
+        this.close(); // Close the dialog or reset the state
+      })
+      .catch(error => console.error('Error updating volunteer:', error));
+  } else {
+    // This is for adding a new item
+    axios.post('http://127.0.0.1:5000/api/volunteers', this.editedItem)
+      .then(response => {
+        this.tableData.push(response.data);
+        this.close();
+      })
+      .catch(error => console.error('Error adding new volunteer:', error));
+  }
+},
+
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tableData[this.editedIndex], this.editedItem);
@@ -191,24 +212,7 @@ export default {
 };
 
 
-// saveItem() {
-//   if (this.editedIndex > -1) {
-//     axios.put(`http://127.0.0.1:5000/api/volunteers/${this.editedItem.id}`, this.editedItem)
-//       .then(response => {
-//         Object.assign(this.tableData[this.editedIndex], this.editedItem);
-//         this.close(); // Assuming this method closes the dialog
-//       })
-//       .catch(error => console.error('Error updating volunteer:', error));
-//   } else {
-//     // If it's a new item, you might want to post it instead
-//     axios.post('http://127.0.0.1:5000/api/volunteers', this.editedItem)
-//       .then(response => {
-//         this.tableData.push(response.data);
-//         this.close();
-//       })
-//       .catch(error => console.error('Error adding new volunteer:', error));
-//   }
-// }
+
 
 </script>
 
