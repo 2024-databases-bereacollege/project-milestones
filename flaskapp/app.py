@@ -62,7 +62,47 @@ def logout():
     session.clear()
     return redirect(url_for('login.html'))  # Redirect to the login page after logout
 
-# Route for displaying all neighbors
+
+
+
+@app.route('/volunteer', methods=['GET'])
+def get_volunteer():
+    volunteer = [volunteer.to_dict() for volunteer in Volunteer.select()]
+    return jsonify(volunteer)
+
+@app.route('/volunteers/add', methods=['POST'])
+def add_volunteer():
+    if request.method == 'POST':
+        # Extract form data
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        phone = request.form['phone']
+        
+        # Hash the password for security
+        hashed_password = generate_password_hash(password)
+
+        # Check if the volunteer already exists in the database
+        existing_volunteer = Volunteer.get_or_none(Email=email)
+        if existing_volunteer:
+            # Update existing volunteer's information
+            existing_volunteer.VolunteerID = username
+            existing_volunteer.Password = hashed_password
+            existing_volunteer.Phone = phone
+            existing_volunteer.save()  # Save the changes to the database
+            return jsonify(existing_volunteer.to_dict())
+        else:
+            # Create a new volunteer
+            new_volunteer = Volunteer.create(
+                VolunteerID=username,
+                Email=email,
+                Password=hashed_password,
+                Phone=phone
+            )
+            return jsonify(new_volunteer.to_dict())
+
+
+
 @app.route('/neighbors', methods=['GET'])
 def neighbor():
     neighbors = Neighbor.query.all()
