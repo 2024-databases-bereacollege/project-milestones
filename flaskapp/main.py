@@ -12,6 +12,9 @@ CORS(app)
 #CORS(app, resources={r"/*":{'origins':"*"}})
 # CORS(app, resources={r'/*':{'origins': 'http://localhost:8080',"allow_headers": "Access-Control-Allow-Origin"}})
 
+myappdb.connect()
+#myappdb.create_tables([Volunteer], safe=True)
+
 @app.route('/api/volunteers', methods=['GET']) #GET request to get all volunteers
 def get_volunteers():
     # Query all volunteers from the database
@@ -47,32 +50,37 @@ def delete_volunteer(id):
     myappdb.session.commit()
     return jsonify({'success': 'Volunteer deleted'}), 200
 
-@app.route('/api/volunteers', methods=['POST']) #POST request to add a volunteer
+@app.route('/api/volunteers', methods=['POST'])
 def add_volunteer():
     try:
-        data = request.get_json()  # Get data sent from the frontend
+        data = request.get_json()
+        app.logger.info('Received data: %s', data)
 
-        # Ensure all required fields are in the data
         if not all(key in data for key in ['FirstName', 'LastName', 'Password', 'Email', 'Phone', 'HasRecordAccess']):
+            app.logger.error('Missing one or more required fields')
             return jsonify({"error": "Missing data for one or more fields"}), 400
 
-        # Create a new Volunteer instance with hashed password
-        volunteer = Volunteer(
+        volunteer = Volunteer.create(
             first_name=data['FirstName'],
             last_name=data['LastName'],
-            password=generate_password_hash(data['Password']),  # Hash the password for security
+            password=generate_password_hash(data['Password']),
             email=data['Email'],
             phone=data['Phone'],
             has_record_access=data['HasRecordAccess']
         )
-        myappdb.session.add(volunteer)  # Add new volunteer to the session
-        myappdb.session.commit()  # Commit the session to save the volunteer to the database
+        app.logger.info('Volunteer created with ID: %s', volunteer.id)
 
-        return jsonify(volunteer.to_dict()), 201  # Return the created volunteer and a 201 CREATED status
+        return jsonify({
+            "id": volunteer.id,
+            "first_name": volunteer.first_name,
+            "last_name": volunteer.last_name,
+            "email": volunteer.email,
+            "phone": volunteer.phone,
+            "has_record_access": volunteer.has_record_access
+        }), 201
     except Exception as e:
-        myappdb.session.rollback()  # Roll back the session in case of error
-        return jsonify({"error": str(e)}), 400  # Return error message if something goes wrong
-
+        app.logger.error('Error adding volunteer: %s', e, exc_info=True)
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/api/service_providers', methods=['GET'])
 def get_service_providers():
