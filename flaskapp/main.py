@@ -178,7 +178,7 @@ def get_services():
 def get_inventory_usageAD():
     query = (Inventory
              .select(Inventory, Inventory_Usage, Visit_Record.Date.alias('VisitDate'))
-             .join(Inventory_Usage, on=(Inventory.InventoryID == Inventory_Usage.Order_Number))
+             .join(Inventory_Usage, on=(Inventory.InventoryID == Inventory_Usage.Inventory_UseID))
              .join(Visit_Record, on=(Inventory_Usage.RecordID == Visit_Record.RecordID)))
 
     inventory_usage_data = []
