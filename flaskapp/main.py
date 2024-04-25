@@ -8,11 +8,11 @@ from models import *
 app = Flask(__name__)
 
 app.config.from_object(__name__)
-
-CORS(app, resources={r"/*":{'origins':"*"}})
+CORS(app)
+#CORS(app, resources={r"/*":{'origins':"*"}})
 # CORS(app, resources={r'/*':{'origins': 'http://localhost:8080',"allow_headers": "Access-Control-Allow-Origin"}})
 
-@app.route('/api/volunteers', methods=['GET'])
+@app.route('/api/volunteers', methods=['GET']) #GET request to get all volunteers
 def get_volunteers():
     # Query all volunteers from the database
     query = Volunteer.select()
@@ -20,21 +20,24 @@ def get_volunteers():
     
     return jsonify(volunteers)
 
-@app.route('/api/volunteers/<int:id>', methods=['PUT'])
+@app.route('/api/volunteers', methods=['PUT']) #PUT request to update a volunteer
 def update_volunteer(id):
     volunteer = Volunteer.query.get(id)
-    data = request.get_json()
-    print("data is ", data) 
     if not volunteer:
         return jsonify({'error': 'Volunteer not found'}), 404
 
     data = request.get_json()
+    print("Received data for update:", data)  # Debugging to see what data is received
+
     for key, value in data.items():
-        setattr(volunteer, key, value)
-    myappdb.session.commit()
+        if hasattr(volunteer, key):  # Ensure the attribute exists before setting it
+            setattr(volunteer, key, value)
+
+    myappdb.session.commit()  # Make sure this is the correct session object name
     return jsonify(volunteer.to_dict()), 200
 
-@app.route('/api/volunteers/<int:id>', methods=['DELETE'])
+
+@app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
 def delete_volunteer(id):
     volunteer = Volunteer.query.get(id)
     if not volunteer:
@@ -44,7 +47,31 @@ def delete_volunteer(id):
     myappdb.session.commit()
     return jsonify({'success': 'Volunteer deleted'}), 200
 
+@app.route('/api/volunteers', methods=['POST']) #POST request to add a volunteer
+def add_volunteer():
+    try:
+        data = request.get_json()  # Get data sent from the frontend
 
+        # Ensure all required fields are in the data
+        if not all(key in data for key in ['FirstName', 'LastName', 'Password', 'Email', 'Phone', 'HasRecordAccess']):
+            return jsonify({"error": "Missing data for one or more fields"}), 400
+
+        # Create a new Volunteer instance with hashed password
+        volunteer = Volunteer(
+            first_name=data['FirstName'],
+            last_name=data['LastName'],
+            password=generate_password_hash(data['Password']),  # Hash the password for security
+            email=data['Email'],
+            phone=data['Phone'],
+            has_record_access=data['HasRecordAccess']
+        )
+        myappdb.session.add(volunteer)  # Add new volunteer to the session
+        myappdb.session.commit()  # Commit the session to save the volunteer to the database
+
+        return jsonify(volunteer.to_dict()), 201  # Return the created volunteer and a 201 CREATED status
+    except Exception as e:
+        myappdb.session.rollback()  # Roll back the session in case of error
+        return jsonify({"error": str(e)}), 400  # Return error message if something goes wrong
 
 
 @app.route('/api/service_providers', methods=['GET'])
