@@ -1,7 +1,7 @@
 import datetime
 from models import *
 
-myappdb = PostgresqlDatabase("myappdb", host="localhost", user="postgres", password="postgres")
+db = PostgresqlDatabase("db", host="localhost", user="postgres", password="postgres")
 
 
 
@@ -23,7 +23,7 @@ def generate_sample_data():
         {
             "NeighborID": 1,
             "VolunteerID": 1,  
-            "OrganizationID": "",
+            "OrganizationID": "SP001",
             "FirstName": "Alice",
             "LastName": "Johnson",
             "DateOfBirth": datetime.date(1980, 5, 15),
@@ -37,7 +37,7 @@ def generate_sample_data():
         {
             "NeighborID": 2,
             "VolunteerID": 2,  
-            "OrganizationID": "",
+            "OrganizationID": "SP002",
             "FirstName": "Bob",
             "LastName": "Smith",
             "DateOfBirth": datetime.date(1975, 8, 25),
@@ -51,7 +51,7 @@ def generate_sample_data():
         {
             "NeighborID": 3,
             "VolunteerID": 3,  
-            "OrganizationID": "",
+            "OrganizationID": "SP003",
             "FirstName": "Catherine",
             "LastName": "Williams",
             "DateOfBirth": datetime.date(1992, 11, 30),
@@ -147,11 +147,11 @@ def generate_sample_data():
         {"Inventory_UseID": 4, "NameOfItem": "First Aid Kits", "RecordID": 4, "Description_of_Item": "Used in health and safety training sessions", "Number_Of_Item_Used": 3},
         {"Inventory_UseID": 5, "NameOfItem": "Flashlights", "RecordID": 5, "Description_of_Item": "Given for emergency preparedness", "Number_Of_Item_Used": 7}
     ]
-    myappdb = PostgresqlDatabase("myappdb", host="localhost", user="postgres", password="postgres")
+    db = PostgresqlDatabase("db", host="localhost", user="postgres", password="postgres")
     
     # Insert the sample data into the database
 
-    with myappdb.atomic():
+    with db.atomic():
         Volunteer.insert_many(volunteers_sample_data).execute()
         Service_Providers.insert_many(service_providers_sample_data).execute()
         Services.insert_many(services_sample_data).execute()
@@ -164,12 +164,12 @@ def generate_sample_data():
 
 if __name__ == '__main__':
     # Connect to the PostgreSQL database
-    myappdb.connect()
+    db.connect()
 
     # Generate and insert the sample data
     generate_sample_data()
 
     # Close the database connection
-    myappdb.close()
+    db.close()
 
 

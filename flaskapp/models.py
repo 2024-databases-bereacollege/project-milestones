@@ -2,13 +2,13 @@ from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict # Allows us to send data as dictionaries
 # Database Configuration
-myappdb = PostgresqlDatabase("myappdb",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
+db = PostgresqlDatabase("db",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
 
 class baseModel(Model):
     def to_dict(self):
         return model_to_dict(self)    
     class Meta:
-        database = myappdb
+        database = db
 
 class Service_Providers(baseModel):
     OrganizationID = CharField(max_length=255, primary_key=True)

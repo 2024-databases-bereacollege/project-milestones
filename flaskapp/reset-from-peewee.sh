@@ -1,15 +1,15 @@
 
 
 # Remove objects from the database
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Inventory_Usage CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Inventory CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Volunteer CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Visit_Service CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Visit_Record CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Neighbor CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Services CASCADE;"
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS Service_Providers CASCADE;"  
-psql -U postgres -d myappdb -c  "DROP TABLE IF EXISTS migratehistory;"  
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Inventory_Usage CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Inventory CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Volunteer CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Visit_Service CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Visit_Record CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Neighbor CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Services CASCADE;"
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS Service_Providers CASCADE;"  
+psql -U postgres -d db -c  "DROP TABLE IF EXISTS migratehistory;"  
 
 # Cleaning up any existing migration files
 rm -rf migrations
@@ -36,7 +36,6 @@ pem migrate
 
 
 
-# Cleaning up migration files after application - optional, consider whether you want to keep these for version control
 # rm -rf migrations
 # rm -f migrations.json
 

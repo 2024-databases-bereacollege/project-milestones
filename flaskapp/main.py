@@ -10,8 +10,8 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 CORS(app)
 
-myappdb.connect()
-#myappdb.create_tables([Volunteer], safe=True)
+db.connect()
+#db.create_tables([Volunteer], safe=True)
 
 # ADD VISIT SECTION ##########################################
 def get_neighborsAV():
@@ -92,7 +92,7 @@ def update_volunteer(id):
         if hasattr(volunteer, key):  
             setattr(volunteer, key, value)
 
-    myappdb.session.commit()  # TODO adjust from session
+    db.session.commit()  # TODO adjust from session
     return jsonify(volunteer.to_dict()), 200
 
 
@@ -102,8 +102,8 @@ def delete_volunteer(id):
     if not volunteer:
         return jsonify({'error': 'Volunteer not found'}), 404
 
-    myappdb.session.delete(volunteer)
-    myappdb.session.commit()
+    db.session.delete(volunteer)
+    db.session.commit()
     return jsonify({'success': 'Volunteer deleted'}), 200
 
 @app.route('/api/volunteers', methods=['POST'])
