@@ -45,6 +45,8 @@ def members():
     return render_template("members.html", members=members_list)
 
 @app.route('/main')
+@app.route('/main')
+@app.route('/main')
 def main_page():
     # Get the sort parameter or use a default value
     sort_by = request.args.get('sort_by', 'chaptername-asc')
@@ -59,20 +61,42 @@ def main_page():
     # Logic to determine how to sort the query
     if field == 'chaptername':
         if order == 'desc':
-            chapters = chapter.select().order_by(chapter.chaptername.desc())
+            chapters_query = chapter.select().order_by(chapter.chaptername.desc())
         else:
-            chapters = chapter.select().order_by(chapter.chaptername.asc())
+            chapters_query = chapter.select().order_by(chapter.chaptername.asc())
     elif field == 'numberofmembers':
         if order == 'desc':
-            chapters = chapter.select().order_by(chapter.numberofmembers.desc())
+            chapters_query = chapter.select().order_by(chapter.numberofmembers.desc())
         else:
-            chapters = chapter.select().order_by(chapter.numberofmembers.asc())
+            chapters_query = chapter.select().order_by(chapter.numberofmembers.asc())
     else:
         # Fallback if the field is unknown
-        chapters = chapter.select()
+        chapters_query = chapter.select()
+
+    # Convert chapters to a list of dicts suitable for JSON serialization
+    chapters = [{
+        'chaptername': c.chaptername,
+        'numberofmembers': c.numberofmembers,
+        'chapterlead': c.chapterlead,
+        'chapteremail': c.chapteremail
+    } for c in chapters_query]
 
     return render_template("main.html", chapters=chapters)
 
+
+@app.route('/update_chapter', methods=['POST'])
+def update_chapter():
+    chapter_id = request.form['chapter_id']
+    try:
+        chapter_instance = chapter.get_by_id(chapter_id)
+        chapter_instance.chaptername = request.form['chapter_name']
+        chapter_instance.numberofmembers = request.form['number_of_members']
+        chapter_instance.chapterlead = request.form['chapter_lead']
+        chapter_instance.chapteremail = request.form['chapter_email']
+        chapter_instance.save()
+        return redirect(url_for('main_page'))  # Redirect to the main page or wherever appropriate
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/events')

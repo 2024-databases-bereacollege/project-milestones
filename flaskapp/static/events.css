@@ -6,7 +6,14 @@
   }
   
   body {
-    font-family: Arial, sans-serif;
+    display: flex;
+    gap: 40px;
+    background-color: #f5f7fa; /* Light background color */
+    background-image: url("https://images.unsplash.com/photo-1578582805561-4abd22211b9e?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-repeat: no-repeat;
+    background-size: cover; /* Make the background image cover the entire element */
+    background-position: center; /* Center the image in the element */
+    background-attachment: fixed; /* Optional: fix the background image during scroll */
   }
   
   .admin-div {
@@ -17,6 +24,7 @@
     justify-content: center;
     align-items: center;
   }
+
   aside {
     width: 200px;
     float: left;
@@ -71,9 +79,11 @@
   
   table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate; /* For spacing between rows */
+    border-spacing: 0 10px; /* Spacing between rows */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
   }
-  
   table caption {
     text-align: left;
     font-size: 1.2em;

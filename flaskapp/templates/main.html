@@ -47,26 +47,50 @@
 
   <section>
     <!-- Table data -->
-    <table>
+    <table class="table">
       <thead>
-        <tr>
-          <th>Chapter Name</th>
-          <th>Number of Members</th>
-          <th>Chapter Lead</th>
-          <th>Chapter Email</th>
-        </tr>
+          <tr>
+              <th>Chapter Name</th>
+              <th>Number of Members</th>
+              <th>Chapter Lead</th>
+              <th>Chapter Email</th>
+              <th>Action</th>
+          </tr>
       </thead>
       <tbody>
-        {% for chapter in chapters %}
-        <tr>
-          <td>{{ chapter.chaptername }}</td>  <!-- Make sure the variable matches the model case -->
-          <td>{{ chapter.numberofmembers }}</td>
-          <td>{{ chapter.chapterlead }}</td>
-          <td>{{ chapter.chapteremail }}</td>
-        </tr>
-        {% endfor %}
+          {% for chapter in chapters %}
+          <tr>
+              <td>{{ chapter.chaptername }}</td>
+              <td>{{ chapter.numberofmembers }}</td>
+              <td>{{ chapter.chapterlead }}</td>
+              <td>{{ chapter.chapteremail }}</td>
+              <td>
+                <button onclick="openEditModal(this.getAttribute('data-chapter'))" data-chapter="{{ chapter|tojson|safe }}" class="btn btn-primary">Edit</button>
+              </td>
+          </tr>
+          {% endfor %}
       </tbody>
-    </table>
+  </table>
+  
+  <div id="editChapterModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form id="editChapterForm" method="post" action="/update_chapter">
+            <input type="hidden" id="edit_chapter_id" name="chapter_id">
+            <label for="edit_chapter_name">Chapter Name:</label>
+            <input type="text" id="edit_chapter_name" name="chapter_name" required><br>
+            <label for="edit_number_of_members">Number of Members:</label>
+            <input type="number" id="edit_number_of_members" name="number_of_members" required><br>
+            <label for="edit_chapter_lead">Chapter Lead:</label>
+            <input type="text" id="edit_chapter_lead" name="chapter_lead" required><br>
+            <label for="edit_chapter_email">Chapter Email:</label>
+            <input type="email" id="edit_chapter_email" name="chapter_email" required><br>
+            <input type="submit" value="Update Chapter">
+        </form>
+    </div>
+</div>
+
+  
   </section>
 </main>
 
@@ -99,6 +123,47 @@
           }
       }
   }
+
+  function openEditModal(chapterData) {
+    // Fill in the form fields with the data
+    const chapter = JSON.parse(data);
+    document.getElementById('edit_chapter_id').value = chapterData.chaptername; // Assuming chaptername is the ID, adjust if needed
+    document.getElementById('edit_chapter_name').value = chapterData.chaptername;
+    document.getElementById('edit_number_of_members').value = chapterData.numberofmembers;
+    document.getElementById('edit_chapter_lead').value = chapterData.chapterlead;
+    document.getElementById('edit_chapter_email').value = chapterData.chapteremail;
+
+    // Display the modal
+    document.getElementById('editChapterModal').style.display = 'block';
+}
+
+// Close modal function
+function closeModal() {
+    document.getElementById('editChapterModal').style.display = 'none';
+}
+
+// Enhance the window.onclick function to close modal when clicking outside of it
+window.onclick = function(event) {
+    var modal = document.getElementById('editChapterModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+
+
+function closeModal() {
+    document.getElementById('editChapterModal').style.display = 'none';
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function(event) {
+    var modal = document.getElementById('editChapterModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
   </script>
   
 

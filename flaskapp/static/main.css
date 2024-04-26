@@ -1,14 +1,29 @@
-/* Basic Reset */
+/* Basic Reset and Typography */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
 }
 
 body {
-  font-family: Arial, sans-serif;
   display: flex;
-  gap: 40px; /* Adjust if necessary */
+  gap: 40px;
+  background-color: #f5f7fa; /* Light background color */
+  background-image: url("https://images.unsplash.com/photo-1578582805561-4abd22211b9e?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-repeat: no-repeat;
+  background-size: cover; /* Make the background image cover the entire element */
+  background-position: center; /* Center the image in the element */
+  background-attachment: fixed; /* Optional: fix the background image during scroll */
+}
+
+/* Sidebar Styles */
+aside {
+  width: 200px;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  background-color: #333; /* Dark background for better visibility */
+  color: white; /* Ensures text is visible */
 }
 
 .admin-div {
@@ -16,15 +31,7 @@ body {
   flex-direction: column;
   gap: 5px;
   padding: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-aside {
-  width: 200px; /* Adjust if more space is needed */
-  float: left;
-  border-right: 1px solid #ccc;
-  height: 100vh;
+  align-items: center; /* Center items vertically in admin-div */
 }
 
 .admin-pic {
@@ -35,24 +42,29 @@ aside {
 .tables-div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
 aside nav ul {
   list-style: none;
+  padding-left: 0; /* Remove default padding */
 }
 
 aside nav ul li a {
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: black;
-  border-bottom: 1px solid #ccc;
+  color: white; /* White color for text */
+  border-bottom: 1px solid #ccc; /* Divider between items */
 }
 
+aside nav ul li a:hover {
+  background-color: #555; /* Slightly lighter on hover for better interaction */
+}
+
+/* Main content area */
 main {
-  flex-grow: 1; /* Allows main to take up remaining space */
+  flex-grow: 1; /* Takes the remaining space */
   padding: 20px;
 }
 
@@ -60,54 +72,74 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-header h1 {
-  margin-right: auto;
-}
-
-input[type="search"] {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
 table {
-  width: 100%; /* Ensures table is full-width */
-  border-collapse: collapse;
-}
-
-table caption {
-  text-align: left;
-  font-size: 1.2em;
-  margin-bottom: 10px;
+  width: 100%;
+  border-collapse: collapse; /* Ensures borders between cells are merged */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 table thead {
-  background-color: #f9f9f9;
+  background-color: #e1e5ee; /* Light header background */
 }
 
-table th,
-table td {
+table th, table td {
   text-align: left;
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px 15px;
+  color: #333; /* Darker text for better readability */
 }
 
 table th {
-  font-weight: bold;
+  color: #5b5e6d; /* Even darker color for headers */
 }
 
 table tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f9fafc; /* Zebra striping for rows */
 }
 
-a {
-  color: #06c;
+/* Link Styles */
+.link-button {
+  background-color: #673ab7; /* Purple for button background */
+  color: #fff;
   text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.875rem;
 }
 
-a:hover {
-  text-decoration: underline;
+.link-button:hover {
+  background-color: #5e35b1; /* Slightly darker on hover */
+}
+
+/* Modal Styles */
+.modal-content {
+  width: auto;
+  height: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 100px; /* Center the modal vertically */
+  background-color: #fefefe; /* White background for modal content */
+}
+
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
 }
