@@ -1,27 +1,26 @@
 <template>
-  <div id="app">
-    <!-- NavBar and Sidebar always present -->
-    <NavBar />
-    <Sidebar />
-    <!-- Main content area -->
-    <div class="Main">
-      <div class="content">
-        <!-- Router views will be injected here -->
-        <router-view></router-view>
-      </div>
+  <div class="app">
+    <div class="sidebar">
+      <!-- Sidebar component goes here -->
+      <Sidebar />
+    </div>
+
+    <div class="main-content">
+      <!-- Main content goes here -->
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 // Importing the NavBar and Sidebar components
-import NavBar from './components/NavBar.vue';
+//import NavBar from './components/NavBar.vue';
 import Sidebar from './components/Sidebar.vue';
 
 export default {
   name: 'MainLayout',
   components: {
-    NavBar,
+  //  NavBar,
     Sidebar
   }
 }
