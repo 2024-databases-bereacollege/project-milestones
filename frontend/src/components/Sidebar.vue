@@ -1,5 +1,9 @@
 <template>
+  
 <div class="sidebar-links">
+  <!--<div class="logo">
+        <img src="../assets/UPLOGO.PNG" alt="UP Initiative Logo" /> />
+      </div> -->
   <router-link to="/" class="sidebar-link">
     <font-awesome-icon :icon="faHome" />
     <span>Home Page</span>
@@ -42,6 +46,7 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHome, faPlusCircle, faSignInAlt, faUserFriends, faUsers, faClipboardList, faHandHoldingHeart, faBuilding, faBox } from '@fortawesome/free-solid-svg-icons'
+//import logo from '../assets/UPLOGO.PNG';
 
 export default {
   components: {
@@ -57,7 +62,8 @@ export default {
       faClipboardList,
       faHandHoldingHeart,
       faBuilding,
-      faBox
+      faBox,
+      //logo,
     }
   }
 }

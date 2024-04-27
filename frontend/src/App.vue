@@ -1,7 +1,7 @@
 <template>
   <div class="app">
+    <TopBar />
     <div class="sidebar">
-      <!-- Sidebar component goes here -->
       <Sidebar />
     </div>
 
@@ -15,12 +15,14 @@
 <script>
 // Importing the NavBar and Sidebar components
 //import NavBar from './components/NavBar.vue';
+import TopBar from './components/TopBar.vue';
 import Sidebar from './components/Sidebar.vue';
 
 export default {
   name: 'MainLayout',
   components: {
   //  NavBar,
+    TopBar,
     Sidebar
   }
 }
