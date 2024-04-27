@@ -1,6 +1,6 @@
 # UP initiative project v1
 
-### This project was designed as part of the course Computer Science 330 - Database Systems in the Spring of 2024. We partner with the organization UP Initiative of Madison County to assist in their mission of supporting unhoused individuals and people struggling with housing security in the region
+#### This project was designed as part of the course Computer Science 330 - Database Systems in the Spring of 2024. We partner with the organization UP Initiative of Madison County to assist in their mission of supporting unhoused individuals and people struggling with housing security in the region
 
 ## PURPOSE OF THE APPLICATION 
 UP initiative was founded in late 2023, and their work supports the community. Their main needs include:
@@ -24,9 +24,10 @@ Michel Moncada-Rabassa
 
 
 ## How to Use:
-
-
-
+Step 1: download vue, vue-CLI service, and node.js
+Step 2: to run backend: type on terminal "cd flaskapp". Then type "pipenv shell", then "python app.py"
+Step 3: to run frontend: type on a different terminal "cd frontend". Then type "npm run serve"
+Step 4: to access database directly: "psql postgress". Then "/dt" to view all tables
 
 
 
