@@ -1,5 +1,4 @@
 import random
-from faker import Faker #used for the fake data
 from models import Service_Providers, Services, Volunteer, Neighbor, Visit_Record, Visit_Service, Inventory_Usage, Inventory
 import datetime
 

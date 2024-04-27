@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, url_for, session, jsonify
+from flask import Flask, request, redirect, render_template, url_for, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash #Using for passwords 
 from flask_cors import CORS #to allow the front end to communicate with the back end
 from models import *
@@ -10,10 +10,6 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 CORS(app)
 
-db.connect()
-#db.create_tables([Volunteer], safe=True)
-
-# ADD VISIT SECTION ##########################################
 def get_neighborsAV():
     neighbors_query = Neighbor.select(
         Neighbor.NeighborID,
@@ -79,32 +75,43 @@ def get_volunteers():
     
     return jsonify(volunteers)
 
-@app.route('/api/volunteers', methods=['PUT']) #PUT request to update a volunteer
+@app.route('/api/volunteers/<int:id>', methods=['PUT'])
 def update_volunteer(id):
-    volunteer = Volunteer.query.get(id)
-    if not volunteer:
+    try:
+        volunteer = Volunteer.get_by_id(id)  # Retrieve the specific volunteer
+        data = request.get_json()  # Get data from the request body
+
+        # Update fields if provided in the data
+        if 'FirstName' in data:
+            volunteer.first_name = data['FirstName']
+        if 'LastName' in data:
+            volunteer.last_name = data['LastName']
+        if 'Email' in data:
+            volunteer.email = data['Email']
+        if 'Phone' in data:
+            volunteer.phone = data['Phone']
+        if 'HasRecordAccess' in data:
+            volunteer.has_record_access = data['HasRecordAccess']
+
+        volunteer.save()  # Save changes to the database
+        return jsonify(volunteer.to_dict()), 200  # Return the updated volunteer info
+    except Volunteer.DoesNotExist:
         return jsonify({'error': 'Volunteer not found'}), 404
-
-    data = request.get_json()
-    print("Received data for update:", data) 
-
-    for key, value in data.items():
-        if hasattr(volunteer, key):  
-            setattr(volunteer, key, value)
-
-    db.session.commit()  # TODO adjust from session
-    return jsonify(volunteer.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
-@app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
+@app.route('/api/volunteers/<int:id>', methods=['DELETE'])
 def delete_volunteer(id):
-    volunteer = Volunteer.query.get(id)
-    if not volunteer:
+    try:
+        volunteer = Volunteer.get_by_id(id)  # Retrieve the specific volunteer
+        volunteer.delete_instance()  # Delete the volunteer instance
+        return jsonify({'success': 'Volunteer deleted'}), 200
+    except Volunteer.DoesNotExist:
         return jsonify({'error': 'Volunteer not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-    db.session.delete(volunteer)
-    db.session.commit()
-    return jsonify({'success': 'Volunteer deleted'}), 200
 
 @app.route('/api/volunteers', methods=['POST'])
 def add_volunteer():

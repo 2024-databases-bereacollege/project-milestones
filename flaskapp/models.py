@@ -75,6 +75,5 @@ class Inventory(baseModel):
     Description_of_Item = CharField(max_length=255)
     ExpirationDate = DateField()
     Number_Of_Item = IntegerField()
-    Inventory_UseID = ForeignKeyField(Inventory_Usage, backref='Inventory')
 
 
