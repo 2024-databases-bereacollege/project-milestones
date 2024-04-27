@@ -1,6 +1,9 @@
 <template>
     <div class="app">
       <h1>Volunteer Information Form</h1>
+      <div>
+    <ComboboxSelect :items="apiData" />
+      </div>
       <form @submit.prevent="addRecord">
         <div class="input-group">
           <label>Volunteer that helped:</label>
@@ -36,9 +39,17 @@
   </template>
   
   <script>
+  import ComboboxSelect from '@/components/ComboboxSelect.vue';
+  //import axios from 'axios';
+
   export default {
+    components: {
+    ComboboxSelect,
+    },
     data() {
       return {
+        apiData: ['neighbor 1,', 'neighbor 2', 'neighbor 3', 'neighbor 4', 'neighbor 5'],
+
         records: [],
         newRecord: {
           volunteer: '',
