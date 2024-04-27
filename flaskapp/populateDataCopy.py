@@ -1,4 +1,3 @@
-```python
 import random
 from models import Service_Providers, Services, Volunteer, Neighbor, Visit_Record, Visit_Service, Inventory_Usage, Inventory
 import datetime
@@ -117,6 +116,3 @@ def populate_data():
 
 if __name__ == "__main__":
     populate_data()
-```
-
-###
