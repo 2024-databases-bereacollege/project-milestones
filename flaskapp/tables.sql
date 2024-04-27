@@ -34,3 +34,10 @@ CREATE TABLE donation (
     item VARCHAR(50),
     monetaryWorth INTEGER
 );
+
+CREATE TABLE event_attendance (
+   memberid INTEGER REFERENCES member(memberid),
+   eventName VARCHAR(100) REFERENCES event(eventName),
+    PRIMARY KEY (memberd, eventName)
+);
+

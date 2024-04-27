@@ -68,6 +68,12 @@ INSERT INTO event (eventName, venue, theme, eventDate, numberofMembersAttended)
 VALUES
     ('Community Building', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200),
     ('Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80),
-    ('Hackathon', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200),
+    ('Code for Good Hackathon', 'Convention Center', 'Environmental Preservation', '2024-04-01', 200),
     ('Seedy Workshop', 'Community Center', 'Environmental Preservation', '2024-04-15', 80),
     ('How to sleep in class', 'Community Center', 'Sleep', '2024-04-15', 80);
+
+INSERT INTO event_attendance (member_id, event_id) VALUES (1, 'Community Building');
+INSERT INTO event_attendance (member_id, event_id) VALUES (2, 'Code for Good Hackathon');
+INSERT INTO event_attendance (member_id, event_id) VALUES (3, 'Community Building');
+INSERT INTO event_attendance (member_id, event_id) VALUES (4, 'Code for Good Hackathon');
+

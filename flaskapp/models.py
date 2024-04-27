@@ -43,7 +43,12 @@ class donation(baseModel):
     item = CharField()
     monetaryWorth = IntegerField()
 
+class event_attendance(baseModel):
+    member = ForeignKeyField(member, backref='events_attended')
+    event = ForeignKeyField(event, backref='attendees')
 
+    class Meta:
+        primary_key = CompositeKey('member', 'event')
 
 
 

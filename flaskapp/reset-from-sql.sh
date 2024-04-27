@@ -10,3 +10,5 @@ psql -c "DROP table IF EXISTS event;"
 
 # Load data back into database
 < data.sql psql
+
+
