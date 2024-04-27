@@ -31,4 +31,4 @@ pem watch
 pem migrate
 
 # Populate database with test data
-python populate_data.py  # Run your data population script
+python populate_data.py  # Run data population script
