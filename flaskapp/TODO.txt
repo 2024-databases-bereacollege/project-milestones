@@ -1,0 +1,4 @@
+# TODO
+
+- Need to fix the path for the image in TopBar.vue
+- Need to fix the title in topbar
