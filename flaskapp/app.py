@@ -126,7 +126,7 @@ def add_neighbor():
                 neighbor.Email = request.form['Email']
                 neighbor.DateOfBirth = datetime.datetime.strptime(request.form['DateOfBirth'], '%Y-%m-%d')
                 neighbor.Phone = request.form['Phone']
-                neighbor.Address = request.form['Address']
+                neighbor.Location = request.form['Location']
                 neighbor.HasPet = request.form.get('HasPet')
                 neighbor.HasStateID = request.form.get('HasStateID')
                 mydb.session.commit()  # Save the changes to the database
@@ -142,7 +142,7 @@ def add_neighbor():
                 Email=request.form['Email'],
                 DateOfBirth=datetime.datetime.strptime(request.form['DateOfBirth'], '%Y-%m-%d'),
                 Phone=request.form['Phone'],
-                Address=request.form['Address'],
+                Location=request.form['Location'],
                 HasPet=request.form.get('HasPet'),
                 HasStateID=request.form.get('HasStateID')
             )

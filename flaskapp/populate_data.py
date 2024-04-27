@@ -47,7 +47,7 @@ def populate_data():
             LastName=fake.last_name(),
             DateOfBirth=generate_random_date(),
             Phone=fake.phone_number(),
-            Location=fake.address(),
+            Location=fake.Location(),
             Email=fake.email(),
             Created_date=fake.date_time(),
             HasStateID=random.choice([True, False]),

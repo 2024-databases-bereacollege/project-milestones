@@ -24,7 +24,7 @@
           { text: 'Last Name', value: 'LastName' },
           { text: 'Date of Birth', value: 'DateOfBirth' },
           { text: 'Phone', value: 'Phone' },
-          { text: 'Address', value: 'Address' },
+          { text: 'Location', value: 'Location' },
           { text: 'Email', value: 'Email' },
           { text: 'Created Date', value: 'Created_date' },
           { text: 'Has State ID', value: 'HasStateID' },
