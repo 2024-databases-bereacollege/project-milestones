@@ -1,7 +1,7 @@
 import datetime
 from models import *
 
-myappdb = PostgresqlDatabase("myappdb", host="localhost", user="postgres", password="postgres")
+db = PostgresqlDatabase("db", host="localhost", user="postgres", password="postgres")
 
 
 
@@ -131,29 +131,31 @@ def generate_sample_data():
         {"Inventory_UseID": 4, "NameOfItem": "First Aid Kits", "RecordID": 4, "Description_of_Item": "Used in health and safety training sessions", "Number_Of_Item_Used": 3},
         {"Inventory_UseID": 5, "NameOfItem": "Flashlights", "RecordID": 5, "Description_of_Item": "Given for emergency preparedness", "Number_Of_Item_Used": 7}
     ]
-    myappdb = PostgresqlDatabase("myappdb", host="localhost", user="postgres", password="postgres")
+    db = PostgresqlDatabase("db", host="localhost", user="postgres", password="postgres")
     
     # Insert the sample data into the database
 
-    with myappdb.atomic():
+    with db.atomic():
     #    Volunteer.insert_many(volunteers_sample_data).execute()
     #    Service_Providers.insert_many(service_providers_sample_data).execute()
     #    Services.insert_many(services_sample_data).execute()
     #    Neighbor.insert_many(neighbors_sample_data).execute()
     #    Visit_Record.insert_many(visit_records_sample_data).execute()
     #    Inventory_Usage.insert_many(inventory_usage_sample_data).execute()       
-        Inventory.insert_many(inventory_sample_data).execute()
-        Visit_Service.insert_many(visit_services_sample_data).execute()
+    #    Inventory.insert_many(inventory_sample_data).execute()
+    #    Visit_Service.insert_many(visit_services_sample_data).execute()
 
 
 if __name__ == '__main__':
+
+   
     # Connect to the PostgreSQL database
-    myappdb.connect()
+    db.connect()
 
     # Generate and insert the sample data
     generate_sample_data()
 
     # Close the database connection
-    myappdb.close()
+    db.close()
 
 
