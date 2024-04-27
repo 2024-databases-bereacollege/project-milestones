@@ -332,6 +332,13 @@ def get_providers_with_services():
         providers_with_services.append(provider_data)
     return jsonify(providers_with_services)
 
+#10 Get all visit records for a specific neighbor 
+@app.route('/api/visit_records/<int:neighbor_id>', methods=['GET'])
+def get_visit_records_for_neighbor(neighbor_id):
+    query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
+
 
 
 
