@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2>Add visit information</h2>
-    <ComboboxSelect
-      v-for="(items, index) in apiData"
-      :key="index"
-      :items="items"
-      :label="`Select ${index + 1}`"
-      @update:model-value="selectedValues[index] = $event"
-    />
+    <div v-for="(items, category) in apiData" :key="category">
+      <ComboboxSelect
+        :items="Object.values(items)"
+        :label="`Select ${category}`"
+        @update:model-value="selectedValues[category] = $event"
+      />
+    </div>
     <button @click="submitData">Submit</button>
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
   },
   data() {
     return {
-      apiData: [],
-      selectedValues: [],
+      apiData: {},
+      selectedValues: {},
     };
   },
   mounted() {
@@ -48,8 +48,8 @@ export default {
       } catch (error) {
         console.error('Error submitting data:', error);
         // Handle error
-        }
-      },
+      }
+    },
   },
 };
 </script>
