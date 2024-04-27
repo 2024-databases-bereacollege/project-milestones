@@ -1,5 +1,3 @@
-
-
 # Remove objects from the database
 psql -U postgres -d db -c  "DROP TABLE IF EXISTS Inventory_Usage CASCADE;"
 psql -U postgres -d db -c  "DROP TABLE IF EXISTS Inventory CASCADE;"
@@ -18,7 +16,6 @@ rm -f migrations.json
 # Initialize peewee-migrate if not already initialized
 pem init
 
-
 # Use peewee-migrate to create tables from Peewee models
 pem add models.Service_Providers
 pem add models.Services
@@ -33,12 +30,5 @@ pem add models.Inventory
 pem watch
 pem migrate
 
-
-
-
-# rm -rf migrations
-# rm -f migrations.json
-
-# Load data back into the database
-#psql < data.sql
-#change
+# Populate database with test data
+python populate_data.py  # Run your data population script

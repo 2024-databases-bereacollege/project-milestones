@@ -2,7 +2,7 @@ from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict # Allows us to send data as dictionaries
 # Database Configuration
-db = PostgresqlDatabase("db",host="localhost",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
+mydb = PostgresqlDatabase("postgres",host="db",user="postgres",password="postgres") #updated from mydb = PostgresqlDatabase("postgres",host="localhost",user="postgres",password="postgres") 
 
 class baseModel(Model):
     def to_dict(self):
