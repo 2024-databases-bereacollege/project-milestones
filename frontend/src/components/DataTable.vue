@@ -191,13 +191,13 @@ export default {
   methods: {
     initialize() {
       this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-        },
+        // {
+        //   name: 'Frozen Yogurt',
+        //   calories: 159,
+        //   fat: 6.0,
+        //   carbs: 24,
+        //   protein: 4.0,
+        // },
       ];
     },
     editItem(item) {
