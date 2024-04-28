@@ -46,18 +46,17 @@ class Neighbor(baseModel):
     HasStateID = BooleanField()
     HasPet = BooleanField()
 
-class Visit_Record(baseModel):
+class Visit_Service(baseModel):
     RecordID = AutoField() #IntegerField(primary_key=True)
+    ServiceID = ForeignKeyField(Services, backref='visit_service')
+    Description = TextField()
+    Date = DateField()
+
+class Visit_Record(baseModel):
+    ServiceOrder = AutoField() #IntegerField(primary_key=True)
     NeighborID = ForeignKeyField(Neighbor, backref='visit_record')  # Ensured consistency in backref
     VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')  # Ensured consistency in backref
-    Date = DateField()
-    #TODO this where we should add notes?
-
-class Visit_Service(baseModel):
-    ServiceOrder = AutoField() #IntegerField(primary_key=True)
-    ServiceID = ForeignKeyField(Services, backref='visit_services')
-    Description = TextField()
-    RecordID = ForeignKeyField(Visit_Record, backref='visit_service')
+    RecordID = ForeignKeyField(Visit_Record, backref='visit_record')
 
 
 class Inventory_Usage(baseModel):
