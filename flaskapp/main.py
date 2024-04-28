@@ -239,6 +239,105 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
+# Rest of the queries.
+
+
+# 1. Identify all volunteers who are allowed to access records:
+@app.route('/api/volunteers/record_access', methods=['GET'])
+def get_volunteers_with_record_access():
+    query = Volunteer.select().where(Volunteer.HasRecordAccess == True)
+    volunteers = [volunteer.to_dict() for volunteer in query]
+    return jsonify(volunteers)
+
+# 2. Find all the records of visits made to a particular neighbor
+@app.route('/api/visit_records/<int:neighbor_id>', methods=['GET'])
+def get_visit_records_for_neighbor(neighbor_id):
+    query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
+
+# 3. Get a list of visit records along with the names of neighbors visited and the volunteer who made the visit
+@app.route('/api/visit_records/details', methods=['GET'])
+def get_visit_records_details():
+    query = (Visit_Record
+             .select(Visit_Record, Neighbor, Volunteer)
+             .join(Neighbor)
+             .join(Volunteer))
+    visit_records = [{
+        'Date': record.Date,
+        'Neighbor': f"{record.neighbor.FirstName} {record.neighbor.LastName}",
+        'Volunteer': f"{record.volunteer.FirstName} {record.volunteer.LastName}"
+    } for record in query]
+    return jsonify(visit_records)
+
+# 4. Count the number of times each service has been provided
+@app.route('/api/services/count', methods=['GET'])
+def get_service_counts():
+    query = (Visit_Service
+             .select(Visit_Service.ServiceID, fn.Count(Visit_Service.ServiceOrder).alias('Count'))
+             .group_by(Visit_Service.ServiceID))
+    service_counts = [{
+        'ServiceID': service.ServiceID,
+        'Count': service.Count
+    } for service in query]
+    return jsonify(service_counts)
+
+# 5. Get a list of items in the inventory that will expire within a specified period
+@app.route('/api/inventory/expiring', methods=['GET'])
+def get_expiring_inventory():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+    query = Inventory.select().where((Inventory.ExpirationDate >= start_date) & (Inventory.ExpirationDate <= end_date))
+    expiring_inventory = [item.to_dict() for item in query]
+    return jsonify(expiring_inventory)
+
+# 6. Count the number of neighbors who have pets
+@app.route('/api/neighbors/pets_count', methods=['GET'])
+def get_neighbors_with_pets_count():
+    pet_count = Neighbor.select().where(Neighbor.HasPet == True).count()
+    return jsonify({'PetCount': pet_count})
+
+# 7. Find all visit records conducted on a specific date
+@app.route('/api/visit_records/date/<date:date_string>', methods=['GET'])
+def get_visit_records_on_date(date_string):
+    target_date = datetime.datetime.strptime(date_string, '%Y-%m-%d').date()
+    query = Visit_Record.select().where(Visit_Record.Date == target_date)
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
+
+# 8.Get list of services provided by a specific organization every year
+@app.route('/api/services/provider/<string:provider_id>/year/<int:year>', methods=['GET'])
+def get_services_by_provider_year(provider_id, year):
+    query = (Services
+             .select(Services, fn.COUNT(Visit_Record.RecordID).alias('ServiceCount'))
+             .join(Visit_Service)
+             .join(Visit_Record)
+             .where((Services.OrganizationID == provider_id) & (fn.EXTRACT('year', Visit_Record.Date) == year))
+             .group_by(Services))
+    services_by_year = [{
+        'ServiceID': service.ServiceID,
+        'ServiceType': service.ServiceType,
+        'ServiceCount': service.ServiceCount
+    } for service in query]
+    return jsonify(services_by_year)
+
+# 9. Get list of organization providing service with the list of service they each provide
+@app.route('/api/providers/services', methods=['GET'])
+def get_providers_with_services():
+    query = Service_Providers.select()
+    providers_with_services = []
+    for provider in query:
+        provider_data = provider.to_dict()
+        provider_data['Services'] = [service.ServiceType for service in provider.services]
+        providers_with_services.append(provider_data)
+    return jsonify(providers_with_services)
+
+#10 Get all visit records for a specific neighbor 
+@app.route('/api/visit_records/<int:neighbor_id>', methods=['GET'])
+def get_visit_records_for_neighbor(neighbor_id):
+    query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
 
 
 
