@@ -8,6 +8,13 @@
         @update:model-value="selectedValues[category] = $event"
       />
     </div>
+    <v-textarea
+      v-model="visitDescription"
+      label="Description of Visit"
+      variant="solo-filled"
+      rows="3"
+      auto-grow
+    ></v-textarea>
     <button @click="submitData">Submit</button>
   </div>
 </template>
@@ -24,6 +31,7 @@ export default {
     return {
       apiData: {},
       selectedValues: {},
+      visitDescription: '',
     };
   },
   mounted() {
@@ -40,9 +48,11 @@ export default {
     },
     async submitData() {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/api/update_database', {
+        const requestData = {
           selectedValues: this.selectedValues,
-        });
+          visitDescription: this.visitDescription,
+        };
+        const response = await axios.post('http://127.0.0.1:5000/api/update_database', requestData);
         console.log('Data submitted successfully:', response.data);
         // Handle success response
       } catch (error) {

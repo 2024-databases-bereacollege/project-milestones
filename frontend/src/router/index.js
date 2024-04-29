@@ -37,7 +37,8 @@ const routes = [
     { path: '/testcrud', component: TestCRUD},
     { path: '/Add_Visit', component: AddVisit},
     { path: '/Instructions', component: GetStarted},
-    { path: '/:pathMatch(.*)*', redirect: '/home' } // Redirect all other paths to home
+    { path: '/:pathMatch(.*)*', redirect: '/home' }, // Redirect all other paths to home
+    { path: '/Neighbors/:ID', component: NeighborTable },//check syntax
 ]
 
 const router = createRouter({

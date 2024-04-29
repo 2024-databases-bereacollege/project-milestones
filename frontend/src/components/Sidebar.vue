@@ -44,6 +44,10 @@
     <font-awesome-icon :icon="faBox" />
     <span>Inventory</span>
   </router-link>
+  <router-link to="/Neighbors/:ID" class="sidebar-link">
+    <font-awesome-icon :icon="faUsers" />
+    <span>Individual Neighbor Records</span>
+  </router-link>
 </div>
 </template>
 
