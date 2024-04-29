@@ -1,5 +1,5 @@
 CREATE TABLE member (
-    memberId serial PRIMARY KEY,
+    memberid serial PRIMARY KEY,
     firstName varchar(100),
     middleName varchar(100) DEFAULT '',
     lastName varchar(100),
@@ -20,7 +20,7 @@ CREATE TABLE chapter (
 );
 
 CREATE TABLE event (
-    eventName varchar(100) PRIMARY KEY,
+    eventname varchar(100) PRIMARY KEY,
     venue varchar(100),
     theme varchar(100),
     eventDate date,
@@ -35,9 +35,16 @@ CREATE TABLE donation (
     monetaryWorth INTEGER
 );
 
+-- CREATE TABLE event_attendance (
+--    memberid integer REFERENCES member(memberid),
+--    eventName VARCHAR(100) REFERENCES event(eventName),
+--    PRIMARY KEY (memberid, eventName)
+-- );
+
 CREATE TABLE event_attendance (
-   memberid INTEGER REFERENCES member(memberid),
-   eventName VARCHAR(100) REFERENCES event(eventName),
-    PRIMARY KEY (memberd, eventName)
+   member INTEGER REFERENCES member(memberid),
+   event1 VARCHAR(100) REFERENCES event(eventname),
+   PRIMARY KEY (member, event1)
 );
+
 
