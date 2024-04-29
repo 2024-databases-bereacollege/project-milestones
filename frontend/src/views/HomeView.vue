@@ -1,19 +1,12 @@
 <template>
   <div class="homepage">
     <header>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
+      <h1>UP Initiative Database</h1>
     </header>
 
     <main>
       <section class="hero">
-        <h1>UP Initiative Database</h1>
+        <h1></h1>
      <!--   <p>This database is a robust solution that can streamline the <br>
           storage, management, and retrieval of your data, <br>
           enhancing operational efficiency and supporting informed decision-making <br>

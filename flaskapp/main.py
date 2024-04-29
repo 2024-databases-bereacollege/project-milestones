@@ -194,14 +194,6 @@ def get_inventory_usageAD():
     return jsonify(inventory_usage_data)
 
 
-
-
-# @app.route('/api/neighbors', methods=['GET'])
-# def get_neighbors():
-#     query = Neighbor.select()
-#     neighbors = [neighbor.to_dict() for neighbor in query]
-#     return jsonify(neighbors)
-
 @app.route('/api/visit_records', methods=['GET'])
 def get_visit_records():
     query = Visit_Record.select()
@@ -226,12 +218,39 @@ def get_inventory_usage():
 def home():
     return jsonify({"message": "Response from root - Home page - This is being sent by backend /"})
 
+# Sara's Queries ########################################################
+
+
 # 1. Identify all volunteers who are allowed to access records:
 @app.route('/api/volunteers/record_access', methods=['GET'])
 def get_volunteers_with_record_access():
     query = Volunteer.select().where(Volunteer.HasRecordAccess == True)
     volunteers = [volunteer.to_dict() for volunteer in query]
     return jsonify(volunteers)
+
+# 2. Find all the records of visits made to a particular neighbor #TODO ensure this works on individual neighbor pages! 
+@app.route('/api/visit_records/<int:neighbor_id>', methods=['GET'])
+def get_visit_records_for_neighbor(neighbor_id):
+    query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
+
+
+# 3. Get a list of visit records along with the names of neighbors visited and the volunteer who made the visit
+#TODO NH i am removing date, if it makes sense to add, I will join visit service and add date
+@app.route('/api/visit_records/details', methods=['GET'])
+def get_visit_records_details():
+    query = (Visit_Record
+             .select(Visit_Record, Neighbor, Volunteer)
+             .join(Neighbor)
+             .join(Volunteer))
+    visit_records = [{
+        'Neighbor': f"{record.neighbor.FirstName} {record.neighbor.LastName}",
+        'Volunteer': f"{record.volunteer.FirstName} {record.volunteer.LastName}"
+    } for record in query]
+    return jsonify(visit_records)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -240,33 +259,6 @@ if __name__ == '__main__':
 # Rest of the queries.
 
 
-# 1. Identify all volunteers who are allowed to access records:
-@app.route('/api/volunteers/record_access', methods=['GET'])
-def get_volunteers_with_record_access():
-    query = Volunteer.select().where(Volunteer.HasRecordAccess == True)
-    volunteers = [volunteer.to_dict() for volunteer in query]
-    return jsonify(volunteers)
-
-# 2. Find all the records of visits made to a particular neighbor
-@app.route('/api/visit_records/<int:neighbor_id>', methods=['GET'])
-def get_visit_records_for_neighbor(neighbor_id):
-    query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
-    visit_records = [record.to_dict() for record in query]
-    return jsonify(visit_records)
-
-# 3. Get a list of visit records along with the names of neighbors visited and the volunteer who made the visit
-@app.route('/api/visit_records/details', methods=['GET'])
-def get_visit_records_details():
-    query = (Visit_Record
-             .select(Visit_Record, Neighbor, Volunteer)
-             .join(Neighbor)
-             .join(Volunteer))
-    visit_records = [{
-        'Date': record.Date,
-        'Neighbor': f"{record.neighbor.FirstName} {record.neighbor.LastName}",
-        'Volunteer': f"{record.volunteer.FirstName} {record.volunteer.LastName}"
-    } for record in query]
-    return jsonify(visit_records)
 
 # 4. Count the number of times each service has been provided
 @app.route('/api/services/count', methods=['GET'])

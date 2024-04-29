@@ -1,6 +1,7 @@
 <template>
   <div>
     <data-table
+  tableTitle="Volunteers"  
   :edited-item="editedItem"
   @update:edited-item="updateEditedItem"
   @save="saveItem"
@@ -29,7 +30,7 @@ export default {
   },
   data() {
     return {
-      tableHeaders: [
+      tableHeaders: [ //keeping this with this name keeps this order, as opposed to 'headers'
         { title: 'Volunteer ID', key: 'VolunteerID' },
         { title: 'First Name', key: 'FirstName' },
         { title: 'Last Name', key: 'LastName' },
