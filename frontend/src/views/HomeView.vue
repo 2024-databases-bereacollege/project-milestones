@@ -14,12 +14,12 @@
     <main>
       <section class="hero">
         <h1>UP Initiative Database</h1>
-        <p>This database is a robust solution that can streamline the <br>
+     <!--   <p>This database is a robust solution that can streamline the <br>
           storage, management, and retrieval of your data, <br>
           enhancing operational efficiency and supporting informed decision-making <br>
           across your organization.
-        </p>
-        <a href="#" class="cta-button">Get Started</a>
+        </p> -->
+        <a href="/Instructions" class="cta-button">Get Started</a>
       </section>
 
       <section class="features">
@@ -83,7 +83,10 @@ nav ul li a {
 .hero {
   text-align: center;
   padding: 100px 0;
-  background-color: #e8e8e8;
+  background-image: url('../assets/madisonCounty.jpeg');
+  background-size: 40% auto;
+  background-position: center;
+  color: #fff;
 }
 
 .hero h1 {
