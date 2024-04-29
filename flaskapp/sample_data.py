@@ -7,52 +7,292 @@ def generate_sample_data():
     # Sample data for Service_Providers table
     def service_providers_sample_data():
         return [
-            {'Organization_Name': 'ABC Services', 'ContactPerson': 'John Doe', 'Email': 'john@abcservices.com', 'Phone': '123-456-7890', 'DateOfStart': '2022-01-01'}
+            {
+                'Organization_Name': 'ABC Services',
+                'ContactPerson': 'John Doe',
+                'Email': 'john@abcservices.com',
+                'Phone': '123-456-7890',
+                'DateOfStart': '2022-01-01'
+            },
+            {
+                'Organization_Name': 'XYZ Solutions',
+                'ContactPerson': 'Jane Smith',
+                'Email': 'jane@xyzsolutions.com',
+                'Phone': '987-654-3210',
+                'DateOfStart': '2021-05-15'
+            },
+            {
+                'Organization_Name': 'PQR Foundation',
+                'ContactPerson': 'Mike Johnson',
+                'Email': 'mike@pqrfoundation.org',
+                'Phone': '555-123-4567',
+                'DateOfStart': '2023-02-28'
+            },
+            {
+                'Organization_Name': 'LMN Assistance',
+                'ContactPerson': 'Sarah Brown',
+                'Email': 'sarah@lmnassistance.com',
+                'Phone': '111-222-3333',
+                'DateOfStart': '2020-11-10'
+            },
+            {
+                'Organization_Name': 'EFG Support',
+                'ContactPerson': 'David Wilson',
+                'Email': 'david@efgsupport.org',
+                'Phone': '444-555-6666',
+                'DateOfStart': '2022-09-01'
+            }
         ]
 
     # Sample data for Services table
     def services_sample_data():
         return [
-            {'ServiceType': 'Cleaning', 'OrganizationID': 1}
+            {
+                'ServiceType': 'Cleaning',
+                'OrganizationID': 1
+            },
+            {
+                'ServiceType': 'Food Delivery',
+                'OrganizationID': 2
+            },
+            {
+                'ServiceType': 'Clothing Donation',
+                'OrganizationID': 3
+            },
+            {
+                'ServiceType': 'Medical Assistance',
+                'OrganizationID': 4
+            },
+            {
+                'ServiceType': 'Job Training',
+                'OrganizationID': 5
+            }
         ]
 
     # Sample data for Volunteer table
     def volunteers_sample_data():
         return [
-            {'FirstName': 'Alice', 'LastName': 'Smith', 'Password': 'password123', 'Email': 'alice@example.com', 'Phone': '987-654-3210', 'HasRecordAccess': True}
+            {
+                'FirstName': 'Alice',
+                'LastName': 'Smith',
+                'Password': 'password123',
+                'Email': 'alice@example.com',
+                'Phone': '987-654-3210',
+                'HasRecordAccess': True
+            },
+            {
+                'FirstName': 'Bob',
+                'LastName': 'Johnson',
+                'Password': 'qwerty456',
+                'Email': 'bob@example.com',
+                'Phone': '111-222-3333',
+                'HasRecordAccess': False
+            },
+            {
+                'FirstName': 'Emily',
+                'LastName': 'Davis',
+                'Password': 'pass1234',
+                'Email': 'emily@example.com',
+                'Phone': '444-555-6666',
+                'HasRecordAccess': True
+            },
+            {
+                'FirstName': 'Michael',
+                'LastName': 'Wilson',
+                'Password': 'abcd1234',
+                'Email': 'michael@example.com',
+                'Phone': '777-888-9999',
+                'HasRecordAccess': False
+            },
+            {
+                'FirstName': 'Sarah',
+                'LastName': 'Brown',
+                'Password': 'password789',
+                'Email': 'sarah@example.com',
+                'Phone': '555-666-7777',
+                'HasRecordAccess': True
+            }
         ]
 
 # Sample data for Neighbor table
     def neighbors_sample_data():
         return [
-           {'VolunteerID': 1, 'OrganizationID': 1, 'FirstName': 'Bob', 'LastName': 'Johnson', 'DateOfBirth': '1990-05-15', 'Phone': '555-123-4567', 'Location': '123 Main St', 'Email': 'bob@example.com', 'HasStateID': True, 'HasPet': False}
-       ]
+            {
+                'VolunteerID': 1,
+                'OrganizationID': 1,
+                'FirstName': 'Bob',
+                'LastName': 'Johnson',
+                'DateOfBirth': '1990-05-15',
+                'Phone': '555-123-4567',
+                'Location': '123 Main St',
+                'Email': 'bob@example.com',
+                'HasStateID': True,
+                'HasPet': False
+            },
+            {
+                'VolunteerID': 2,
+                'OrganizationID': 2,
+                'FirstName': 'Emily',
+                'LastName': 'Davis',
+                'DateOfBirth': '1985-09-20',
+                'Phone': '111-222-3333',
+                'Location': '456 Elm St',
+                'Email': 'emily@example.com',
+                'HasStateID': False,
+                'HasPet': True
+            },
+            {
+                'VolunteerID': 3,
+                'OrganizationID': 3,
+                'FirstName': 'Michael',
+                'LastName': 'Wilson',
+                'DateOfBirth': '1978-02-10',
+                'Phone': '444-555-6666',
+                'Location': '789 Oak Ave',
+                'Email': 'michael@example.com',
+                'HasStateID': True,
+                'HasPet': False
+            },
+            {
+                'VolunteerID': 4,
+                'OrganizationID': 4,
+                'FirstName': 'Sarah',
+                'LastName': 'Brown',
+                'DateOfBirth': '1995-12-03',
+                'Phone': '777-888-9999',
+                'Location': '321 Pine Rd',
+                'Email': 'sarah@example.com',
+                'HasStateID': True,
+                'HasPet': True
+            },
+            {
+                'VolunteerID': 5,
+                'OrganizationID': 5,
+                'FirstName': 'David',
+                'LastName': 'Taylor',
+                'DateOfBirth': '1982-07-25',
+                'Phone': '222-333-4444',
+                'Location': '654 Cedar Ln',
+                'Email': 'david@example.com',
+                'HasStateID': False,
+                'HasPet': False
+            }
+        ]
 
     # Sample data for Visit_Service table
     def visit_services_sample_data():
         return [
-            {'ServiceID': 1, 'Description': 'Weekly cleaning service', 'Date': '2023-06-01'}
+            {
+                'ServiceID': 1,
+                'Description': 'Weekly cleaning service',
+                'Date': '2023-06-01'
+            },
+            {
+                'ServiceID': 2,
+                'Description': 'Monthly food delivery',
+                'Date': '2023-07-15'
+            },
+            {
+                'ServiceID': 3,
+                'Description': 'Clothing donation drive',
+                'Date': '2023-08-10'
+            },
+            {
+                'ServiceID': 4,
+                'Description': 'Medical check-up and consultation',
+                'Date': '2023-09-05'
+            },
+            {
+                'ServiceID': 5,
+                'Description': 'Job training workshop',
+                'Date': '2023-10-20'
+            }
         ]
 
-    # Sample data for Visit_Record table
+# Sample data for Visit_Record table
     def visit_records_sample_data():
         return [
-            {'NeighborID': 1, 'VolunteerID': 1, 'RecordID': 1}
+            {'NeighborID': 1, 'VolunteerID': 1, 'RecordID': 1},
+            {'NeighborID': 2, 'VolunteerID': 2, 'RecordID': 2},
+            {'NeighborID': 3, 'VolunteerID': 3, 'RecordID': 3},
+            {'NeighborID': 4, 'VolunteerID': 4, 'RecordID': 4},
+            {'NeighborID': 5, 'VolunteerID': 5, 'RecordID': 5}
         ]
 
-    # Sample data for Inventory_Usage table
+# Sample data for Inventory_Usage table
     def inventory_usage_sample_data():
         return [
-            {'NameOfItem': 'Cleaning Supplies', 'RecordID': 1, 'Description_of_Item': 'Mop and bucket', 'Number_Of_Item_Used': 1}
+            {
+                'NameOfItem': 'Cleaning Supplies',
+                'RecordID': 1,
+                'Description_of_Item': 'Mop and bucket',
+                'Number_Of_Item_Used': 1
+            },
+            {
+                'NameOfItem': 'Food Items',
+                'RecordID': 2,
+                'Description_of_Item': 'Canned goods',
+                'Number_Of_Item_Used': 10
+            },
+            {
+                'NameOfItem': 'Clothing',
+                'RecordID': 3,
+                'Description_of_Item': 'T-shirts and jeans',
+                'Number_Of_Item_Used': 5
+            },
+            {
+                'NameOfItem': 'Medical Supplies',
+                'RecordID': 4,
+                'Description_of_Item': 'Bandages and antiseptic',
+                'Number_Of_Item_Used': 3
+            },
+            {
+                'NameOfItem': 'Stationery',
+                'RecordID': 5,
+                'Description_of_Item': 'Pens and notebooks',
+                'Number_Of_Item_Used': 8
+            }
         ]
 
     # Sample data for Inventory table
     def inventory_sample_data():
         return [
-            {'NameOfItem': 'Cleaning Supplies', 'VolunteerID': 1, 'Description_of_Item': 'Mop and bucket', 'ExpirationDate': '2024-12-31', 'Number_Of_Item': 10}
+            {
+                'NameOfItem': 'Cleaning Supplies',
+                'VolunteerID': 1,
+                'Description_of_Item': 'Mop and bucket',
+                'ExpirationDate': '2024-12-31',
+                'Number_Of_Item': 10
+            },
+            {
+                'NameOfItem': 'Food Items',
+                'VolunteerID': 2,
+                'Description_of_Item': 'Canned goods',
+                'ExpirationDate': '2023-09-30',
+                'Number_Of_Item': 50
+            },
+            {
+                'NameOfItem': 'Clothing',
+                'VolunteerID': 3,
+                'Description_of_Item': 'T-shirts and jeans',
+                'ExpirationDate': '2023-09-30', #TODO listed as cannot be NULL?
+                'Number_Of_Item': 20
+            },
+            {
+                'NameOfItem': 'Medical Supplies',
+                'VolunteerID': 4,
+                'Description_of_Item': 'Bandages and antiseptic',
+                'ExpirationDate': '2025-06-30',
+                'Number_Of_Item': 15
+            },
+            {
+                'NameOfItem': 'Stationery',
+                'VolunteerID': 5,
+                'Description_of_Item': 'Pens and notebooks',
+                'ExpirationDate': '2025-06-30',
+                'Number_Of_Item': 30
+            }
         ]
-
-    # Add more sample data functions for each table as needed
 
     return {
         'service_providers': service_providers_sample_data(),
