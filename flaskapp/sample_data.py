@@ -29,34 +29,20 @@ def generate_sample_data():
 def insert_services():
         services_sample_data = Service_Providers.select()
         services_sample_data = [
-        {"ServiceType": "Meal Delivery", "OrganizationID": service_providers[0].id},
-        {"ServiceType": "Legal Aid", "OrganizationID": service_providers[1].id},
-        {"ServiceType": "Home Repairs", "OrganizationID": service_providers[2].id},
-        {"ServiceType": "Medical Checkup", "OrganizationID": service_providers[3].id},
-        {"ServiceType": "Youth Mentoring", "OrganizationID": service_providers[4].id}
+        {"ServiceType": "Meal Delivery", "OrganizationID": Service_Providers[0].id},
+        {"ServiceType": "Legal Aid", "OrganizationID": Service_Providers[1].id},
+        {"ServiceType": "Home Repairs", "OrganizationID": Service_Providers[2].id},
+        {"ServiceType": "Medical Checkup", "OrganizationID": Service_Providers[3].id},
+        {"ServiceType": "Youth Mentoring", "OrganizationID": Service_Providers[4].id}
     ]
 
-def insert_neighbors ():
+def insert_neighbors():
     volunteers = Volunteer.select()
     service_providers = Service_Providers.select()
     neighbors_sample_data = [
         {"FirstName": "Alice", "LastName": "Johnson", "VolunteerID": volunteers[0].id, "OrganizationID": service_providers[0].id, "DateOfBirth": datetime.date(1980, 5, 15), "Phone": "555-0201", "Location": "123 Elm Street, Springfield", "Email": "alice.j@example.com", "Created_date": datetime.datetime.now(), "HasStateID": True, "HasPet": False},
-     neighbors_sample_data = [
-        { "FirstName": "Bob", "LastName": "Smith","NeighborID": 2, "VolunteerID": volunteers[1].id, "OrganizationID": service_providers[1].id, "DateOfBirth": datetime.date(1975, 8, 25), "Phone": "555-0202", "Location": "456 Maple Avenue, Springfield", "Email": "bob.s@example.com", "Created_date": datetime.datetime.now(), "HasStateID": False, "HasPet": True
-        },
-        {   
-            "FirstName": "Catherine",
-            "LastName": "Williams",
-            "VolunteerID": volunteers[2].id, 
-            "OrganizationID": service_providers[2].id
-            "DateOfBirth": datetime.date(1992, 11, 30),
-            "Phone": "555-0203",
-            "Location": "789 Pine Road, Springfield",
-            "Email": "catherine.w@example.com",
-            "Created_date": datetime.datetime.now(),
-            "HasStateID": True,
-            "HasPet": True
-        }
+        {"FirstName": "Bob", "LastName": "Smith", "VolunteerID": volunteers[1].id, "OrganizationID": service_providers[1].id, "DateOfBirth": datetime.date(1975, 8, 25), "Phone": "555-0202", "Location": "456 Maple Avenue, Springfield", "Email": "bob.s@example.com", "Created_date": datetime.datetime.now(), "HasStateID": False, "HasPet": True},
+        {"FirstName": "Catherine", "LastName": "Williams", "VolunteerID": volunteers[2].id, "OrganizationID": service_providers[2].id, "DateOfBirth": datetime.date(1992, 11, 30), "Phone": "555-0203", "Location": "789 Pine Road, Springfield", "Email": "catherine.w@example.com", "Created_date": datetime.datetime.now(), "HasStateID": True, "HasPet": True}
     ]
 def insert_visit_service():
     service_types = ServiceType.select()
@@ -119,14 +105,14 @@ def insert_inventory_usage_records():
     # Insert the sample data into the database
 
     with db.atomic():
-    #    Volunteer.insert_many(volunteers_sample_data).execute()
-    #    Service_Providers.insert_many(service_providers_sample_data).execute()
-    #    Services.insert_many(services_sample_data).execute()
-    #    Neighbor.insert_many(neighbors_sample_data).execute()
-    #    Visit_Record.insert_many(visit_records_sample_data).execute()
-    #    Visit_Service.insert_many(visit_services_sample_data).execute()    
-    #    Inventory.insert_many(inventory_sample_data).execute()
-    #    Inventory_Usage.insert_many(inventory_usage_sample_data).execute()  
+        Volunteer.insert_many(volunteers_sample_data).execute()
+        Service_Providers.insert_many(service_providers_sample_data).execute()
+        Services.insert_many(services_sample_data).execute()
+        Neighbor.insert_many(neighbors_sample_data).execute()
+        Visit_Record.insert_many(visit_records_sample_data).execute()
+        Visit_Service.insert_many(visit_services_sample_data).execute()    
+        Inventory.insert_many(inventory_sample_data).execute()
+        Inventory_Usage.insert_many(inventory_usage_sample_data).execute()  
  
 
 if __name__ == '__main__':

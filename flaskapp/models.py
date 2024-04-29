@@ -33,7 +33,7 @@ class Volunteer(baseModel):
     HasRecordAccess = BooleanField()
     
 class Neighbor(baseModel):
-    NeighborID = IntegerField(primary_key=True)
+    NeighborID = AutoField()
     VolunteerID = ForeignKeyField(Volunteer, backref='neighbor')  # Ensured consistency in backref
     OrganizationID = ForeignKeyField(Service_Providers, backref='neighbor')  # Adjusted for clarity and consistency
     FirstName = CharField(max_length=255)
