@@ -95,7 +95,7 @@ def update_volunteer(id):
     db.session.commit()  # TODO adjust from session
     return jsonify(volunteer.to_dict()), 200
 
-
+################ volunteers below ############################
 @app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
 def delete_volunteer(id):
     volunteer = Volunteer.query.get(id)
@@ -138,10 +138,16 @@ def add_volunteer():
         app.logger.error('Error adding volunteer: %s', e, exc_info=True)
         return jsonify({"error": str(e)}), 500
 
+################ volunteers above ############################
+    
+################ neighbors below ############################    
+@app.route('/api/neighbors', methods=['GET'])
+def get_neighbors():
+    neighbors = [neighbor.to_dict() for neighbor in Neighbor.select()]
+    return jsonify(neighbors)
 
 
-
-
+################ neighbors above ############################
 
 
 
@@ -150,8 +156,6 @@ def get_service_providers():
     query = Service_Providers.select()
     service_providers = [provider.to_dict() for provider in query]
     return jsonify(service_providers)
-
-
 
 
 
@@ -192,23 +196,11 @@ def get_inventory_usageAD():
 
 
 
-
-# @app.route('/api/services', methods=['GET'])
-# def get_services():
-#     query = Services.select()
-#     services = [service.to_dict() for service in query]
-#     return jsonify(services)
-
-
-
-
-
-
-@app.route('/api/neighbors', methods=['GET'])
-def get_neighbors():
-    query = Neighbor.select()
-    neighbors = [neighbor.to_dict() for neighbor in query]
-    return jsonify(neighbors)
+# @app.route('/api/neighbors', methods=['GET'])
+# def get_neighbors():
+#     query = Neighbor.select()
+#     neighbors = [neighbor.to_dict() for neighbor in query]
+#     return jsonify(neighbors)
 
 @app.route('/api/visit_records', methods=['GET'])
 def get_visit_records():
@@ -351,6 +343,12 @@ def get_visit_records_for_neighbor(neighbor_id):
 
 
 
+
+# @app.route('/api/services', methods=['GET'])
+# def get_services():
+#     query = Services.select()
+#     services = [service.to_dict() for service in query]
+#     return jsonify(services)
 
 # @app.route('/api/services', methods=['GET'])
 # def get_services():

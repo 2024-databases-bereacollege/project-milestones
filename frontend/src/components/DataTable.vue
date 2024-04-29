@@ -190,30 +190,32 @@ export default {
   },
   methods: {
     initialize() {
-      this.desserts = [
-        // {
-        //   name: 'Frozen Yogurt',
-        //   calories: 159,
-        //   fat: 6.0,
-        //   carbs: 24,
-        //   protein: 4.0,
-        // },
-      ];
+// does this need items? 
     },
     editItem(item) {
-      this.$emit('edit-item', item);
+    this.editedIndex = this.items.indexOf(item);
+    this.$emit('edit-item', { item, index: this.editedIndex });
     },
     deleteItem(item) {
-      this.$emit('delete-item', item);
+      this.editedIndex = this.items.indexOf(item);
+      this.$emit('delete-item', { item, index: this.editedIndex });
     },
     deleteItemConfirm() {
-      this.$emit('delete-item-confirm');
+    this.$emit('delete-item-confirm', this.editedIndex);
     },
     close() {
+    this.dialog = false;
+    this.$nextTick(() => {
+      this.editedIndex = -1;
       this.$emit('close');
+    });
     },
     closeDelete() {
-      this.$emit('close-delete');
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedIndex = -1;
+        this.$emit('close-delete');
+      });
     },
     save() {
       this.$emit('save', this.editedItem);

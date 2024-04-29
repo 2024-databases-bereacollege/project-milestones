@@ -36,7 +36,9 @@
     methods: {
       // Fetch neighbor data from backend
       getResponse() {
-        const path = 'http://localhost:8080/NeighborTable';
+        const path = 'http://127.0.0.1:5000/api/neighbors';
+        //const path = 'http://localhost:8080/Neighbors'; originial and changed to correct path
+
         axios.get(path)
           .then(response => {
             // Assuming the response is a single neighbor object
