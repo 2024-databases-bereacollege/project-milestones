@@ -1,20 +1,20 @@
 <template>
   <div>
     <data-table
-      :edited-item="editedItem"
-      @update:edited-item="updateEditedItem"
-      @save="saveItem"
-      :headers="tableHeaders"
-      :items="volunteers"
-      :default-item="defaultItem" 
-      @edit-item="editItem($event.item, $event.index)"
-      @delete-item="deleteItem($event.item, $event.index)"
-      @delete-item-confirm="deleteItemConfirm($event)"
-      @close="close"
-      @close-delete="closeDelete"
-      sort-by="VolunteerID"
-      sort-order="asc"
-    ></data-table>
+  :edited-item="editedItem"
+  @update:edited-item="updateEditedItem"
+  @save="saveItem"
+  :headers="tableHeaders"
+  :items="volunteers"
+  :default-item="defaultItem"
+  :on-edit="editItem"
+  :on-delete="deleteItem"
+  @delete-item-confirm="deleteItemConfirm($event)"
+  @close="close"
+  @close-delete="closeDelete"
+  sort-by="VolunteerID"
+  sort-order="asc"
+></data-table>
   </div>
 </template>
 
@@ -71,14 +71,21 @@ export default {
           console.error('Error fetching data:', error);
         });
     },
-    editItem(item, index) {
-    this.editedIndex = index;
+    editItem(item) {
+    this.editedIndex = this.volunteers.indexOf(item);
     this.editedItem = Object.assign({}, item);
     },
-    deleteItem(item, index) {
-      this.editedIndex = index;
-      this.editedItem = Object.assign({}, item);
+    // deleteItem(item, index) {
+    //   this.editedIndex = index;
+    //   this.editedItem = Object.assign({}, item);
+    // },
+
+
+    deleteItem(item) {
+    this.editedIndex = this.volunteers.indexOf(item);
+    this.editedItem = Object.assign({}, item);
     },
+
     deleteItemConfirm(index) {
       // Perform the delete operation in the database
       // Remove the item from the volunteers array using the index

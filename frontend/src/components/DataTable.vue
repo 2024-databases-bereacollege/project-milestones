@@ -131,6 +131,10 @@ export default {
       type: Array,
       required: true,
     },
+    onEdit: {
+      type: Function,
+      required: true,
+    },
     editedItem: {
       type: Object,
       required: true,
@@ -193,12 +197,21 @@ export default {
 // does this need items? 
     },
     editItem(item) {
+    console.log('Edit button clicked for item:', item);
     this.editedIndex = this.items.indexOf(item);
-    this.$emit('edit-item', { item, index: this.editedIndex });
-    },
+    this.onEdit(item);
+    this.dialog = true;
+  },
+    // deleteItem(item) {
+    //   console.log('Delete button clicked for item:', item);
+    //   this.editedIndex = this.items.indexOf(item);
+    //   this.$emit('delete-item', { item, index: this.editedIndex });
+    // },
     deleteItem(item) {
-      this.editedIndex = this.items.indexOf(item);
-      this.$emit('delete-item', { item, index: this.editedIndex });
+    console.log('Delete button clicked for item:', item);
+    this.editedIndex = this.items.indexOf(item);
+    this.onDelete(item);
+    this.dialogDelete = true; // Add this line
     },
     deleteItemConfirm() {
     this.$emit('delete-item-confirm', this.editedIndex);
@@ -220,6 +233,12 @@ export default {
     save() {
       this.$emit('save', this.editedItem);
     },
+    watch: {
+  editedItem(newValue) {
+    console.log('editedItem changed:', newValue);
+    },
+  },
+
   },
 };
 </script>
