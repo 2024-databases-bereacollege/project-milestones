@@ -234,6 +234,12 @@ def get_inventory_usage():
 def home():
     return jsonify({"message": "Response from root - Home page - This is being sent by backend /"})
 
+# 1. Identify all volunteers who are allowed to access records:
+@app.route('/api/volunteers/record_access', methods=['GET'])
+def get_volunteers_with_record_access():
+    query = Volunteer.select().where(Volunteer.HasRecordAccess == True)
+    volunteers = [volunteer.to_dict() for volunteer in query]
+    return jsonify(volunteers)
 
 if __name__ == '__main__':
     app.run(debug=True)
