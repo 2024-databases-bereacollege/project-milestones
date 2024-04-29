@@ -56,7 +56,7 @@ class Visit_Record(baseModel):
     ServiceOrder = AutoField() #IntegerField(primary_key=True)
     NeighborID = ForeignKeyField(Neighbor, backref='visit_record')  # Ensured consistency in backref
     VolunteerID = ForeignKeyField(Volunteer, backref='visit_record')  # Ensured consistency in backref
-    RecordID = ForeignKeyField(Visit_Record, backref='visit_record')
+    RecordID = ForeignKeyField(Visit_Service, backref='visit_record') # Changed to Visit Service
 
 
 class Inventory_Usage(baseModel):
