@@ -1,9 +1,9 @@
 <template>
   
 <div class="sidebar-links">
-  <!--<div class="logo">
-        <img src="../assets/UPLOGO.PNG" alt="UP Initiative Logo" /> />
-      </div> -->
+  <div class="logo">
+    <img :src="require('../assets/upClouds.png')" alt="UP Initiative Logo" class="logo-image" />
+  </div>
   <router-link to="/" class="sidebar-link">
     <font-awesome-icon :icon="faHome" />
     <span>Home Page</span>
@@ -70,6 +70,12 @@ export default {
 </script>
 
 <style>
+
+.logo-image {
+  width: 200px; 
+  height: auto; /* Maintain the aspect ratio */
+}
+
 .sidebar {
   width: 16rem;
   background-color: #333;
