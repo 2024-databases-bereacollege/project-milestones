@@ -12,7 +12,7 @@ import Inventory from '@/views/Inventory.vue';
 import TestComponent from '@/components/TestComponent.vue';
 import TestCRUD from '@/views/TestCRUD.vue';
 import AddVisit from '@/views/AddVisit.vue';
-
+import GetStarted from '@/views/GetStarted.vue';
 
 const routes = [
     { 
@@ -36,7 +36,9 @@ const routes = [
     { path: '/test', component: TestComponent},
     { path: '/testcrud', component: TestCRUD},
     { path: '/Add_Visit', component: AddVisit},
-    { path: '/:pathMatch(.*)*', redirect: '/home' } // Redirect all other paths to home
+    { path: '/Instructions', component: GetStarted},
+    { path: '/:pathMatch(.*)*', redirect: '/home' }, // Redirect all other paths to home
+    { path: '/Neighbors/:ID', component: NeighborTable },//check syntax
 ]
 
 const router = createRouter({

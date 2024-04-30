@@ -8,6 +8,10 @@
     <font-awesome-icon :icon="faHome" />
     <span>Home Page</span>
   </router-link>
+  <router-link to="/Instructions" class="sidebar-link">
+    <font-awesome-icon :icon="faInfoCircle" />
+    <span>Instructions</span>
+  </router-link>
   <router-link to="/Add_Visit" class="sidebar-link">
     <font-awesome-icon :icon="faPlusCircle" />
     <span>Add Visit</span>
@@ -40,12 +44,16 @@
     <font-awesome-icon :icon="faBox" />
     <span>Inventory</span>
   </router-link>
+  <router-link to="/Neighbors/:ID" class="sidebar-link">
+    <font-awesome-icon :icon="faUsers" />
+    <span>Individual Neighbor Records</span>
+  </router-link>
 </div>
 </template>
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faHome, faPlusCircle, faSignInAlt, faUserFriends, faUsers, faClipboardList, faHandHoldingHeart, faBuilding, faBox } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPlusCircle, faSignInAlt, faUserFriends, faUsers, faClipboardList, faHandHoldingHeart, faBuilding, faBox, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 //import logo from '../assets/UPLOGO.PNG';
 
 export default {
@@ -63,6 +71,7 @@ export default {
       faHandHoldingHeart,
       faBuilding,
       faBox,
+      faInfoCircle,
       //logo,
     }
   }

@@ -6,7 +6,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>Template table</v-toolbar-title>
+        <v-toolbar-title>{{ tableTitle }}</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
@@ -123,12 +123,20 @@
 <script>
 export default {
   props: {
+    tableTitle: {
+      type: String,
+      default: 'Template table'
+    },
     headers: {
       type: Array,
       required: true,
     },
     items: {
       type: Array,
+      required: true,
+    },
+    onEdit: {
+      type: Function,
       required: true,
     },
     editedItem: {
@@ -193,15 +201,25 @@ export default {
 // does this need items? 
     },
     editItem(item) {
+    console.log('Edit button clicked for item:', item);
     this.editedIndex = this.items.indexOf(item);
-    this.$emit('edit-item', { item, index: this.editedIndex });
-    },
+    this.onEdit(item);
+    this.dialog = true;
+  },
+    // deleteItem(item) {
+    //   console.log('Delete button clicked for item:', item);
+    //   this.editedIndex = this.items.indexOf(item);
+    //   this.$emit('delete-item', { item, index: this.editedIndex });
+    // },
     deleteItem(item) {
-      this.editedIndex = this.items.indexOf(item);
-      this.$emit('delete-item', { item, index: this.editedIndex });
+    console.log('Delete button clicked for item:', item);
+    this.editedIndex = this.items.indexOf(item);
+    this.onDelete(item);
+    this.dialogDelete = true; 
     },
     deleteItemConfirm() {
     this.$emit('delete-item-confirm', this.editedIndex);
+    this.closeDelete();
     },
     close() {
     this.dialog = false;
@@ -220,6 +238,12 @@ export default {
     save() {
       this.$emit('save', this.editedItem);
     },
+    watch: {
+  editedItem(newValue) {
+    console.log('editedItem changed:', newValue);
+    },
+  },
+
   },
 };
 </script>
