@@ -25,7 +25,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :value="editedItem.FirstName"
-              @input="$emit('update:editedItem', { ...editedItem, FirstName: $event })"
+              @input="$emit('update:editedItem', { ...editedItem, FirstName: $event.target.value })"
               label="First Name"
               required
             ></v-text-field>
@@ -33,7 +33,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :value="editedItem.LastName"
-              @input="$emit('update:editedItem', { ...editedItem, LastName: $event })"
+              @input="$emit('update:editedItem', { ...editedItem, LastName: $event.target.value })"
               label="Last Name"
               required
             ></v-text-field>
@@ -41,7 +41,7 @@
           <v-col cols="12">
             <v-text-field
               :value="editedItem.Password"
-              @input="$emit('update:editedItem', { ...editedItem, Password: $event })"
+              @input="$emit('update:editedItem', { ...editedItem, Password: $event.target.value })"
               label="Password"
               type="password"
               required
@@ -50,7 +50,7 @@
           <v-col cols="12">
             <v-text-field
               :value="editedItem.Email"
-              @input="$emit('update:editedItem', { ...editedItem, Email: $event })"
+              @input="$emit('update:editedItem', { ...editedItem, Email: $event.target.value })"
               label="Email"
               required
             ></v-text-field>
@@ -58,7 +58,7 @@
           <v-col cols="12">
             <v-text-field
               :value="editedItem.Phone"
-              @input="$emit('update:editedItem', { ...editedItem, Phone: $event })"
+              @input="$emit('update:editedItem', { ...editedItem, Phone: $event.target.value })"
               label="Phone"
               required
             ></v-text-field>
@@ -71,8 +71,8 @@
             ></v-checkbox>
           </v-col>
         </v-row>
-                </v-container>
-              </v-card-text>
+      </v-container>
+      </v-card-text>
   
               <v-card-actions>
                 <v-spacer></v-spacer>
