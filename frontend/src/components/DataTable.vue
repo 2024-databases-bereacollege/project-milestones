@@ -134,11 +134,6 @@
   </template>
 
 <script>
-// //                    <v-text-field
-// :value="editedItem.protein"
-//                       @input="$emit('update:editedItem', { ...editedItem, protein: $event })"
-//                       label="Protein (g)"
-//                     ></v-text-field>
 export default {
   props: {
     tableTitle: {
@@ -240,11 +235,7 @@ export default {
     this.onEdit(item);
     this.dialog = true;
   },
-    // deleteItem(item) {
-    //   console.log('Delete button clicked for item:', item);
-    //   this.editedIndex = this.items.indexOf(item);
-    //   this.$emit('delete-item', { item, index: this.editedIndex });
-    // },
+
     deleteItem(item) {
     console.log('Delete button clicked for item:', item);
     this.editedIndex = this.items.indexOf(item);
@@ -384,4 +375,10 @@ export default {
       },
     },
   }
+
+      // deleteItem(item) {
+    //   console.log('Delete button clicked for item:', item);
+    //   this.editedIndex = this.items.indexOf(item);
+    //   this.$emit('delete-item', { item, index: this.editedIndex });
+    // },
   </script> -->

@@ -69,6 +69,8 @@ def get_visit():
 
 ##############################################################
 
+################ volunteers below ############################
+
 
 
 @app.route('/api/volunteers', methods=['GET']) #GET request to get all volunteers
@@ -79,64 +81,84 @@ def get_volunteers():
     
     return jsonify(volunteers)
 
-@app.route('/api/volunteers', methods=['PUT']) #PUT request to update a volunteer
-def update_volunteer(id):
-    volunteer = Volunteer.query.get(id)
-    if not volunteer:
-        return jsonify({'error': 'Volunteer not found'}), 404
-
-    data = request.get_json()
-    print("Received data for update:", data) 
-
-    for key, value in data.items():
-        if hasattr(volunteer, key):  
-            setattr(volunteer, key, value)
-
-    db.session.commit()  # TODO adjust from session
-    return jsonify(volunteer.to_dict()), 200
-
-################ volunteers below ############################
-@app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
-def delete_volunteer(id):
-    volunteer = Volunteer.query.get(id)
-    if not volunteer:
-        return jsonify({'error': 'Volunteer not found'}), 404
-
-    db.session.delete(volunteer)
-    db.session.commit()
-    return jsonify({'success': 'Volunteer deleted'}), 200
 
 @app.route('/api/volunteers', methods=['POST'])
-def add_volunteer():
-    try:
-        data = request.get_json()
-        app.logger.info('Received data: %s', data)
+def create_volunteer():
+    data = request.get_json()
+    volunteer = Volunteer(**data)
+    volunteer.save()
+    return jsonify(volunteer.to_dict()), 201
 
-        if not all(key in data for key in ['FirstName', 'LastName', 'Password', 'Email', 'Phone', 'HasRecordAccess']):
-            app.logger.error('Missing one or more required fields')
-            return jsonify({"error": "Missing data for one or more fields"}), 400
+@app.route('/api/volunteers/<int:volunteer_id>', methods=['PUT'])
+def update_volunteer(volunteer_id):
+    data = request.get_json()
+    volunteer = Volunteer.get_by_id(volunteer_id)
+    volunteer.update(**data).execute()
+    return jsonify(volunteer.to_dict())
 
-        volunteer = Volunteer.create(
-            first_name=data['FirstName'],
-            last_name=data['LastName'],
-            password=generate_password_hash(data['Password']),
-            email=data['Email'],
-            phone=data['Phone'],
-            has_record_access=data['HasRecordAccess']
-        )
-        app.logger.info('Volunteer created with ID: %s', volunteer.id)
+@app.route('/api/volunteers/<int:volunteer_id>', methods=['DELETE'])
+def delete_volunteer(volunteer_id):
+    volunteer = Volunteer.get_by_id(volunteer_id)
+    volunteer.delete_instance()
+    return '', 204
 
-        return jsonify({
-            "id": volunteer.id,
-            "first_name": volunteer.first_name,
-            "last_name": volunteer.last_name,
-            "email": volunteer.email,
-            "phone": volunteer.phone,
-            "has_record_access": volunteer.has_record_access
-        }), 201
-    except Exception as e:
-        app.logger.error('Error adding volunteer: %s', e, exc_info=True)
-        return jsonify({"error": str(e)}), 500
+# @app.route('/api/volunteers', methods=['PUT']) #PUT request to update a volunteer
+# def update_volunteer(id):
+#     volunteer = Volunteer.query.get(id)
+#     if not volunteer:
+#         return jsonify({'error': 'Volunteer not found'}), 404
+
+#     data = request.get_json()
+#     print("Received data for update:", data) 
+
+#     for key, value in data.items():
+#         if hasattr(volunteer, key):  
+#             setattr(volunteer, key, value)
+
+#     db.session.commit()  # TODO adjust from session
+#     return jsonify(volunteer.to_dict()), 200
+
+# @app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
+# def delete_volunteer(id):
+#     volunteer = Volunteer.query.get(id)
+#     if not volunteer:
+#         return jsonify({'error': 'Volunteer not found'}), 404
+
+#     db.session.delete(volunteer)
+#     db.session.commit()
+#     return jsonify({'success': 'Volunteer deleted'}), 200
+
+# @app.route('/api/volunteers', methods=['POST'])
+# def add_volunteer():
+#     try:
+#         data = request.get_json()
+#         app.logger.info('Received data: %s', data)
+
+#         if not all(key in data for key in ['FirstName', 'LastName', 'Password', 'Email', 'Phone', 'HasRecordAccess']):
+#             app.logger.error('Missing one or more required fields')
+#             return jsonify({"error": "Missing data for one or more fields"}), 400
+
+#         volunteer = Volunteer.create(
+#             first_name=data['FirstName'],
+#             last_name=data['LastName'],
+#             password=generate_password_hash(data['Password']),
+#             email=data['Email'],
+#             phone=data['Phone'],
+#             has_record_access=data['HasRecordAccess']
+#         )
+#         app.logger.info('Volunteer created with ID: %s', volunteer.id)
+
+#         return jsonify({
+#             "id": volunteer.id,
+#             "first_name": volunteer.first_name,
+#             "last_name": volunteer.last_name,
+#             "email": volunteer.email,
+#             "phone": volunteer.phone,
+#             "has_record_access": volunteer.has_record_access
+#         }), 201
+#     except Exception as e:
+#         app.logger.error('Error adding volunteer: %s', e, exc_info=True)
+#         return jsonify({"error": str(e)}), 500
 
 ################ volunteers above ############################
     
