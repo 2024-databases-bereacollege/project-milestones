@@ -79,7 +79,7 @@ export default {
       const volunteerID = this.volunteers[this.editedIndex].VolunteerID;
       axios.put(`http://127.0.0.1:5000/api/volunteers/${volunteerID}`, item)
         .then(response => {
-          Object.assign(this.volunteers[this.editedIndex], response.data);
+          Object.assign(this.volunteers[this.editedIndex], response.data); //TODO: Maybe this? this.$set(this.volunteers, this.editedIndex, response.data);
           this.close();
         })
         .catch(error => {
