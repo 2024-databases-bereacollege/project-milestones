@@ -65,10 +65,10 @@
           </v-col>
           <v-col cols="12">
             <v-checkbox
-              :input-value="editedItem.HasRecordAccess"
-              @change="$emit('update:editedItem', { ...editedItem, HasRecordAccess: $event })"
-              label="Has Record Access"
-            ></v-checkbox>
+  v-model="hasRecordAccess"
+  label="Has Record Access"
+></v-checkbox>
+
           </v-col>
         </v-row>
       </v-container>
@@ -193,6 +193,8 @@ export default {
   data() {
     return {
       dialog: false,
+      hasRecordAccess: false,
+
       // ...
       // editedItem: {
       //   FirstName: '',
@@ -268,8 +270,13 @@ export default {
       });
     },
     save() {
-      this.$emit('save', this.editedItem);
-    },
+    const updatedItem = {
+      ...this.editedItem,
+      HasRecordAccess: this.hasRecordAccess,
+    };
+    this.$emit('save', updatedItem);
+    this.close();
+  },
     watch: {
   editedItem(newValue) {
     console.log('editedItem changed:', newValue);

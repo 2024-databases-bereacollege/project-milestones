@@ -4,6 +4,7 @@
   tableTitle="Volunteers"  
   :edited-item="editedItem"
   @update:edited-item="updateEditedItem"
+  @update:has-record-access="updateHasRecordAccess"
   @save="saveItem"
   :headers="tableHeaders"
   :items="volunteers"
@@ -80,7 +81,9 @@ export default {
     //   this.editedIndex = index;
     //   this.editedItem = Object.assign({}, item);
     // },
-
+    updateHasRecordAccess(value) {
+    this.editedItem.HasRecordAccess = value;
+    },
 
     deleteItem(item) {
     this.editedIndex = this.volunteers.indexOf(item);
