@@ -1,0 +1,6 @@
+# TODO
+
+- Need to fix the path for the image in TopBar.vue
+- Need to fix the title in topbar
+- Items cant be listed as NULL? expiration date in inventory is esp wrong
+- AttributeError: type object 'Visit_Record' has no attribute 'Date'
