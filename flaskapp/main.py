@@ -177,6 +177,33 @@ def get_neighbors():
     neighbors = [neighbor.to_dict() for neighbor in Neighbor.select()]
     return jsonify(neighbors)
 
+@app.route('/api/neighbors', methods=['POST'])
+def create_neighbor():
+    data = request.get_json()
+    neighbor = Neighbor(**data)
+    neighbor.save()
+    return jsonify(neighbor.to_dict()), 201
+
+@app.route('/api/neighbors/<int:neighbor_id>', methods=['PUT'])
+def update_neighbor(neighbor_id):
+    data = request.get_json()
+    neighbor = Neighbor.get_or_none(Neighbor.NeighborID == neighbor_id)
+    if neighbor:
+        for key, value in data.items():
+            setattr(neighbor, key, value)
+        neighbor.save()
+        return jsonify(neighbor.to_dict())
+    else:
+        return jsonify({'error': 'Neighbor not found'}), 404
+
+@app.route('/api/neighbors/<int:neighbor_id>', methods=['DELETE'])
+def delete_neighbor(neighbor_id):
+    neighbor = Neighbor.get_or_none(Neighbor.NeighborID == neighbor_id)
+    if neighbor:
+        neighbor.delete_instance()
+        return '', 204
+    else:
+        return jsonify({'error': 'Neighbor not found'}), 404
 
 ################ neighbors above ############################
 
