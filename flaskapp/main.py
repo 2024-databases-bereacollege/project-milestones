@@ -337,8 +337,6 @@ def get_visit_records_for_neighbor(neighbor_id):
     visit_records = [record.to_dict() for record in query]
     return jsonify(visit_records)
 
-
-
 #11 Get neighbor details along with their visit records, services, and volunteers associated with those visit records. 
 @app.route('/api/neighbor/<int:neighbor_id>', methods=['GET'])
 def get_neighbor_details(neighbor_id):
@@ -439,6 +437,10 @@ def get_visits_by_volunteer(volunteer_id):
              .where(Volunteer.VolunteerID == volunteer_id))
     visits = [visit.to_dict() for visit in query]
     return jsonify(visits)
+
+
+
+
 
 
 
