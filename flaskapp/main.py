@@ -330,7 +330,15 @@ def get_visit_records_for_neighbor(neighbor_id):
     return jsonify(visit_records)
 
 
-
+# 16. Get all visits conducted by a specific volunteer
+@app.route('/api/volunteers/<int:volunteer_id>/visits', methods=['GET'])
+def get_visits_by_volunteer(volunteer_id):
+    query = (Visit_Record
+             .select()
+             .join(Volunteer)
+             .where(Volunteer.VolunteerID == volunteer_id))
+    visits = [visit.to_dict() for visit in query]
+    return jsonify(visits)
 
 
 
