@@ -12,7 +12,7 @@
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ props }">
             <v-btn class="mb-2" color="primary" dark v-bind="props">
-              New Item
+              New Entry
             </v-btn>
           </template>
           <v-card>
@@ -20,46 +20,59 @@
               <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
             <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" md="4" sm="6">
-                    <v-text-field
-                      :value="editedItem.name"
-                      @input="$emit('update:editedItem', { ...editedItem, name: $event })"
-                      label="Dessert name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="4" sm="6">
-                    <v-text-field
-                      :value="editedItem.calories"
-                      @input="$emit('update:editedItem', { ...editedItem, calories: $event })"
-                      label="Calories"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="4" sm="6">
-                    <v-text-field
-                      :value="editedItem.fat"
-                      @input="$emit('update:editedItem', { ...editedItem, fat: $event })"
-                      label="Fat (g)"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="4" sm="6">
-                    <v-text-field
-                      :value="editedItem.carbs"
-                      @input="$emit('update:editedItem', { ...editedItem, carbs: $event })"
-                      label="Carbs (g)"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="4" sm="6">
-                    <v-text-field
-                      :value="editedItem.protein"
-                      @input="$emit('update:editedItem', { ...editedItem, protein: $event })"
-                      label="Protein (g)"
-                    ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :value="editedItem.FirstName"
+              @input="$emit('update:editedItem', { ...editedItem, FirstName: $event.target.value })"
+              label="First Name"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :value="editedItem.LastName"
+              @input="$emit('update:editedItem', { ...editedItem, LastName: $event.target.value })"
+              label="Last Name"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              :value="editedItem.Password"
+              @input="$emit('update:editedItem', { ...editedItem, Password: $event.target.value })"
+              label="Password"
+              type="password"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              :value="editedItem.Email"
+              @input="$emit('update:editedItem', { ...editedItem, Email: $event.target.value })"
+              label="Email"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              :value="editedItem.Phone"
+              @input="$emit('update:editedItem', { ...editedItem, Phone: $event.target.value })"
+              label="Phone"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-checkbox
+  v-model="hasRecordAccess"
+  label="Has Record Access"
+></v-checkbox>
+
+          </v-col>
+        </v-row>
+      </v-container>
+      </v-card-text>
   
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -174,10 +187,26 @@ export default {
   },
   data() {
     return {
-      desserts: [],
       dialog: false,
-      dialogDelete: false,
-      editedIndex: -1,
+      hasRecordAccess: false,
+
+      // ...
+      // editedItem: {
+      //   FirstName: '',
+      //   LastName: '',
+      //   Password: '',
+      //   Email: '',
+      //   Phone: '',
+      //   HasRecordAccess: false,
+      // },
+      // defaultItem: {
+      //   FirstName: '',
+      //   LastName: '',
+      //   Password: '',
+      //   Email: '',
+      //   Phone: '',
+      //   HasRecordAccess: false,
+      // },
     };
   },
   computed: {
@@ -206,11 +235,7 @@ export default {
     this.onEdit(item);
     this.dialog = true;
   },
-    // deleteItem(item) {
-    //   console.log('Delete button clicked for item:', item);
-    //   this.editedIndex = this.items.indexOf(item);
-    //   this.$emit('delete-item', { item, index: this.editedIndex });
-    // },
+
     deleteItem(item) {
     console.log('Delete button clicked for item:', item);
     this.editedIndex = this.items.indexOf(item);
@@ -236,8 +261,13 @@ export default {
       });
     },
     save() {
-      this.$emit('save', this.editedItem);
-    },
+    const updatedItem = {
+      ...this.editedItem,
+      HasRecordAccess: this.hasRecordAccess,
+    };
+    this.$emit('save', updatedItem);
+    this.close();
+  },
     watch: {
   editedItem(newValue) {
     console.log('editedItem changed:', newValue);
@@ -345,4 +375,10 @@ export default {
       },
     },
   }
+
+      // deleteItem(item) {
+    //   console.log('Delete button clicked for item:', item);
+    //   this.editedIndex = this.items.indexOf(item);
+    //   this.$emit('delete-item', { item, index: this.editedIndex });
+    // },
   </script> -->

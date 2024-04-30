@@ -69,6 +69,8 @@ def get_visit():
 
 ##############################################################
 
+################ volunteers below ############################
+
 
 
 @app.route('/api/volunteers', methods=['GET']) #GET request to get all volunteers
@@ -79,64 +81,93 @@ def get_volunteers():
     
     return jsonify(volunteers)
 
-@app.route('/api/volunteers', methods=['PUT']) #PUT request to update a volunteer
-def update_volunteer(id):
-    volunteer = Volunteer.query.get(id)
-    if not volunteer:
-        return jsonify({'error': 'Volunteer not found'}), 404
 
+@app.route('/api/volunteers', methods=['POST']) #POST request to create a volunteer
+def create_volunteer():
     data = request.get_json()
-    print("Received data for update:", data) 
+        # Remove the VolunteerID field from the data
+    data.pop('VolunteerID', None)
+    volunteer = Volunteer(**data)
+    volunteer.save()
+    return jsonify(volunteer.to_dict()), 201
 
-    for key, value in data.items():
-        if hasattr(volunteer, key):  
+@app.route('/api/volunteers/<int:volunteer_id>', methods=['PUT']) #PUT request to update a volunteer
+def update_volunteer(volunteer_id):
+    data = request.get_json()
+    # Remove the VolunteerID field from the data
+    data.pop('VolunteerID', None)
+    volunteer = Volunteer.get_or_none(Volunteer.VolunteerID == volunteer_id)
+    if volunteer:
+        for key, value in data.items():
             setattr(volunteer, key, value)
-
-    db.session.commit()  # TODO adjust from session
-    return jsonify(volunteer.to_dict()), 200
-
-################ volunteers below ############################
-@app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
-def delete_volunteer(id):
-    volunteer = Volunteer.query.get(id)
-    if not volunteer:
+        volunteer.save()
+        return jsonify(volunteer.to_dict())
+    else:
         return jsonify({'error': 'Volunteer not found'}), 404
 
-    db.session.delete(volunteer)
-    db.session.commit()
-    return jsonify({'success': 'Volunteer deleted'}), 200
+@app.route('/api/volunteers/<int:volunteer_id>', methods=['DELETE']) #DELETE request to delete a volunteer
+def delete_volunteer(volunteer_id):
+    volunteer = Volunteer.get_by_id(volunteer_id)
+    volunteer.delete_instance()
+    return '', 204
 
-@app.route('/api/volunteers', methods=['POST'])
-def add_volunteer():
-    try:
-        data = request.get_json()
-        app.logger.info('Received data: %s', data)
+# @app.route('/api/volunteers', methods=['PUT']) #PUT request to update a volunteer
+# def update_volunteer(id):
+#     volunteer = Volunteer.query.get(id)
+#     if not volunteer:
+#         return jsonify({'error': 'Volunteer not found'}), 404
 
-        if not all(key in data for key in ['FirstName', 'LastName', 'Password', 'Email', 'Phone', 'HasRecordAccess']):
-            app.logger.error('Missing one or more required fields')
-            return jsonify({"error": "Missing data for one or more fields"}), 400
+#     data = request.get_json()
+#     print("Received data for update:", data) 
 
-        volunteer = Volunteer.create(
-            first_name=data['FirstName'],
-            last_name=data['LastName'],
-            password=generate_password_hash(data['Password']),
-            email=data['Email'],
-            phone=data['Phone'],
-            has_record_access=data['HasRecordAccess']
-        )
-        app.logger.info('Volunteer created with ID: %s', volunteer.id)
+#     for key, value in data.items():
+#         if hasattr(volunteer, key):  
+#             setattr(volunteer, key, value)
 
-        return jsonify({
-            "id": volunteer.id,
-            "first_name": volunteer.first_name,
-            "last_name": volunteer.last_name,
-            "email": volunteer.email,
-            "phone": volunteer.phone,
-            "has_record_access": volunteer.has_record_access
-        }), 201
-    except Exception as e:
-        app.logger.error('Error adding volunteer: %s', e, exc_info=True)
-        return jsonify({"error": str(e)}), 500
+#     db.session.commit()  # TODO adjust from session
+#     return jsonify(volunteer.to_dict()), 200
+
+# @app.route('/api/volunteers', methods=['DELETE']) #DELETE request to delete a volunteer
+# def delete_volunteer(id):
+#     volunteer = Volunteer.query.get(id)
+#     if not volunteer:
+#         return jsonify({'error': 'Volunteer not found'}), 404
+
+#     db.session.delete(volunteer)
+#     db.session.commit()
+#     return jsonify({'success': 'Volunteer deleted'}), 200
+
+# @app.route('/api/volunteers', methods=['POST'])
+# def add_volunteer():
+#     try:
+#         data = request.get_json()
+#         app.logger.info('Received data: %s', data)
+
+#         if not all(key in data for key in ['FirstName', 'LastName', 'Password', 'Email', 'Phone', 'HasRecordAccess']):
+#             app.logger.error('Missing one or more required fields')
+#             return jsonify({"error": "Missing data for one or more fields"}), 400
+
+#         volunteer = Volunteer.create(
+#             first_name=data['FirstName'],
+#             last_name=data['LastName'],
+#             password=generate_password_hash(data['Password']),
+#             email=data['Email'],
+#             phone=data['Phone'],
+#             has_record_access=data['HasRecordAccess']
+#         )
+#         app.logger.info('Volunteer created with ID: %s', volunteer.id)
+
+#         return jsonify({
+#             "id": volunteer.id,
+#             "first_name": volunteer.first_name,
+#             "last_name": volunteer.last_name,
+#             "email": volunteer.email,
+#             "phone": volunteer.phone,
+#             "has_record_access": volunteer.has_record_access
+#         }), 201
+#     except Exception as e:
+#         app.logger.error('Error adding volunteer: %s', e, exc_info=True)
+#         return jsonify({"error": str(e)}), 500
 
 ################ volunteers above ############################
     
@@ -146,6 +177,33 @@ def get_neighbors():
     neighbors = [neighbor.to_dict() for neighbor in Neighbor.select()]
     return jsonify(neighbors)
 
+@app.route('/api/neighbors', methods=['POST'])
+def create_neighbor():
+    data = request.get_json()
+    neighbor = Neighbor(**data)
+    neighbor.save()
+    return jsonify(neighbor.to_dict()), 201
+
+@app.route('/api/neighbors/<int:neighbor_id>', methods=['PUT'])
+def update_neighbor(neighbor_id):
+    data = request.get_json()
+    neighbor = Neighbor.get_or_none(Neighbor.NeighborID == neighbor_id)
+    if neighbor:
+        for key, value in data.items():
+            setattr(neighbor, key, value)
+        neighbor.save()
+        return jsonify(neighbor.to_dict())
+    else:
+        return jsonify({'error': 'Neighbor not found'}), 404
+
+@app.route('/api/neighbors/<int:neighbor_id>', methods=['DELETE'])
+def delete_neighbor(neighbor_id):
+    neighbor = Neighbor.get_or_none(Neighbor.NeighborID == neighbor_id)
+    if neighbor:
+        neighbor.delete_instance()
+        return '', 204
+    else:
+        return jsonify({'error': 'Neighbor not found'}), 404
 
 ################ neighbors above ############################
 
@@ -250,7 +308,18 @@ def get_visit_records_details():
     } for record in query]
     return jsonify(visit_records)
 
-
+@app.route('/api/neighbors/<int:neighbor_id>', methods=['GET'])
+def get_neighbor_details(neighbor_id):
+    try:
+        neighbor = Neighbor.get_by_id(neighbor_id)
+        neighbor_info = {
+            'NeighborID': neighbor.NeighborID,
+            'FullName': f"{neighbor.FirstName} {neighbor.LastName}",
+            'DateOfBirth': neighbor.DateOfBirth.strftime('%Y-%m-%d')  # Format date of birth
+        }
+        return jsonify(neighbor_info), 200
+    except Neighbor.DoesNotExist:
+        return jsonify({'error': 'Neighbor not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -342,7 +411,90 @@ def get_visits_by_volunteer(volunteer_id):
 
 
 
-
+#10 Get all visit records for a specific neighbor
+@app.route('/api/visit_records/<int:neighbor_id>', methods=['GET'])
+def get_visit_records_for_neighbor(neighbor_id):
+    query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
+    visit_records = [record.to_dict() for record in query]
+    return jsonify(visit_records)
+#11 Get neighbor details along with their visit records, services, and volunteers associated with those visit records.
+@app.route('/api/neighbor/<int:neighbor_id>', methods=['GET'])
+def get_neighbor_details(neighbor_id):
+    try:
+        neighbor = Neighbor.get_by_id(neighbor_id)
+        neighbor_info = {
+            'NeighborID': neighbor.NeighborID,
+            'FullName': f"{neighbor.FirstName} {neighbor.LastName}",
+            'DateOfBirth': neighbor.DateOfBirth.strftime('%Y-%m-%d')  # Format date of birth
+        }
+        visit_records_query = Visit_Record.select().where(Visit_Record.NeighborID == neighbor_id)
+        visit_records = []
+        for record in visit_records_query:
+            visit_info = {
+                'VisitID': record.VisitID,
+                'Date': record.Date.strftime('%Y-%m-%d'),  # Format visit date
+            }
+            services_query = Visit_Service.select().where(Visit_Service.RecordID == record.RecordID)
+            services_info = [service.ServiceType for service in services_query]
+            visit_info['Services'] = services_info
+            volunteers_query = Volunteer.select().join(Visit_Record).where(Visit_Record.RecordID == record.RecordID)
+            volunteers_info = [{
+                'VolunteerID': volunteer.VolunteerID,
+                'FullName': f"{volunteer.FirstName} {volunteer.LastName}"
+            } for volunteer in volunteers_query]
+            visit_info['Volunteers'] = volunteers_info
+            visit_records.append(visit_info)
+        return jsonify({
+            'NeighborInfo': neighbor_info,
+            'VisitRecords': visit_records
+        }), 200
+    except Neighbor.DoesNotExist:
+        return jsonify({'error': 'Neighbor not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+# 12. Get all visits conducted within a specified date range
+@app.route('/api/visit_records/range', methods=['GET'])
+def get_visits_in_date_range():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+    query = Visit_Record.select().where((Visit_Record.Date >= start_date) & (Visit_Record.Date <= end_date))
+    visits = [visit.to_dict() for visit in query]
+    return jsonify(visits)
+# 13. Get all neighbors who have not received any visits
+@app.route('/api/neighbors/no_visits', methods=['GET'])
+def get_neighbors_without_visits():
+    query = Neighbor.select().where(~(Neighbor.neighbor_records.exists()))
+    neighbors = [neighbor.to_dict() for neighbor in query]
+    return jsonify(neighbors)
+# 14. Get list of organization providing service with the list of service they each provide
+@app.route('/api/providers/services', methods=['GET'])
+def get_providers_with_services():
+    query = Service_Providers.select()
+    providers_with_services = []
+    for provider in query:
+        provider_data = provider.to_dict()
+        provider_data['Services'] = [service.ServiceType for service in provider.services]
+        providers_with_services.append(provider_data)
+    return jsonify(providers_with_services)
+# 15.Get all volunteers who have provided a specific service
+@app.route('/api/services/<int:service_id>/volunteers', methods=['GET'])
+def get_volunteers_for_service(service_id):
+    query = (Volunteer
+             .select(Volunteer)
+             .join(Visit_Record)
+             .join(Visit_Service)
+             .where(Visit_Service.ServiceID == service_id))
+    volunteers = [volunteer.to_dict() for volunteer in query]
+    return jsonify(volunteers)
+# 16. Get all visits conducted by a specific volunteer
+@app.route('/api/volunteers/<int:volunteer_id>/visits', methods=['GET'])
+def get_visits_by_volunteer(volunteer_id):
+    query = (Visit_Record
+             .select()
+             .join(Volunteer)
+             .where(Volunteer.VolunteerID == volunteer_id))
+    visits = [visit.to_dict() for visit in query]
+    return jsonify(visits)
 
 # @app.route('/api/services', methods=['GET'])
 # def get_services():

@@ -6,3 +6,5 @@
 - AttributeError: type object 'Visit_Record' has no attribute 'Date'
 - No need for vol ID in neighbor Models table
 - Make instructions page 
+- figure out data.sql
+- move main .py to app.py 
