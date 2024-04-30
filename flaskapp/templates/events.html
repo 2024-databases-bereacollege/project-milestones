@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Event Table</title>
+    <link rel="stylesheet" href="../static/events.css">
+</head>
+<body>
+    <aside>
+        <!-- Sidebar navigation -->
+        <nav>
+            <div class="admin-div">
+                <p>Admin Panel</p>
+                <img class="admin-pic" src="https://annemariesegal.com/wp-content/uploads/2017/04/adobestock_86346713-cropped-young-woman-in-suit.jpg?w=640">
+            </div>
+            <ul class="tables-div">
+                <li><a href="chapters">Chapters</a></li>
+                <li><a href="members">Members</a></li>
+                <li><a href="donations">Donations</a></li>
+                <li><a href="events">Events</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <section>
+            <div class="events-div">
+                <h2>Event Table</h2>
+                <button id="addEventBtn">Add New Event</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Venue</th>
+                        <th>Event Date</th>
+                        <th>Theme</th>
+                        <th>Attendance</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in events %}
+                    <tr>
+                        <td><a href="#" class="event-link" data-eventname="{{ e.eventname }}">{{ e.eventname }}</a></td>
+                        <td>{{ e.venue }}</td>
+                        <td>{{ e.eventdate }}</td>
+                        <td>{{ e.theme }}</td>
+                        <td>{{ e.attendance }}</td>
+                        <td>
+                            <button data-event='{{ e|tojson|safe }}' onclick="openEditEventModal(this)">Edit</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <div id="addEventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="addEventForm" method="post" action="/add_event">
+                <label for="event_name">Event Name:</label>
+                <input type="text" id="event_name" name="event_name" required><br>
+                <label for="venue">Venue:</label>
+                <input type="text" id="venue" name="venue" required><br>
+                <label for="event_date">Event Date:</label>
+                <input type="date" id="event_date" name="event_date" required><br>
+                <label for="theme">Theme:</label>
+                <input type="text" id="theme" name="theme" required><br>
+                <label for="attendance">Expected Attendance:</label>
+                <input type="number" id="attendance" name="attendance" required><br>
+                <input type="submit" value="Add Event">
+            </form>
+        </div>
+    </div>
+    <div id="editEventModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <form id="editEventForm" method="post" action="/update_event">
+                <input type="hidden" id="edit_event_id" name="event_id">
+                <label for="edit_event_name">Event Name:</label>
+                <input type="text" id="edit_event_name" name="event_name" required><br>
+                <label for="edit_venue">Venue:</label>
+                <input type="text" id="edit_venue" name="venue" required><br>
+                <label for="edit_event_date">Event Date:</label>
+                <input type="date" id="edit_event_date" name="event_date" required><br>
+                <label for="edit_theme">Theme:</label>
+                <input type="text" id="edit_theme" name="theme" required><br>
+                <label for="edit_attendance">Expected Attendance:</label>
+                <input type="number" id="edit_attendance" name="attendance" required><br>
+                <input type="submit" value="Update Event">
+            </form>
+        </div>
+    </div>
+    <div id="attendeesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h4>Attendees</h4>
+            <ul id="attendeeList"></ul>
+        </div>
+    </div>
+    
+    <script>
+        var eventModal = document.getElementById("addEventModal");
+        var eventBtn = document.getElementById("addEventBtn");
+        var closeSpans = document.getElementsByClassName("close");
+        var attendeesModal = document.getElementById("attendeesModal");
+      
+        eventBtn.onclick = function() {
+            eventModal.style.display = "block";
+        };
+      
+        for (var i = 0; i < closeSpans.length; i++) {
+            closeSpans[i].onclick = function() {
+                this.parentElement.parentElement.style.display = "none";
+            };
+        }
+      
+        window.onclick = function(event) {
+            if (event.target == eventModal || event.target == attendeesModal) {
+                event.target.style.display = "none";
+            }
+        };
+      
+        function openEditEventModal(button) {
+            var eventData = JSON.parse(button.getAttribute('data-event'));
+            document.getElementById("edit_event_id").value = eventData.event_id;
+            document.getElementById("edit_event_name").value = eventData.eventname;
+            document.getElementById("edit_venue").value = eventData.venue;
+            document.getElementById("edit_event_date").value = eventData.eventdate;
+            document.getElementById("edit_theme").value = eventData.theme;
+            document.getElementById("edit_attendance").value = eventData.attendance;
+            document.getElementById("editEventModal").style.display = "block";
+        }
+        document.querySelectorAll('.event-link').forEach(item => {
+        item.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Hardcoded data for testing
+        var hardcodedData = {
+            'Community Building': [
+                { firstname: 'Alice', lastname: 'Johnson' },
+                { firstname: 'Bob', lastname: 'Smith' }
+            ],
+            'Workshop': [
+                { firstname: 'Carol', lastname: 'Williams' },
+                { firstname: 'David', lastname: 'Brown' }
+            ],
+            'Code for Good Hackathon': [
+                { firstname: 'Eve', lastname: 'Davis' },
+                { firstname: 'Frank', lastname: 'Miller' }
+            ],
+            'Seedy Workshop': [
+                { firstname: 'Grace', lastname: 'Wilson' }
+            ],
+            'How to sleep in class': [
+                // No attendees for this event
+            ]
+        };
+
+        var eventName = this.getAttribute('data-eventname');
+        var data = { attendees: hardcodedData[eventName] || [] };
+        console.log("Received data for " + eventName + ":", data);
+
+        var attendeesList = document.getElementById("attendeeList");
+        attendeesList.innerHTML = ''; // Clear previous list
+
+        if (data.attendees.length > 0) {
+            data.attendees.forEach(attendee => {
+                var li = document.createElement("li");
+                li.textContent = `${attendee.firstname} ${attendee.lastname}`;
+                attendeesList.appendChild(li);
+            });
+        } else {
+            attendeesList.textContent = 'No attendees found for this event.';
+        }
+
+            attendeesModal.style.display = "block";
+            });
+        });
+
+        // document.querySelectorAll('.event-link').forEach(item => {
+        //     item.addEventListener('click', function(e) {
+        //         e.preventDefault();
+        //         var eventname = this.getAttribute('data-eventname');
+        //         fetch(`/get_attendees?eventname=${encodeURIComponent(eventname)}`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log(data); // Debugging line
+        //             var attendeesList = document.getElementById("attendeeList");
+        //             attendeesList.innerHTML = ''; // Clear previous list
+        //             if (data.attendees && data.attendees.length > 0) {
+        //                 data.attendees.forEach(attendee => {
+        //                     var li = document.createElement("li");
+        //                     li.textContent = `${attendee.firstname} ${attendee.lastname}`;
+        //                     attendeesList.appendChild(li);
+        //                 });
+        //             } else {
+        //                 attendeesList.textContent = 'No attendees found for this event.';
+        //             }
+        //             attendeesModal.style.display = "block";
+        //         })
+        //         .catch(error => {
+        //             console.error('Error fetching attendees:', error);
+        //             // You could also append this error message to the attendeesList if you want to show it on the page.
+        //         });
+        //     });
+        // });
+        // document.querySelectorAll('.event-link').forEach(item => {
+        // item.addEventListener('click', function(e) {
+        // e.preventDefault();
+        // var eventName = this.getAttribute('data-eventname');
+        // fetch(`/get_attendees?eventname=${encodeURIComponent(eventName)}`)
+        //     .then(response => response.json())
+            
+        //             // .then(data => {
+        //             //     console.log("Received data:", data); // Debugging line
+        //             //     var attendeesList = document.getElementById("attendeeList");
+        //             //     attendeesList.innerHTML = ''; // Clear previous list
+        //             //     if (data.length > 0)
+                    
+        //     .then(data => {
+        //     var attendeesList = document.getElementById("attendeeList");
+        //     attendeesList.innerHTML = '';
+        //     if (data.attendees && data.attendees.length > 0) { // Assuming the API returns an array directly
+        //         data.forEach(attendee => {
+        //         var li = document.createElement("li");
+        //         li.textContent = `${attendee.firstname} ${attendee.lastname}`;
+        //         attendeesList.appendChild(li);
+        //         });
+        //         } else {
+        //             attendeesList.textContent = 'No attendees found for this event.';
+        //         }
+        //         attendeesModal.style.display = "block";
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching attendees:', error);
+        //         // Update the attendees list with an error message here, if you wish
+        //         });
+        //     });
+        // });
+
+
+
+      </script>
+      
+    <!-- <script>
+        var eventModal = document.getElementById("addEventModal");
+        var eventBtn = document.getElementById("addEventBtn");
+        var closeSpans = document.getElementsByClassName("close");
+        var attendeesModal = document.getElementById("attendeesModal");
+        eventBtn.onclick = function() {
+            eventModal.style.display = "block";
+        };
+        for (var i = 0; i < closeSpans.length; i++) {
+            closeSpans[i].onclick = function() {
+                this.parentElement.parentElement.style.display = "none";
+            };
+        }
+        window.onclick = function(event) {
+            if (event.target == eventModal || event.target == attendeesModal) {
+                event.target.style.display = "none";
+            }
+        }
+        function openEditEventModal(button) {
+            var eventData = JSON.parse(button.getAttribute('data-event'));
+            document.getElementById("edit_event_id").value = eventData.event_id; // Assuming you have event_id in your data-event JSON
+            document.getElementById("edit_event_name").value = eventData.eventname;
+            document.getElementById("edit_venue").value = eventData.venue;
+            document.getElementById("edit_event_date").value = eventData.eventdate;
+            document.getElementById("edit_theme").value = eventData.theme;
+            document.getElementById("edit_attendance").value = eventData.attendance;
+            document.getElementById("editEventModal").style.display = "block";
+        }
+        document.querySelectorAll('.event-link').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                var eventName = this.getAttribute('data-eventname');
+                // fetch(`/get_attendees?eventname=${eventName}`)
+                fetch(`/get_attendees?eventname=${encodeURIComponent(eventName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    var attendeesList = document.getElementById("attendeeList");
+                    attendeesList.innerHTML = ''; // Clear previous list
+                    data.attendees.forEach(attendee => {
+                        var li = document.createElement("li");
+                        li.appendChild(document.createTextNode(`${attendee.firstname} ${attendee.lastname}`));
+                        attendeesList.appendChild(li);
+                    });
+                    attendeesModal.style.display = "block";
+                })
+                .catch(error => console.error('Error fetching attendees:', error));
+            });
+        });
+    </script> -->
+</body>
+</html>
