@@ -430,6 +430,15 @@ def get_volunteers_for_service(service_id):
     volunteers = [volunteer.to_dict() for volunteer in query]
     return jsonify(volunteers)
 
+# 16. Get all visits conducted by a specific volunteer
+@app.route('/api/volunteers/<int:volunteer_id>/visits', methods=['GET'])
+def get_visits_by_volunteer(volunteer_id):
+    query = (Visit_Record
+             .select()
+             .join(Volunteer)
+             .where(Volunteer.VolunteerID == volunteer_id))
+    visits = [visit.to_dict() for visit in query]
+    return jsonify(visits)
 
 
 
