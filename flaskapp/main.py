@@ -82,21 +82,30 @@ def get_volunteers():
     return jsonify(volunteers)
 
 
-@app.route('/api/volunteers', methods=['POST'])
+@app.route('/api/volunteers', methods=['POST']) #POST request to create a volunteer
 def create_volunteer():
     data = request.get_json()
+        # Remove the VolunteerID field from the data
+    data.pop('VolunteerID', None)
     volunteer = Volunteer(**data)
     volunteer.save()
     return jsonify(volunteer.to_dict()), 201
 
-@app.route('/api/volunteers/<int:volunteer_id>', methods=['PUT'])
+@app.route('/api/volunteers/<int:volunteer_id>', methods=['PUT']) #PUT request to update a volunteer
 def update_volunteer(volunteer_id):
     data = request.get_json()
-    volunteer = Volunteer.get_by_id(volunteer_id)
-    volunteer.update(**data).execute()
-    return jsonify(volunteer.to_dict())
+    # Remove the VolunteerID field from the data
+    data.pop('VolunteerID', None)
+    volunteer = Volunteer.get_or_none(Volunteer.VolunteerID == volunteer_id)
+    if volunteer:
+        for key, value in data.items():
+            setattr(volunteer, key, value)
+        volunteer.save()
+        return jsonify(volunteer.to_dict())
+    else:
+        return jsonify({'error': 'Volunteer not found'}), 404
 
-@app.route('/api/volunteers/<int:volunteer_id>', methods=['DELETE'])
+@app.route('/api/volunteers/<int:volunteer_id>', methods=['DELETE']) #DELETE request to delete a volunteer
 def delete_volunteer(volunteer_id):
     volunteer = Volunteer.get_by_id(volunteer_id)
     volunteer.delete_instance()

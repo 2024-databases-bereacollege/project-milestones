@@ -73,26 +73,47 @@ export default {
           console.error('Error fetching data:', error);
         });
     },
-
     saveItem(item) {
-      if (this.editedIndex > -1) {
-        axios.put(`http://127.0.0.1:5000/api/volunteers/${item.VolunteerID}`, item)
-          .then(response => {
-            Object.assign(this.volunteers[this.editedIndex], response.data);
-            this.close();
-          })
-          .catch(error => {
-            console.error('Error updating volunteer:', error);
-          });
-      } else {
-        axios.post('http://127.0.0.1:5000/api/volunteers', item)
-          .then(response => {
-            this.volunteers.push(response.data);
-            this.close();
-          })
-          .catch(error => {
-            console.error('Error creating volunteer:', error);
-          });
+    if (this.editedIndex > -1) {
+      // Update an existing volunteer
+      const volunteerID = this.volunteers[this.editedIndex].VolunteerID;
+      axios.put(`http://127.0.0.1:5000/api/volunteers/${volunteerID}`, item)
+        .then(response => {
+          Object.assign(this.volunteers[this.editedIndex], response.data);
+          this.close();
+        })
+        .catch(error => {
+          console.error('Error updating volunteer:', error);
+        });
+    } else {
+      // Create a new volunteer
+      axios.post('http://127.0.0.1:5000/api/volunteers', item)
+        .then(response => {
+          this.volunteers.push(response.data);
+          this.close();
+        })
+        .catch(error => {
+          console.error('Error creating volunteer:', error);
+        });
+    // saveItem(item) {
+    //   if (this.editedIndex > -1) {
+    //     axios.put(`http://127.0.0.1:5000/api/volunteers/${item.VolunteerID}`, item)
+    //       .then(response => {
+    //         Object.assign(this.volunteers[this.editedIndex], response.data);
+    //         this.close();
+    //       })
+    //       .catch(error => {
+    //         console.error('Error updating volunteer:', error);
+    //       });
+    //   } else {
+    //     axios.post('http://127.0.0.1:5000/api/volunteers', item)
+    //       .then(response => {
+    //         this.volunteers.push(response.data);
+    //         this.close();
+    //       })
+    //       .catch(error => {
+    //         console.error('Error creating volunteer:', error);
+    //       });
       }
     },
 
