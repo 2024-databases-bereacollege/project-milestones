@@ -13,6 +13,7 @@ import TestComponent from '@/components/TestComponent.vue';
 import TestCRUD from '@/views/TestCRUD.vue';
 import AddVisit from '@/views/AddVisit.vue';
 import GetStarted from '@/views/GetStarted.vue';
+import NeighborProfile from '@/components/NeighborProfile.vue';
 
 const routes = [
     { 
@@ -38,7 +39,7 @@ const routes = [
     { path: '/Add_Visit', component: AddVisit},
     { path: '/Instructions', component: GetStarted},
     { path: '/:pathMatch(.*)*', redirect: '/home' }, // Redirect all other paths to home
-    { path: '/Neighbors/:ID', component: NeighborTable },//check syntax
+    { path: '/Neighbors/:ID', component: NeighborProfile },//check syntax
 ]
 
 const router = createRouter({

@@ -1,49 +1,59 @@
 <template>
   <div class="neighbor-profile">
+    <h1>Neighbor Profile</h1>
     <h2>{{ neighbor.FirstName }} {{ neighbor.LastName }}</h2>
     <table>
       <tr>
-        <th><i class="fas fa-birthday-cake"></i> Date of Birth</th>
+        <th><font-awesome-icon icon="faBirthdayCake" /> Date of Birth</th>
         <td>{{ neighbor.DateOfBirth }}</td>
       </tr>
       <tr>
-        <th><i class="fas fa-phone"></i> Phone</th>
+        <th><font-awesome-icon icon="faPhone" /> Phone</th>
         <td>{{ neighbor.Phone }}</td>
       </tr>
       <tr>
-        <th><i class="fas fa-map-marker-alt"></i> Location</th>
+        <th><font-awesome-icon icon="faMapMarkerAlt" /> Location</th>
         <td>{{ neighbor.Location }}</td>
       </tr>
       <tr>
-        <th><i class="fas fa-envelope"></i> Email</th>
+        <th><font-awesome-icon icon="faEnvelope" /> Email</th>
         <td>{{ neighbor.Email }}</td>
       </tr>
       <tr>
-        <th><i class="fas fa-calendar-plus"></i> Created Date</th>
+        <th><font-awesome-icon icon="faCalendarPlus" /> Created Date</th>
         <td>{{ neighbor.Created_date }}</td>
       </tr>
       <tr>
-        <th><i class="fas fa-id-card"></i> Has State ID</th>
+        <th><font-awesome-icon icon="faIdCard" /> Has State ID</th>
         <td>{{ neighbor.HasStateID ? 'Yes' : 'No' }}</td>
       </tr>
       <tr>
-        <th><i class="fas fa-paw"></i> Has Pet</th>
+        <th><font-awesome-icon icon="faPaw" /> Has Pet</th>
         <td>{{ neighbor.HasPet ? 'Yes' : 'No' }}</td>
       </tr>
     </table>
-
     <h3>Visit Records</h3>
     <IndividualVisitLog :visits="visitRecords" />
   </div>
 </template>
 
 <script>
-import IndividualVisitLog from './IndividualVisitLog.vue';
+import axios from 'axios';
+
+//import IndividualVisitLog from './IndividualVisitLog.vue';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faBirthdayCake, faPhone, faMapMarkerAlt, faEnvelope, faCalendarPlus, faIdCard, faPaw } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faBirthdayCake, faPhone, faMapMarkerAlt, faEnvelope, faCalendarPlus, faIdCard, faPaw);
 
 export default {
   components: {
-    IndividualVisitLog,
+    // IndividualVisitLog,
+    FontAwesomeIcon,
   },
+  props: ['ID'],
   data() {
     return {
       neighbor: {
@@ -65,7 +75,6 @@ export default {
   },
   mounted() {
     const neighborID = this.$route.params.ID;
-    
     axios.get(`http://127.0.0.1:5000/api/neighbors/${neighborID}`)
       .then(response => {
         this.neighbor = response.data;
@@ -73,7 +82,10 @@ export default {
       .catch(error => {
         console.error(error);
       });
-
+  },
+};
+</script>
+<!-- 
     // Fetch visit records from the API based on neighborID
     // Update the `visitRecords` data property with the fetched data
     // Example:
@@ -83,10 +95,7 @@ export default {
     //   })
     //   .catch(error => {
     //     console.error(error);
-    //   });
-  },
-};
-</script>
+    //   }); -->
 
 <style scoped>
 .neighbor-profile {
