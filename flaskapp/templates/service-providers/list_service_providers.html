@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Service Providers</title>
+</head>
+<body>
+    <h1>Service Providers</h1>
+    <ul>
+        {% for provider in service_providers %}
+            <li><a href="{{ url_for('view_service_provider', organization=provider.Organization) }}">{{ provider.Organization }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_service_provider_route') }}">Add a new service provider</a>
+</body>
+</html>

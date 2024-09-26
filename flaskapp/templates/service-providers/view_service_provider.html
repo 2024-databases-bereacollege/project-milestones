@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Provider Details</title>
+</head>
+<body>
+    <h1>Service Provider Details</h1>
+    <p>Organization: {{ provider.Organization }}</p>
+    <p>Contact Person: {{ provider.ContactPerson }}</p>
+    <p>Email: {{ provider.Email }}</p>
+    <p>Phone: {{ provider.Phone }}</p>
+    <p>Date of Start: {{ provider.DateOfStart }}</p>
+    <a href="{{ url_for('list_service_providers') }}">Back to
